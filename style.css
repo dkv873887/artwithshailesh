@@ -1,0 +1,1146 @@
+/* =========================
+   BASIC RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f8f5f0;
+    color: #222;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+header {
+    width: 100%;
+    background: #111;
+    color: white;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 18px 7%;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+nav a:hover {
+    color: #f4b400;
+}
+
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 90vh;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 50px 20px;
+
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.55),
+            rgba(0, 0, 0, 0.55)
+        ),
+        url("images/hero.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+    color: white;
+}
+
+.hero-content {
+    max-width: 850px;
+    width: 100%;
+}
+
+.small-title {
+    font-size: 16px;
+    letter-spacing: 4px;
+    margin-bottom: 15px;
+}
+
+.hero h1 {
+    font-size: 70px;
+    margin-bottom: 15px;
+}
+
+.hero h2 {
+    font-size: 25px;
+    font-weight: normal;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+}
+
+
+
+/* =========================
+   HERO BUTTONS
+========================= */
+
+.hero-buttons {
+    margin-top: 30px;
+}
+
+.btn {
+    display: inline-block;
+
+    background: #f4b400;
+    color: #111;
+
+    text-decoration: none;
+
+    padding: 13px 25px;
+    margin: 5px;
+
+    border-radius: 30px;
+
+    font-weight: bold;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+.second-btn {
+    background: white;
+}
+
+
+
+/* =========================
+   GENERAL SECTION
+========================= */
+
+.section {
+    width: 100%;
+
+    padding: 80px 7%;
+
+    text-align: center;
+
+    overflow: hidden;
+}
+
+.section h2 {
+    font-size: 38px;
+    margin-bottom: 15px;
+}
+
+.section > p {
+    max-width: 700px;
+    margin: 0 auto 30px;
+}
+
+
+
+/* =========================
+   ABOUT SECTION
+========================= */
+
+.about-section {
+    background: #f8f5f0;
+}
+
+.about-container {
+    max-width: 1100px;
+    width: 100%;
+
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+
+    gap: 40px;
+
+    overflow: hidden;
+}
+
+
+
+/* =========================
+   ABOUT IMAGE
+========================= */
+
+.about-image {
+    width: 300px;
+    height: 300px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: white;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+.about-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    display: block;
+
+    border-radius: 20px;
+}
+
+
+
+/* =========================
+   ABOUT TEXT
+========================= */
+
+.about-text {
+    flex: 1;
+    min-width: 0;
+
+    text-align: left;
+}
+
+.about-text h2 {
+    margin-bottom: 20px;
+}
+
+.about-text p {
+    margin-bottom: 15px;
+}
+
+
+
+/* =========================
+   GALLERY
+========================= */
+
+.gallery-section {
+    background: white;
+}
+
+
+
+/* =========================
+   CATEGORY BUTTONS
+========================= */
+
+.categories {
+    width: 100%;
+
+    margin: 30px 0;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+.categories button {
+    border: none;
+
+    background: #111;
+
+    color: white;
+
+    padding: 10px 18px;
+
+    border-radius: 20px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+}
+
+.categories button:hover {
+    background: #f4b400;
+
+    color: #111;
+}
+
+
+
+/* =========================
+   GALLERY GRID
+========================= */
+
+.gallery {
+    width: 100%;
+
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 30px;
+
+    align-items: start;
+}
+
+
+
+/* =========================
+   GALLERY CARD
+========================= */
+
+.gallery-card {
+    width: 100%;
+
+    min-width: 0;
+
+    background: #f4f1ec;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.12);
+
+    transition: transform 0.3s;
+
+    position: relative;
+}
+
+.gallery-card:hover {
+    transform: translateY(-5px);
+}
+
+
+
+/* =========================
+   GALLERY IMAGE
+========================= */
+
+.gallery-card img {
+    width: 100%;
+
+    height: 300px;
+
+    object-fit: contain;
+
+    display: block;
+
+    background: #eeeeee;
+}
+
+
+
+/* =========================
+   CARD CONTENT
+========================= */
+
+.card-content {
+    padding-bottom: 18px;
+}
+
+.gallery-card h3 {
+    padding: 18px 10px;
+
+    font-size: 20px;
+}
+
+
+
+/* =========================
+   SOCIAL ACTIONS
+========================= */
+
+.social-actions {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+
+    padding: 0 10px;
+}
+
+.social-actions button {
+    border: none;
+
+    background: white;
+
+    padding: 8px 12px;
+
+    border-radius: 20px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+.social-actions button:hover {
+    background: #f4b400;
+
+    transform: translateY(-2px);
+}
+
+
+
+/* =========================
+   COMMENT BOX
+========================= */
+
+.comment-box {
+    margin: 12px 15px 0;
+
+    padding: 8px;
+
+    text-align: left;
+
+    font-size: 14px;
+}
+
+.comment-item {
+    background: white;
+
+    border-radius: 10px;
+
+    padding: 8px 10px;
+
+    margin-top: 6px;
+}
+
+
+
+/* =========================
+   YOUTUBE
+========================= */
+
+.youtube-section {
+    background: #111;
+
+    color: white;
+}
+
+.youtube-btn {
+    display: inline-block;
+
+    margin-top: 20px;
+
+    padding: 14px 25px;
+
+    background: #ff0000;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 30px;
+
+    font-weight: bold;
+}
+
+.youtube-btn:hover {
+    opacity: 0.85;
+}
+
+
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact-section {
+    background: #f8f5f0;
+}
+
+.contact-buttons {
+    margin-top: 25px;
+}
+
+.contact-btn {
+    display: inline-block;
+
+    margin: 7px;
+
+    padding: 13px 25px;
+
+    background: #111;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 30px;
+}
+
+.contact-btn:hover {
+    background: #f4b400;
+
+    color: #111;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    background:
+        linear-gradient(
+            135deg,
+            #111827,
+            #0f172a
+        );
+
+    padding: 28px 20px;
+
+    text-align: center;
+
+    border-top:
+        1px solid rgba(255, 255, 255, 0.08);
+}
+
+
+/* =========================
+   FOOTER TOP LINE
+========================= */
+
+.footer-top {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+}
+
+
+/* COPYRIGHT */
+
+.copyright-text {
+    color: #38bdf8;
+}
+
+
+/* DOT */
+
+.footer-dot {
+    color: #a78bfa;
+
+    font-weight: bold;
+}
+
+
+/* DEVELOPED BY */
+
+.developed-text {
+    color: #a78bfa;
+}
+
+.developed-text strong {
+    color: #facc15;
+}
+
+
+/* KEEP CREATING */
+
+.smile-text {
+    color: #ec4899;
+}
+
+.heart {
+    color: #fb7185;
+
+    margin-left: 3px;
+}
+
+
+/* =========================
+   DEVELOPER LINKEDIN
+========================= */
+
+.developer-linkedin {
+    margin-top: 3px;
+}
+
+.developer-linkedin a {
+    color: #22c55e;
+
+    text-decoration: none;
+
+    font-size: 16px;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.developer-linkedin a:hover {
+    color: #4ade80;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   MOBILE FOOTER
+========================= */
+
+@media (max-width: 600px) {
+
+    .footer-top {
+        gap: 6px;
+
+        font-size: 14px;
+    }
+
+    .developer-linkedin a {
+        font-size: 15px;
+    }
+
+}
+
+/* =========================
+   COMMENTS
+========================= */
+
+.comment-box {
+    display: block;
+
+    width: 100%;
+
+    margin-top: 12px;
+
+    padding: 5px 0;
+}
+
+
+.comment-item {
+    display: block;
+
+    width: 100%;
+
+    margin-top: 8px;
+
+    padding: 9px 12px;
+
+    background: #f3f4f6;
+
+    color: #111827;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    text-align: left;
+
+    border-left:
+        3px solid #7c3aed;
+
+    box-sizing: border-box;
+}
+
+/* =========================
+   COLORFUL PUBLIC THEME
+========================= */
+
+header {
+    background:
+        linear-gradient(
+            135deg,
+            #111827,
+            #312e81,
+            #7c3aed
+        );
+
+    box-shadow:
+        0 5px 20px rgba(49, 46, 129, 0.25);
+}
+
+.logo {
+    display: inline-block;
+
+    background:
+        linear-gradient(
+            90deg,
+            #facc15,
+            #fb7185,
+            #38bdf8
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+nav a {
+    transition:
+        color 0.3s ease,
+        transform 0.2s ease;
+}
+
+nav a:hover {
+    color: #facc15;
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   COLORFUL GALLERY
+========================= */
+
+.gallery-section {
+    background:
+        linear-gradient(
+            135deg,
+            #fff7ed,
+            #f5f3ff,
+            #eff6ff
+        );
+}
+
+.gallery-card {
+    background: white;
+
+    border:
+        1px solid rgba(124, 58, 237, 0.12);
+
+    box-shadow:
+        0 10px 30px rgba(76, 29, 149, 0.12);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.gallery-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 18px 35px rgba(76, 29, 149, 0.20);
+}
+
+.gallery-card h3 {
+    color: #312e81;
+}
+
+
+/* =========================
+   COLORFUL CATEGORY BUTTONS
+========================= */
+
+.categories button {
+    background:
+        linear-gradient(
+            135deg,
+            #4f46e5,
+            #7c3aed
+        );
+
+    color: white;
+
+    box-shadow:
+        0 5px 15px rgba(79, 70, 229, 0.20);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.categories button:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #f59e0b,
+            #ec4899
+        );
+
+    color: white;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(236, 72, 153, 0.25);
+}
+
+
+/* =========================
+   COLORFUL SOCIAL BUTTONS
+========================= */
+
+.social-actions button {
+    border:
+        1px solid #e5e7eb;
+
+    background: #ffffff;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.social-actions button:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #facc15,
+            #fb7185
+        );
+
+    color: white;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   COLORFUL CONTACT
+========================= */
+
+.contact-section {
+    background:
+        linear-gradient(
+            135deg,
+            #eef2ff,
+            #fdf2f8,
+            #ecfeff
+        );
+}
+
+.contact-section h2 {
+    color: #312e81;
+}
+
+.contact-buttons {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-top: 30px;
+}
+
+.contact-btn {
+    min-width: 150px;
+
+    margin: 0;
+
+    padding: 13px 22px;
+
+    border-radius: 12px;
+
+    font-weight: bold;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4f46e5,
+            #7c3aed
+        );
+
+    box-shadow:
+        0 7px 18px rgba(79, 70, 229, 0.20);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.contact-btn:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #ec4899,
+            #f59e0b
+        );
+
+    color: white;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 22px rgba(236, 72, 153, 0.25);
+}
+
+
+/* =========================
+   COLORFUL FOOTER
+========================= */
+
+footer {
+    background:
+        linear-gradient(
+            135deg,
+            #111827,
+            #312e81,
+            #7c3aed
+        );
+}
+
+footer strong {
+    color: #facc15;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+    .gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 20px;
+    }
+
+    .about-container {
+        gap: 30px;
+    }
+
+    .about-image {
+        width: 280px;
+        height: 280px;
+    }
+
+}
+
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+    header {
+        flex-direction: column;
+
+        gap: 15px;
+
+        padding: 15px 20px;
+    }
+
+    nav {
+        gap: 12px;
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+    nav a {
+        font-size: 14px;
+    }
+
+
+
+    /* HERO */
+
+    .hero {
+        min-height: 80vh;
+
+        padding: 40px 20px;
+    }
+
+    .hero h1 {
+        font-size: 45px;
+    }
+
+    .hero h2 {
+        font-size: 20px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+
+
+    /* SECTIONS */
+
+    .section {
+        padding: 60px 20px;
+    }
+
+    .section h2 {
+        font-size: 30px;
+    }
+
+
+
+    /* ABOUT */
+
+    .about-container {
+        width: 100%;
+
+        flex-direction: column;
+
+        gap: 30px;
+
+        overflow: hidden;
+    }
+
+    .about-image {
+        width: 280px;
+
+        height: 280px;
+
+        max-width: 100%;
+    }
+
+    .about-image img {
+        width: 100%;
+
+        height: 100%;
+
+        object-fit: contain;
+    }
+
+    .about-text {
+        width: 100%;
+
+        text-align: center;
+    }
+
+
+
+    /* GALLERY */
+
+    .gallery {
+        grid-template-columns: 1fr;
+
+        width: 100%;
+
+        gap: 25px;
+    }
+
+    .gallery-card {
+        width: 100%;
+    }
+
+    .gallery-card img {
+        height: 300px;
+    }
+
+}
+
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 480px) {
+
+    .logo {
+        font-size: 20px;
+    }
+
+    nav {
+        gap: 8px;
+    }
+
+    nav a {
+        font-size: 13px;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero h2 {
+        font-size: 18px;
+    }
+
+    .about-image {
+        width: 250px;
+
+        height: 250px;
+    }
+
+    .gallery-card img {
+        height: 250px;
+    }
+
+    .social-actions button {
+        font-size: 12px;
+
+        padding: 7px 10px;
+    }
+
+}

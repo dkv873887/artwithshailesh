@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login | artwithshailesh</title>
+
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        /* =========================
+           BODY
+        ========================= */
+
+        body {
+
+            min-height: 100vh;
+
+            font-family: Arial, sans-serif;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 30px;
+
+            overflow-x: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 10% 20%,
+                    #ff4d8d 0,
+                    transparent 25%
+                ),
+                radial-gradient(
+                    circle at 90% 15%,
+                    #38bdf8 0,
+                    transparent 25%
+                ),
+                radial-gradient(
+                    circle at 85% 90%,
+                    #a78bfa 0,
+                    transparent 25%
+                ),
+                radial-gradient(
+                    circle at 15% 90%,
+                    #ffd166 0,
+                    transparent 22%
+                ),
+                linear-gradient(
+                    135deg,
+                    #111827,
+                    #1e293b,
+                    #312e81
+                );
+
+        }
+
+
+        /* =========================
+           BACKGROUND PAINT SPLASH
+        ========================= */
+
+        .paint {
+
+            position: fixed;
+
+            border-radius: 50%;
+
+            filter: blur(1px);
+
+            opacity: 0.75;
+
+            z-index: 0;
+
+        }
+
+
+        .paint-one {
+
+            width: 180px;
+
+            height: 180px;
+
+            background: #ff4d6d;
+
+            top: -60px;
+
+            left: -50px;
+
+        }
+
+
+        .paint-two {
+
+            width: 130px;
+
+            height: 130px;
+
+            background: #ffd166;
+
+            bottom: 30px;
+
+            left: 40px;
+
+        }
+
+
+        .paint-three {
+
+            width: 210px;
+
+            height: 210px;
+
+            background: #38bdf8;
+
+            top: -80px;
+
+            right: -70px;
+
+        }
+
+
+        .paint-four {
+
+            width: 160px;
+
+            height: 160px;
+
+            background: #a78bfa;
+
+            bottom: -60px;
+
+            right: 40px;
+
+        }
+
+
+        /* =========================
+           LOGIN WINDOW
+        ========================= */
+
+        .login-window {
+
+            position: relative;
+
+            z-index: 10;
+
+            width: 100%;
+
+            max-width: 900px;
+
+            min-height: 540px;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            background:
+                rgba(255, 255, 255, 0.96);
+
+            border-radius: 30px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 30px 80px
+                rgba(0, 0, 0, 0.45);
+
+        }
+
+
+        /* =========================
+           LEFT ART SECTION
+        ========================= */
+
+        .art-side {
+
+            position: relative;
+
+            padding: 45px;
+
+            color: white;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #ff4d6d,
+                    #f97316,
+                    #f4b400,
+                    #22c55e,
+                    #38bdf8,
+                    #8b5cf6
+                );
+
+            background-size: 300% 300%;
+
+            animation:
+                colorfulBg 8s ease infinite;
+
+        }
+
+
+        @keyframes colorfulBg {
+
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+
+        }
+
+
+        .art-overlay {
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(255,255,255,0.35),
+                    transparent 20%
+                ),
+                radial-gradient(
+                    circle at 80% 70%,
+                    rgba(255,255,255,0.25),
+                    transparent 25%
+                );
+
+        }
+
+
+        .art-content {
+
+            position: relative;
+
+            z-index: 5;
+
+        }
+
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 55px;
+
+        }
+
+
+        .brand-icon {
+
+            width: 52px;
+
+            height: 52px;
+
+            background: white;
+
+            color: #ff4d6d;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 27px;
+
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,0.2);
+
+        }
+
+
+        .brand-name {
+
+            font-size: 23px;
+
+            font-weight: bold;
+
+        }
+
+
+        .brand-name span {
+
+            color: #fff5b1;
+
+        }
+
+
+        .art-side h1 {
+
+            font-family: Georgia, serif;
+
+            font-size: 52px;
+
+            line-height: 1.05;
+
+            font-style: italic;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .art-side p {
+
+            font-size: 16px;
+
+            line-height: 1.7;
+
+            max-width: 350px;
+
+            color: rgba(255,255,255,0.95);
+
+        }
+
+
+        .art-line {
+
+            width: 90px;
+
+            height: 5px;
+
+            border-radius: 10px;
+
+            background: white;
+
+            margin: 20px 0;
+
+        }
+
+
+        /* =========================
+           PAINT PALETTE
+        ========================= */
+
+        .palette {
+
+            position: absolute;
+
+            right: 40px;
+
+            bottom: 35px;
+
+            width: 170px;
+
+            height: 110px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #d99b58,
+                    #b96e37
+                );
+
+            border-radius:
+                55%
+                45%
+                50%
+                35%;
+
+            transform: rotate(-8deg);
+
+            box-shadow:
+                0 15px 25px
+                rgba(0,0,0,0.25);
+
+        }
+
+
+        .palette-hole {
+
+            position: absolute;
+
+            width: 30px;
+
+            height: 30px;
+
+            border-radius: 50%;
+
+            background: rgba(80,40,20,0.4);
+
+            right: 25px;
+
+            bottom: 22px;
+
+        }
+
+
+        .color-dot {
+
+            position: absolute;
+
+            width: 27px;
+
+            height: 27px;
+
+            border-radius: 50%;
+
+        }
+
+
+        .dot-red {
+
+            background: #ff1744;
+
+            left: 30px;
+
+            top: 22px;
+
+        }
+
+
+        .dot-yellow {
+
+            background: #ffd600;
+
+            left: 67px;
+
+            top: 15px;
+
+        }
+
+
+        .dot-blue {
+
+            background: #00b0ff;
+
+            left: 103px;
+
+            top: 25px;
+
+        }
+
+
+        .dot-green {
+
+            background: #00e676;
+
+            left: 48px;
+
+            top: 55px;
+
+        }
+
+
+        .dot-purple {
+
+            background: #aa00ff;
+
+            left: 85px;
+
+            top: 58px;
+
+        }
+
+
+        /* =========================
+           PAINT BRUSH
+        ========================= */
+
+        .brush {
+
+            position: absolute;
+
+            right: 10px;
+
+            bottom: 90px;
+
+            width: 145px;
+
+            height: 10px;
+
+            background: #7c4a28;
+
+            border-radius: 10px;
+
+            transform: rotate(-35deg);
+
+        }
+
+
+        .brush::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: -28px;
+
+            top: -8px;
+
+            width: 35px;
+
+            height: 26px;
+
+            border-radius:
+                60%
+                30%
+                50%
+                30%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff4d6d,
+                    #ffd166,
+                    #38bdf8
+                );
+
+        }
+
+
+        /* =========================
+           RIGHT LOGIN SECTION
+        ========================= */
+
+        .login-side {
+
+            padding: 55px 50px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            background: #ffffff;
+
+        }
+
+
+        .login-icon {
+
+            width: 70px;
+
+            height: 70px;
+
+            border-radius: 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 35px;
+
+            margin-bottom: 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f4b400,
+                    #ff6b6b
+                );
+
+            box-shadow:
+                0 10px 25px
+                rgba(244,180,0,0.25);
+
+        }
+
+
+        .login-side h2 {
+
+            font-size: 32px;
+
+            color: #111827;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .login-side > p {
+
+            color: #6b7280;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-group {
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            color: #374151;
+
+            font-weight: 600;
+
+            font-size: 14px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .input-box {
+
+            position: relative;
+
+        }
+
+
+        .input-box span {
+
+            position: absolute;
+
+            left: 15px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            font-size: 19px;
+
+        }
+
+
+        .input-box input {
+
+            width: 100%;
+
+            padding: 14px 15px 14px 45px;
+
+            border: 2px solid #e5e7eb;
+
+            border-radius: 13px;
+
+            outline: none;
+
+            font-size: 15px;
+
+            color: #111827;
+
+            transition: 0.3s;
+
+        }
+
+
+        .input-box input:focus {
+
+            border-color: #f4b400;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(244,180,0,0.12);
+
+        }
+
+
+        /* =========================
+           LOGIN BUTTON
+        ========================= */
+
+        .login-btn {
+
+            width: 100%;
+
+            border: none;
+
+            padding: 15px;
+
+            border-radius: 13px;
+
+            margin-top: 5px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f4b400,
+                    #ff7b00
+                );
+
+            color: #111827;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            box-shadow:
+                0 8px 20px
+                rgba(244,180,0,0.25);
+
+        }
+
+
+        .login-btn:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 25px
+                rgba(244,180,0,0.35);
+
+        }
+
+
+        .login-btn:disabled {
+
+            opacity: 0.6;
+
+            cursor: not-allowed;
+
+            transform: none;
+
+        }
+
+
+        /* =========================
+           ERROR
+        ========================= */
+
+        .error-message {
+
+            display: none;
+
+            margin-top: 15px;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            background: #fee2e2;
+
+            color: #b91c1c;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .login-footer {
+
+            margin-top: 25px;
+
+            text-align: center;
+
+            color: #9ca3af;
+
+            font-size: 12px;
+
+        }
+
+
+        .login-footer strong {
+
+            color: #f4b400;
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            body {
+
+                padding: 15px;
+
+            }
+
+
+            .login-window {
+
+                grid-template-columns: 1fr;
+
+                max-width: 500px;
+
+            }
+
+
+            .art-side {
+
+                min-height: 330px;
+
+                padding: 30px;
+
+            }
+
+
+            .brand {
+
+                margin-bottom: 30px;
+
+            }
+
+
+            .art-side h1 {
+
+                font-size: 40px;
+
+            }
+
+
+            .palette {
+
+                right: 25px;
+
+                bottom: 20px;
+
+                transform:
+                    scale(0.75)
+                    rotate(-8deg);
+
+            }
+
+
+            .brush {
+
+                right: 0;
+
+                bottom: 65px;
+
+                transform:
+                    scale(0.75)
+                    rotate(-35deg);
+
+            }
+
+
+            .login-side {
+
+                padding: 40px 30px;
+
+            }
+
+        }
+
+
+        @media (max-width: 450px) {
+
+            .art-side {
+
+                min-height: 300px;
+
+                padding: 25px;
+
+            }
+
+
+            .art-side h1 {
+
+                font-size: 34px;
+
+            }
+
+
+            .art-side p {
+
+                font-size: 14px;
+
+            }
+
+
+            .palette {
+
+                right: -10px;
+
+                bottom: 0;
+
+                transform:
+                    scale(0.6)
+                    rotate(-8deg);
+
+            }
+
+
+            .brush {
+
+                right: -30px;
+
+                bottom: 55px;
+
+            }
+
+
+            .login-side {
+
+                padding: 35px 22px;
+
+            }
+
+
+            .login-side h2 {
+
+                font-size: 27px;
+
+            }
+
+        }
+
+        .show-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px;
+            z-index: 5;
+        }
+
+        .show-password:hover {
+            transform: translateY(-50%) scale(1.15);
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= BACKGROUND COLORS ================= -->
+
+    <div class="paint paint-one"></div>
+
+    <div class="paint paint-two"></div>
+
+    <div class="paint paint-three"></div>
+
+    <div class="paint paint-four"></div>
+
+
+
+    <!-- ================= LOGIN WINDOW ================= -->
+
+    <div class="login-window">
+
+
+        <!-- ================= ART SIDE ================= -->
+
+        <section class="art-side">
+
+
+            <div class="art-overlay"></div>
+
+
+            <div class="art-content">
+
+
+                <!-- BRAND -->
+
+                <div class="brand">
+
+                    <div class="brand-icon">
+                        🎨
+                    </div>
+
+                    <div class="brand-name">
+
+                        artwith<span>shailesh</span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- TITLE -->
+
+                <h1>
+                    Create.<br>
+                    Paint.<br>
+                    Inspire.
+                </h1>
+
+
+                <div class="art-line"></div>
+
+
+                <p>
+
+                    Welcome to the creative
+                    studio of artwithshailesh.
+
+                    Manage paintings, sketches,
+                    flower designs and artwork
+                    from your admin dashboard.
+
+                </p>
+
+
+            </div>
+
+
+
+            <!-- ================= PALETTE ================= -->
+
+            <div class="palette">
+
+
+                <div
+                    class="color-dot dot-red">
+                </div>
+
+
+                <div
+                    class="color-dot dot-yellow">
+                </div>
+
+
+                <div
+                    class="color-dot dot-blue">
+                </div>
+
+
+                <div
+                    class="color-dot dot-green">
+                </div>
+
+
+                <div
+                    class="color-dot dot-purple">
+                </div>
+
+
+                <div class="palette-hole"></div>
+
+
+            </div>
+
+
+
+            <!-- ================= BRUSH ================= -->
+
+            <div class="brush"></div>
+
+
+        </section>
+
+
+
+        <!-- ================= LOGIN SIDE ================= -->
+
+        <section class="login-side">
+
+
+            <div class="login-icon">
+                🖌️
+            </div>
+
+
+            <h2>
+                Admin Login
+            </h2>
+
+
+            <p>
+                Sign in to manage your artwork.
+            </p>
+
+
+
+            <!-- ================= EMAIL ================= -->
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+
+                <div class="input-box">
+
+                    <span>
+                        📧
+                    </span>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                    required>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= PASSWORD ================= -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+
+                <div class="input-box">
+
+                    <span>🔐</span>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        autocomplete="off"
+                        required>
+
+                    <button
+                        type="button"
+                        id="togglePassword"
+                        class="show-password">
+                        👁️
+                    </button>
+
+                </div>
+
+                </div>
+
+
+
+            <!-- ================= LOGIN BUTTON ================= -->
+
+            <button
+                type="button"
+                class="login-btn"
+                id="loginBtn">
+
+                🎨 Login to Dashboard
+
+            </button>
+
+
+
+            <!-- ================= ERROR ================= -->
+
+            <div
+                class="error-message"
+                id="errorMessage">
+            </div>
+
+
+
+            <!-- ================= FOOTER ================= -->
+
+            <div class="login-footer">
+
+                artwithshailesh
+
+                <br>
+
+                Developed by
+
+                <strong>
+                    Dharmendra Verma
+                </strong>
+
+            </div>
+
+
+        </section>
+
+
+    </div>
+
+
+
+    <!-- ================= FIREBASE LOGIN ================= -->
+
+    <script type="module">
+
+        import { auth } from "./firebase.js";
+
+        import {
+            signInWithEmailAndPassword,
+            
+        }
+        from
+        "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+
+
+        /* =========================
+           ELEMENTS
+        ========================= */
+
+        const emailInput =
+            document.getElementById("email");
+
+        const passwordInput =
+            document.getElementById("password");
+
+        const togglePassword =
+            document.getElementById("togglePassword");
+
+        togglePassword.addEventListener(
+            "click",
+            function() {
+
+                if (passwordInput.type === "password") {
+
+                    passwordInput.type = "text";
+
+                    togglePassword.innerText = "🙈";
+
+                } else {
+
+                    passwordInput.type = "password";
+
+                    togglePassword.innerText = "👁️";
+
+                }
+
+            }
+        );
+
+        const loginBtn =
+            document.getElementById("loginBtn");
+
+        const errorMessage =
+            document.getElementById("errorMessage");
+
+
+        /* =========================
+           LOGIN
+        ========================= */
+
+        loginBtn.addEventListener(
+            "click",
+            async function() {
+
+
+                const email =
+                    emailInput.value.trim();
+
+
+                const password =
+                    passwordInput.value;
+
+
+
+                /* EMPTY CHECK */
+
+                if (
+                    email === "" ||
+                    password === ""
+                ) {
+
+                    showError(
+                        "Please enter your email and password."
+                    );
+
+                    return;
+
+                }
+
+
+
+                /* BUTTON LOADING */
+
+                loginBtn.disabled = true;
+
+                loginBtn.innerText =
+                    "🎨 Logging in...";
+
+
+                hideError();
+
+
+
+                try {
+
+
+                    await signInWithEmailAndPassword(
+                        auth,
+                        email,
+                        password
+                    );
+
+
+                    window.location.href =
+                        "admin.html";
+
+
+                }
+
+                catch (error) {
+
+                    console.log(error);
+
+
+                    let message =
+                        "Login failed. Please check your email and password.";
+
+
+                    if (
+                        error.code ===
+                        "auth/invalid-credential"
+                    ) {
+
+                        message =
+                            "Email or password is incorrect.";
+
+                    }
+
+
+                    else if (
+                        error.code ===
+                        "auth/invalid-email"
+                    ) {
+
+                        message =
+                            "Please enter a valid email address.";
+
+                    }
+
+
+                    else if (
+                        error.code ===
+                        "auth/too-many-requests"
+                    ) {
+
+                        message =
+                            "Too many attempts. Please try again later.";
+
+                    }
+
+
+                    showError(message);
+
+
+                    loginBtn.disabled = false;
+
+                    loginBtn.innerText =
+                        "🎨 Login to Dashboard";
+
+                }
+
+            }
+        );
+
+
+
+        /* =========================
+           ENTER KEY LOGIN
+        ========================= */
+
+        passwordInput.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Enter") {
+
+                    loginBtn.click();
+
+                }
+
+            }
+        );
+
+
+
+        /* =========================
+           SHOW ERROR
+        ========================= */
+
+        function showError(message) {
+
+            errorMessage.innerText =
+                "⚠️ " + message;
+
+            errorMessage.style.display =
+                "block";
+
+        }
+
+
+
+        /* =========================
+           HIDE ERROR
+        ========================= */
+
+        function hideError() {
+
+            errorMessage.style.display =
+                "none";
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
