@@ -66,6 +66,7 @@ nav a:hover {
 
 
 
+
 /* =========================
    HERO
 ========================= */
@@ -82,15 +83,12 @@ nav a:hover {
 
     padding: 50px 20px;
 
-    background-image:
-        linear-gradient(
-            rgba(0, 0, 0, 0.55),
-            rgba(0, 0, 0, 0.55)
-        ),
-        url("images/hero.jpg");
+    background-color: #222;
+    background-image: none;
 
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
 
     color: white;
 }
@@ -543,6 +541,10 @@ nav a:hover {
 ========================= */
 
 footer {
+    width: 100%;
+
+    box-sizing: border-box;
+
     background:
         linear-gradient(
             135deg,
@@ -1144,3 +1146,1634 @@ footer strong {
     }
 
 }
+
+/* =========================
+   PHOTOS MANAGEMENT DESIGN
+========================= */
+
+#photosSection {
+    padding: 30px;
+}
+
+#photosSection label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #c084fc;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    letter-spacing: 0.3px;
+}
+
+#photosSection #photosGrid > p {
+    color: #94a3b8;
+
+    font-size: 15px;
+
+    padding: 20px;
+
+    background: rgba(124, 58, 237, 0.08);
+
+    border: 1px solid
+        rgba(124, 58, 237, 0.18);
+
+    border-radius: 12px;
+}
+
+
+
+#photosSection .section-header h2 {
+    color: #ffffff;
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+#photosSection .section-header p {
+    color: #aab4c3;
+    margin-bottom: 25px;
+}
+
+/* Photo Title Input */
+
+#photoTitle {
+    width: 100%;
+    max-width: 600px;
+    padding: 14px 16px;
+    margin-bottom: 18px;
+
+    background: #111927;
+    color: #ffffff;
+
+    border: 1px solid #334155;
+    border-radius: 12px;
+
+    font-size: 15px;
+    outline: none;
+
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+#photoTitle:focus {
+    border-color: #7c3aed;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(124, 58, 237, 0.15);
+}
+
+#photoTitle::placeholder {
+    color: #7f8a9a;
+}
+
+
+/* Select Photo */
+
+#photoFile {
+    width: 100%;
+    max-width: 600px;
+
+    padding: 12px;
+
+    margin-bottom: 20px;
+
+    background: #111927;
+    color: #dbe4f0;
+
+    border: 1px solid #334155;
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+}
+
+#photoFile::file-selector-button {
+    padding: 10px 16px;
+
+    margin-right: 12px;
+
+    border: none;
+    border-radius: 9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #4f46e5
+        );
+
+    color: white;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+#photoFile::file-selector-button:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 15px
+        rgba(124, 58, 237, 0.35);
+}
+
+
+/* Upload Photo Button */
+
+#uploadPhotoBtn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 13px 22px;
+
+    border: none;
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #ec4899
+        );
+
+    color: white;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px
+        rgba(124, 58, 237, 0.25);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+#uploadPhotoBtn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 25px
+        rgba(236, 72, 153, 0.30);
+}
+
+#uploadPhotoBtn:active {
+    transform: translateY(0);
+}
+
+
+/* Photos Grid */
+
+#photosGrid {
+    margin-top: 30px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(220px, 1fr)
+        );
+
+    gap: 20px;
+}
+
+
+/* Photo Card */
+
+.photo-card {
+    overflow: hidden;
+
+    background: #111927;
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.08);
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 10px 25px
+        rgba(0, 0, 0, 0.25);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.photo-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 15px 30px
+        rgba(0, 0, 0, 0.35);
+}
+
+.photo-card img {
+    width: 100%;
+    height: 220px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+.photo-card h3 {
+    padding: 15px 15px 10px;
+
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 17px;
+}
+
+
+/* Delete Photo Button */
+
+.delete-photo-btn {
+    width: calc(100% - 30px);
+
+    margin:
+        0 15px 15px;
+
+    padding: 11px;
+
+    border: none;
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ef4444,
+            #dc2626
+        );
+
+    color: white;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.delete-photo-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px
+        rgba(239, 68, 68, 0.30);
+}
+
+/* =========================
+   PHOTOS FINAL COLOUR FIX
+========================= */
+
+#photosSection {
+    background: transparent !important;
+}
+
+/* Photo Title text */
+
+#photosSection label {
+    display: block !important;
+
+    color: #c084fc !important;
+
+    font-size: 15px !important;
+    font-weight: 700 !important;
+
+    margin-bottom: 8px !important;
+}
+
+
+/* Photo Title input */
+
+#photosSection #photoTitle {
+    background: #111827 !important;
+
+    color: #ffffff !important;
+
+    border: 2px solid #7c3aed !important;
+
+    border-radius: 12px !important;
+
+    padding: 14px 16px !important;
+
+    outline: none !important;
+}
+
+#photosSection #photoTitle::placeholder {
+    color: #94a3b8 !important;
+}
+
+
+/* Select Photo */
+
+#photosSection #photoFile {
+    background: #111827 !important;
+
+    color: #cbd5e1 !important;
+
+    border: 2px solid #4f46e5 !important;
+
+    border-radius: 12px !important;
+
+    padding: 10px !important;
+}
+
+
+/* Select Photo button */
+
+#photosSection #photoFile::file-selector-button {
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #4f46e5
+        ) !important;
+
+    color: #ffffff !important;
+
+    border: none !important;
+
+    border-radius: 9px !important;
+
+    padding: 10px 16px !important;
+
+    font-weight: 700 !important;
+
+    cursor: pointer !important;
+}
+
+
+/* Upload Photo */
+
+#photosSection #uploadPhotoBtn {
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #ec4899
+        ) !important;
+
+    color: #ffffff !important;
+
+    border: none !important;
+
+    border-radius: 12px !important;
+
+    padding: 13px 24px !important;
+
+    font-size: 15px !important;
+
+    font-weight: 700 !important;
+
+    cursor: pointer !important;
+}
+
+
+/* No photo message */
+
+#photosSection #photosGrid > p {
+    color: #94a3b8 !important;
+
+    background:
+        rgba(124, 58, 237, 0.10) !important;
+
+    border: 1px solid
+        rgba(124, 58, 237, 0.25) !important;
+
+    border-radius: 12px !important;
+
+    padding: 18px !important;
+}
+
+
+/* Delete Photo */
+
+#photosSection .delete-photo-btn {
+    background:
+        linear-gradient(
+            135deg,
+            #ef4444,
+            #dc2626
+        ) !important;
+
+    color: #ffffff !important;
+
+    border: none !important;
+
+    border-radius: 10px !important;
+
+    padding: 11px !important;
+
+    font-weight: 700 !important;
+
+    cursor: pointer !important;
+}
+/* =========================
+   APPEARANCE SETTINGS
+========================= */
+
+.appearance-settings-panel {
+    margin-top: 15px;
+    padding: 15px;
+    background: #0f172a;
+    border-radius: 12px;
+    border: 1px solid rgba(236, 72, 153, 0.25);
+}
+
+.appearance-settings-panel label {
+    display: block;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.appearance-settings-panel select {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(124, 58, 237, 0.4);
+    border-radius: 8px;
+    background: #111827;
+    color: white;
+    font-size: 13px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.appearance-settings-panel select:focus {
+    border-color: #ec4899;
+}
+/* =========================
+   LIGHT THEME
+========================= */
+
+body.light-theme {
+    background: #f5f7fb;
+    color: #111827;
+}
+
+body.light-theme .sidebar {
+    background: #ffffff;
+    border-right: 1px solid #e5e7eb;
+}
+
+body.light-theme .settings-card {
+    background: #ffffff;
+    border-color: #e5e7eb;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .settings-card-content h3 {
+    color: #111827;
+}
+
+body.light-theme .settings-card-content p {
+    color: #6b7280;
+}
+
+body.light-theme .appearance-settings-panel {
+    background: #f8fafc;
+    border-color: #e5e7eb;
+}
+
+body.light-theme .appearance-settings-panel label {
+    color: #111827;
+}
+
+body.light-theme .appearance-settings-panel select {
+    background: #ffffff;
+    color: #111827;
+    border-color: #d1d5db;
+}
+
+body.light-theme .section-header p {
+    color: #7c3aed;
+}
+
+/* =========================
+   LIGHT THEME FORCE
+========================= */
+
+body.light-theme {
+    background: #f5f5f5 !important;
+    color: #111827 !important;
+}
+
+body.light-theme .sidebar {
+    background: #ffffff !important;
+    color: #111827 !important;
+}
+
+body.light-theme .settings-card {
+    background: #ffffff !important;
+    color: #111827 !important;
+    border-color: #dddddd !important;
+}
+
+body.light-theme .settings-card-content h3 {
+    color: #111827 !important;
+}
+
+body.light-theme .settings-card-content p {
+    color: #555555 !important;
+}
+
+body.light-theme .section-header h2 {
+    color: #7c3aed !important;
+}
+
+body.light-theme .section-header p {
+    color: #6b21a8 !important;
+}
+
+/* =========================
+   SECURITY SETTINGS
+========================= */
+
+.security-settings-panel {
+    margin-top: 15px;
+    padding: 15px;
+    background: #0f172a;
+    border-radius: 12px;
+    border: 1px solid rgba(236, 72, 153, 0.25);
+}
+
+.security-status {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
+    background: rgba(124, 58, 237, 0.10);
+    border-radius: 10px;
+}
+
+.security-icon {
+    font-size: 24px;
+}
+
+.security-status h4 {
+    color: white;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.security-status p {
+    color: #aab4c3;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.security-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding: 11px 12px;
+    margin-top: 8px;
+    background: #111827;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.security-item span {
+    color: #d1d5db;
+    font-size: 12px;
+}
+
+.security-item strong {
+    color: #22c55e;
+    font-size: 12px;
+    white-space: nowrap;
+}
+/* =========================
+   DELETE ARTWORK BUTTON
+========================= */
+
+.delete-artwork-btn {
+    width: 100%;
+    margin-top: 12px;
+    padding: 11px 16px;
+
+    background: linear-gradient(
+        135deg,
+        #ff4d6d,
+        #e63956
+    );
+
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 12px rgba(230, 57, 86, 0.25);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.delete-artwork-btn:hover {
+    background: linear-gradient(
+        135deg,
+        #e63956,
+        #c9184a
+    );
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(230, 57, 86, 0.35);
+}
+
+.delete-artwork-btn:active {
+    transform: scale(0.97);
+}
+
+
+
+/* =================================
+   AUTOMATIC YOUTUBE VIDEO GRID
+================================= */
+
+.youtube-videos {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    margin: 30px 0;
+}
+
+.youtube-video-card {
+    min-width: 0;
+    overflow: hidden;
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+}
+
+.youtube-video-card iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+}
+
+.youtube-video-card h3 {
+    padding: 12px;
+    margin: 0;
+    font-size: 15px;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 768px) {
+    .youtube-videos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .youtube-videos {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =================================
+   ARTWITHSHAILESH - YOUTUBE VIDEO CARDS
+================================= */
+
+#youtubeVideos {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    width: 100%;
+    margin: 24px auto;
+    align-items: stretch;
+}
+
+#youtubeVideos .youtube-video-card {
+    min-width: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    border-radius: 16px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+#youtubeVideos .youtube-video-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
+}
+
+#youtubeVideos .youtube-video-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 0 !important;
+    background: #f2f2f2;
+}
+
+#youtubeVideos .youtube-video-card h3 {
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 600;
+    color: #252525;
+    margin: 16px 16px 8px;
+    overflow-wrap: anywhere;
+}
+
+#youtubeVideos .youtube-video-card a {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+    margin: auto 16px 16px !important;
+    padding: 11px 16px !important;
+    background: #e62117 !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px !important;
+    transition: background 0.2s ease;
+}
+
+#youtubeVideos .youtube-video-card a:hover {
+    background: #b81710 !important;
+}
+
+@media (max-width: 900px) {
+    #youtubeVideos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+    }
+}
+
+@media (max-width: 560px) {
+    #youtubeVideos {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+    }
+
+    #youtubeVideos .youtube-video-card h3 {
+        font-size: 15px;
+    }
+}
+
+/* =================================
+   ARTWITHSHAILESH - YOUTUBE SECTION
+================================= */
+
+.youtube-section {
+    position: relative;
+    overflow: hidden;
+    padding: 60px 24px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #17152b, #252047, #3b245e);
+    color: #ffffff;
+    text-align: center;
+}
+
+.youtube-section h2 {
+    margin: 0 0 14px;
+    font-size: clamp(26px, 4vw, 40px);
+    line-height: 1.25;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.youtube-section h2::after {
+    content: "";
+    display: block;
+    width: 76px;
+    height: 4px;
+    margin: 16px auto 0;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #ff4d6d, #ffc857);
+}
+
+.youtube-section > p {
+    max-width: 600px;
+    margin: 0 auto 30px;
+    color: #e3def5;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.youtube-section .youtube-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 28px;
+    padding: 13px 24px;
+    border-radius: 30px;
+    background: #ff334f;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.youtube-section .youtube-btn:hover {
+    background: #d91f3a;
+    transform: translateY(-3px);
+}
+
+@media (max-width: 560px) {
+    .youtube-section {
+        padding: 36px 14px;
+        border-radius: 16px;
+    }
+
+    .youtube-section > p {
+        font-size: 14px;
+        margin-bottom: 24px;
+    }
+
+    .youtube-section .youtube-btn {
+        margin-top: 22px;
+        padding: 12px 18px;
+        font-size: 14px;
+    }
+}
+
+/* =================================
+   ARTWITHSHAILESH - ART GALLERY
+================================= */
+
+.gallery-section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.gallery-section > h2 {
+    text-align: center;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 800;
+    color: #282044;
+    margin-bottom: 12px;
+}
+
+.gallery-section > p {
+    max-width: 650px;
+    margin: 0 auto 28px;
+    text-align: center;
+    color: #666174;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/* Category buttons */
+
+.gallery-section .categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin: 25px auto 32px;
+}
+
+.gallery-section .categories button {
+    padding: 10px 20px;
+    border: 1px solid #e2d9f5;
+    border-radius: 30px;
+    background: #ffffff;
+    color: #38265d;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease,
+                transform 0.2s ease;
+}
+
+.gallery-section .categories button:hover {
+    background: #38265d;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* Responsive gallery grid */
+
+.gallery-section .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    align-items: stretch;
+}
+
+/* Gallery images */
+
+.gallery-section .gallery img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 14px;
+    transition: transform 0.3s ease;
+}
+
+/* Gallery card hover */
+
+.gallery-section .gallery > * {
+    min-width: 0;
+    overflow: hidden;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 5px 18px rgba(30, 20, 50, 0.10);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.gallery-section .gallery > *:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(30, 20, 50, 0.16);
+}
+
+/* Tablet */
+
+@media (max-width: 900px) {
+    .gallery-section .gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    .gallery-section .gallery img {
+        height: 240px;
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 560px) {
+    .gallery-section {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    .gallery-section .gallery {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+    }
+
+    .gallery-section .gallery img {
+        height: auto;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+    }
+
+    .gallery-section .categories {
+        gap: 8px;
+    }
+
+    .gallery-section .categories button {
+        padding: 9px 14px;
+        font-size: 13px;
+    }
+
+    .gallery-section > p {
+        font-size: 14px;
+        padding: 0 8px;
+    }
+}
+
+/* Yellow Gallery Category Buttons */
+
+.gallery-section .categories button {
+    background: #ffcc00;
+    color: #282044;
+    border: 1px solid #e6b800;
+    font-weight: 700;
+}
+
+.gallery-section .categories button:hover {
+    background: #f2b900;
+    color: #282044;
+    transform: translateY(-2px);
+}
+
+/* ===== COLORFUL ARTWITHSHAILESH DESIGN ===== */
+
+.hero {
+    position: relative;
+    isolation: isolate;
+    text-align: center;
+    color: white;
+    padding: 35px 20px 70px;
+    background-size: cover;
+    background-position: center;
+}
+
+.hero h1 {
+    font-size: clamp(42px, 6vw, 76px);
+    font-weight: 900;
+    color: #ffffff;
+    text-shadow: 2px 3px 8px rgba(0, 0, 0, 0.45);
+    margin: 15px 0;
+}
+
+.hero h1 span {
+    color: #ffca28;
+}
+
+.hero p {
+    font-size: clamp(17px, 2.5vw, 28px);
+    font-weight: 700;
+    line-height: 1.6;
+}
+
+.hero .welcome {
+    display: inline-block;
+    padding: 10px 28px;
+    border-radius: 12px;
+    color: #25205d;
+    background: linear-gradient(100deg, #ffe45e, #ff9c53, #ff4fa3);
+    font-weight: 900;
+    letter-spacing: 3px;
+}
+
+.hero .tagline {
+    color: #ffffff;
+    font-weight: 800;
+    font-style: italic;
+}
+
+.hero .hero-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 28px;
+}
+
+.hero .hero-buttons a {
+    display: inline-block;
+    padding: 15px 28px;
+    border-radius: 40px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: transform 0.25s ease;
+}
+
+.hero .hero-buttons a:first-child {
+    background: linear-gradient(120deg, #ffe45e, #ffb300);
+    color: #282044;
+}
+
+.hero .hero-buttons a:last-child {
+    background: linear-gradient(120deg, #df36f5, #008cff);
+    color: #ffffff;
+}
+
+.hero .hero-buttons a:hover {
+    transform: translateY(-4px);
+}
+
+#about h2,
+.about-section h2 {
+    display: table;
+    margin: 0 auto 30px;
+    padding: 12px 35px;
+    border-radius: 16px;
+    color: #21145e;
+    background: linear-gradient(
+        100deg,
+        #ffe45e,
+        #ff8a45,
+        #ff4fa3,
+        #9c6bff,
+        #39c8ff
+    );
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 900;
+}
+
+@media (max-width: 600px) {
+    .hero {
+        padding: 35px 15px 50px;
+    }
+
+    .hero .hero-buttons a {
+        padding: 12px 20px;
+    }
+}
+
+/* ===== COLORFUL HERO DESIGN ===== */
+
+.hero {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+}
+
+.hero .hero-content {
+    text-align: center;
+}
+
+/* WELCOME TO - colorful brush style */
+
+.hero .small-title {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 12px;
+    background: linear-gradient(100deg, #ffe45e, #ff984d, #ff45a8);
+    color: #25145d;
+    font-weight: 900;
+    letter-spacing: 3px;
+}
+
+/* Website name */
+
+.hero #publicWebsiteName {
+    color: #ffffff;
+    font-size: clamp(42px, 6vw, 76px);
+    font-weight: 900;
+    text-shadow: 2px 3px 8px rgba(0, 0, 0, 0.45);
+}
+
+.hero #publicWebsiteName::after {
+    content: "";
+    display: block;
+    width: min(75%, 400px);
+    height: 8px;
+    margin: 8px auto;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #ff35a8, #ffca28, #00cfff);
+}
+
+/* Wall Painting • Sketch • Flower Design */
+
+.hero .hero-content > h2 {
+    font-size: clamp(20px, 3vw, 32px);
+    font-weight: 900;
+    background: linear-gradient(
+        90deg,
+        #ffcc33,
+        #48d9ff,
+        #ff4eaa
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Tagline / description */
+
+.hero #publicWebsiteDescription {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+/* Colorful buttons */
+
+.hero .hero-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 28px;
+}
+
+.hero .hero-buttons .btn {
+    display: inline-block;
+    padding: 15px 28px;
+    border: none;
+    border-radius: 40px;
+    background: linear-gradient(120deg, #ffe45e, #ffb300);
+    color: #25145d;
+    font-weight: 800;
+    text-decoration: none;
+    transition: transform 0.25s ease;
+}
+
+.hero .hero-buttons .second-btn {
+    background: linear-gradient(120deg, #d633ff, #008cff);
+    color: #ffffff;
+}
+
+.hero .hero-buttons .btn:hover {
+    transform: translateY(-4px);
+}
+
+@media (max-width: 600px) {
+    .hero #publicWebsiteDescription {
+        font-size: 16px;
+    }
+
+    .hero .hero-buttons {
+        gap: 12px;
+    }
+
+    .hero .hero-buttons .btn {
+        padding: 12px 18px;
+    }
+}
+
+/* Art Is My Passion */
+
+.hero .art-tagline {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 24px;
+    border-radius: 30px;
+    background: linear-gradient(90deg, #ff4fa3, #ff9e45, #ffe45e);
+    color: #25145d;
+    font-size: 20px;
+    font-weight: 900;
+    box-shadow: 0 5px 18px rgba(255, 79, 163, 0.3);
+}
+
+/* ===== SHAILSHART COLORFUL TITLE ===== */
+
+#publicWebsiteName {
+    color: #ffffff;
+    font-weight: 900;
+    text-shadow: 2px 3px 8px rgba(0, 0, 0, 0.5);
+}
+
+#publicWebsiteName::first-letter {
+    color: #ffcc33;
+}
+
+/* Colorful underline below website name */
+
+#publicWebsiteName::after {
+    content: "";
+    display: block;
+    width: 65%;
+    height: 7px;
+    margin: 10px auto;
+    border-radius: 10px;
+    background: linear-gradient(
+        90deg,
+        #ff36a5,
+        #ffcc33,
+        #00cfff
+    );
+}
+
+/* Remove only the extra plain tagline if it has this class */
+
+.hero .old-tagline {
+    display: none;
+}
+
+/* ===== ABOUT SECTION ===== */
+
+#about h2,
+.about-section h2 {
+    display: table;
+    margin: 0 auto 28px;
+    padding: 12px 30px;
+    border-radius: 16px;
+    color: #26135f;
+    background: linear-gradient(
+        100deg,
+        #ffe45e,
+        #ff8b48,
+        #ff45a8,
+        #a45cff,
+        #36c9ff
+    );
+    font-weight: 900;
+}
+
+/* About description */
+
+#about p,
+.about-section p {
+    color: #49366c;
+    font-size: 17px;
+    line-height: 1.9;
+}
+
+#about p:first-of-type,
+.about-section p:first-of-type {
+    color: #e34d9b;
+    font-weight: 700;
+}
+
+/* Art tagline button */
+
+.hero .art-tagline {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: 30px;
+    background: linear-gradient(90deg, #ff4fa3, #ff9e45, #ffe45e);
+    color: #25145d;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+/* Make the complete website name colorful */
+
+.hero #publicWebsiteName {
+    background: linear-gradient(
+        90deg,
+        #ff3cac,
+        #ff9f43,
+        #ffe14a,
+        #36d1dc,
+        #5b65f5,
+        #c850c0
+    ) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    color: transparent !important;
+    display: inline-block;
+}
+/* WELCOME TO aur shaileshart ko upar-niche rakhein */
+
+.hero .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero .small-title {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 12px;
+    order: 1;
+}
+
+.hero #publicWebsiteName {
+    display: block;
+    width: 100%;
+    margin: 0 auto 15px;
+    text-align: center;
+    order: 2;
+    background: linear-gradient(
+        90deg,
+        #ffcc33,
+        #ff4fa3,
+        #40c8ff,
+        #a66bff
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Baaki hero content ka order */
+.hero .hero-content > h2 {
+    order: 3;
+}
+
+.hero #publicWebsiteDescription {
+    order: 4;
+}
+
+.hero .art-tagline {
+    order: 5;
+}
+
+.hero .hero-buttons {
+    order: 6;
+}
+
+
+/* View all comments button */
+
+.view-all-comments-btn {
+    display: block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    background: #f0e6ff;
+    color: #663399;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.view-all-comments-btn:hover {
+    background: #e2d0ff;
+}
+
+/* Comment author name */
+
+.comment-author {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: #663399;
+    margin-bottom: 5px;
+}
+
+.comment-item {
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    background: #f8f5fc;
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================
+   ADMIN NOTIFICATION
+========================= */
+
+.admin-notification-wrapper {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    left: auto !important;
+    bottom: auto !important;
+    z-index: 99999 !important;
+    width: auto !important;
+    height: auto !important;
+    margin-left: 0;
+    flex-shrink: 0;
+}
+
+.admin-notification-btn {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 64px !important;
+    height: 64px !important;
+    padding: 0 !important;
+    font-size: 36px !important;
+    border: 2px solid #e0b84b !important;
+    border-radius: 50% !important;
+    background: #182331 !important;
+    color: #ffffff !important;
+    cursor: pointer !important;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.3) !important;
+}
+
+.admin-notification-panel {
+    position: absolute !important;
+    top: 74px !important;
+    right: 0 !important;
+    left: auto !important;
+    width: 350px !important;
+    max-width: calc(100vw - 32px) !important;
+    max-height: 400px !important;
+    overflow-y: auto !important;
+    padding: 16px !important;
+    background: #ffffff !important;
+    color: #263238 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* MOBILE ADMIN TOP BAR */
+
+@media (max-width: 600px) {
+    #adminApp .topbar {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        height: auto;
+        min-height: 110px;
+        padding: 12px;
+    }
+
+    #adminApp .topbar .brand {
+        margin-right: auto;
+        max-width: 100%;
+    }
+
+    #adminApp .topbar .admin-notification-wrapper {
+        order: 3;
+        margin-left: auto;
+    }
+
+    #adminApp .topbar .logout-btn {
+        order: 2;
+        margin-left: auto;
+        flex-shrink: 0;
+    }
+
+    #adminApp .admin-notification-btn {
+        width: 50px !important;
+        height: 50px !important;
+        font-size: 28px !important;
+    }
+}
+
+   
+
+    .admin-notification-btn {
+        width: 50px !important;
+        height: 50px !important;
+        font-size: 28px !important;
+    }
+/* =========================
+   COLORFUL ADMIN ACCESS CARD
+========================= */
+
+.admin-access-card {
+    background: linear-gradient(
+        135deg,
+        #182848,
+        #3b1f63,
+        #123b4a
+    );
+
+    border: 1px solid rgba(150, 120, 255, 0.5);
+    border-radius: 20px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+
+    box-shadow:
+        0 8px 25px rgba(85, 60, 180, 0.2);
+
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.admin-access-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 12px 30px rgba(120, 70, 255, 0.3);
+}
+
+.admin-access-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.admin-access-card h3 {
+    color: #d9d5ff;
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+.admin-access-card .admin-active-status {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    color: #4dffae;
+    font-size: 30px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.active-dot {
+    width: 10px;
+    height: 10px;
+
+    background: #35f59b;
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 10px #35f59b,
+        0 0 20px rgba(53, 245, 155, 0.6);
+}
+
+
+

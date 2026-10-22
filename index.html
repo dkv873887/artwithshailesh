@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,7 +56,7 @@
                 WELCOME TO
             </p>
 
-            <h1>
+            <h1 id="publicWebsiteName">
                 artwithshailesh
             </h1>
 
@@ -64,9 +64,15 @@
                 Wall Painting • Sketch • Flower Design
             </h2>
 
-            <p>
-                Creative artwork made with passion, imagination and love.
+            
+            
+            
+
+
+            <p class="art-tagline">
+                🎨 Art Is My Passion ❤️
             </p>
+
 
 
             <div class="hero-buttons">
@@ -94,13 +100,16 @@
         <div class="about-container">
 
 
+
             <div class="about-image">
 
                 <img
-                    src="images/shailesh.jpg"
-                    alt="Shailesh - Artist">
+                    alt="Shailesh - Artist"
+                    id="publicProfilePhoto"
+                    style="visibility: hidden;">
 
             </div>
+
 
 
             <div class="about-text">
@@ -191,15 +200,27 @@
         <p>
             Watch Shailesh creating beautiful artwork.
         </p>
+        <!-- Automatic YouTube Videos -->
+
+        <div
+            id="youtubeVideos"
+            class="youtube-videos">
+
+            <p>Latest videos loading...</p>
+
+        </div>
 
         <a
-            href="http://www.youtube.com/@artwithshailesh"
-    class="youtube-btn"
-    target="_blank">
+            href="https://youtube.com/@artwithshailesh"
+            class="youtube-btn"
+            id="visitYoutubeChannelBtn"
+            target="_blank"
+            rel="noopener noreferrer">
 
             ▶ Visit YouTube Channel
 
         </a>
+
 
     </section>
 
@@ -224,8 +245,9 @@
         <!-- WhatsApp - Shailesh -->
 
         <a
-            href="https://wa.me/919984809023"
+            href="#"
             class="contact-btn"
+            id="whatsappContactBtn"
             target="_blank">
 
             💬 WhatsApp
@@ -236,8 +258,9 @@
         <!-- Instagram - Shailesh -->
 
         <a
-            href="https://www.instagram.com/divine_art_by_shailesh"
+            href="#"
             class="contact-btn"
+            id="publicInstagramBtn"
             target="_blank">
 
             📸 Instagram
@@ -248,8 +271,9 @@
         <!-- YouTube - Shailesh -->
 
         <a
-            href="https://www.youtube.com/@artwithshailesh"
+            href="#"
             class="contact-btn"
+            id="publicYoutubeBtn"
             target="_blank">
 
             ▶️ YouTube
@@ -262,6 +286,7 @@
         <a
             href="#"
             class="contact-btn"
+            id="publicLinkedinBtn"
             target="_blank">
 
             💼 LinkedIn

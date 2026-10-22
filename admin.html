@@ -2,29 +2,25 @@
 <html lang="en">
 
 <head>
-    <style>
-        .admin-profile {
-            visibility: hidden;
-        }
-    </style>
-
-
+    <link rel="stylesheet" href="style.css">
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <title>Admin Dashboard | artwithshailesh</title>
-
+    <title>
+        artwithshailesh | Admin Panel
+    </title>
 
     <style>
 
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
-
 
         body {
             font-family: Arial, sans-serif;
@@ -44,15 +40,128 @@
             color: white;
 
             min-height: 100vh;
+
+            overflow-x: hidden;
         }
 
+        button,
+        input,
+        textarea,
+        select {
+            font-family: inherit;
+        }
 
-        /* ================= HEADER ================= */
+        button {
+            cursor: pointer;
+        }
 
-        header {
+        /* =========================
+           LOGIN CHECK SCREEN
+        ========================= */
+
+        #loadingScreen {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+        }
+
+        .loading-box {
+
+            width: 100%;
+
+            max-width: 420px;
+
+            padding: 35px;
+
+            text-align: center;
+
+            background: rgba(
+                17,
+                25,
+                39,
+                0.92
+            );
+
+            border: 1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 20px 50px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.35
+                );
+
+        }
+
+        .loading-logo {
+
+            width: 75px;
+
             height: 75px;
 
-            padding: 0 35px;
+            margin: 0 auto 15px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            border: 3px solid #f4b400;
+
+        }
+
+        .loading-box h2 {
+
+            margin-bottom: 8px;
+
+        }
+
+        .loading-box p {
+
+            color: #aab4c3;
+
+            font-size: 14px;
+
+        }
+
+        /* =========================
+           ADMIN APP
+        ========================= */
+
+        #adminApp {
+
+            display: none;
+
+            min-height: 100vh;
+
+        }
+
+        /* =========================
+           TOP BAR
+        ========================= */
+
+        .topbar {
+
+            height: 75px;
+
+            width: 100%;
 
             display: flex;
 
@@ -60,388 +169,413 @@
 
             justify-content: space-between;
 
-            background: rgba(5, 8, 14, 0.95);
+            padding: 0 25px;
 
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            background:
+                rgba(
+                    7,
+                    11,
+                    18,
+                    0.95
+                );
+
+            border-bottom: 1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
 
             position: sticky;
 
             top: 0;
 
             z-index: 1000;
+
+            backdrop-filter: blur(12px);
+
         }
 
+        .brand {
 
-        .logo {
             display: flex;
 
             align-items: center;
 
             gap: 12px;
+
         }
 
+        .brand-logo {
 
-        .logo-icon {
-            width: 45px;
+            width: 42px;
 
-            height: 45px;
+            height: 42px;
 
             border-radius: 50%;
 
-            background: #f4b400;
+            object-fit: cover;
 
-            display: flex;
+            border: 2px solid #f4b400;
 
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 24px;
         }
 
+        .brand-name {
 
-        .logo h2 {
-            font-size: 22px;
-
-            font-weight: 700;
-        }
-
-
-        .logo span {
-            color: #f4b400;
-        }
-
-
-        .admin-area {
-            display: flex;
-
-            align-items: center;
-
-            gap: 15px;
-        }
-
-
-        .admin-avatar {
-            width: 40px;
-
-            height: 40px;
-
-            border-radius: 50%;
-
-            background: #f4b400;
-
-            color: #111;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
+            font-size: 20px;
 
             font-weight: bold;
+
         }
 
+        .brand-name span {
 
-        .logout-btn {
-            border: none;
-
-            padding: 10px 18px;
-
-            border-radius: 20px;
-
-            background: rgba(255, 255, 255, 0.1);
-
-            color: white;
-
-            cursor: pointer;
-
-            transition: 0.3s;
-        }
-
-
-        .logout-btn:hover {
-            background: #f4b400;
-
-            color: #111;
-        }
-
-
-        /* ================= LAYOUT ================= */
-
-        .layout {
-            display: flex;
-
-            min-height: calc(100vh - 75px);
-        }
-
-
-        /* ================= SIDEBAR ================= */
-
-        .sidebar {
-            width: 230px;
-
-            padding: 25px 15px;
-
-            background: rgba(5, 9, 16, 0.85);
-
-            border-right: 1px solid rgba(255, 255, 255, 0.07);
-
-            flex-shrink: 0;
-        }
-
-
-        .side-title {
-            color: #777;
-
-            font-size: 12px;
-
-            text-transform: uppercase;
-
-            letter-spacing: 2px;
-
-            margin: 10px 15px 15px;
-        }
-
-        /* ================= ADMIN PROFILE ================= */
-
-        .admin-profile {
-            text-align: center;
-            padding: 20px 12px;
-            margin-bottom: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .admin-profile img {
-            width: 85px;
-            height: 85px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #f4b400;
-            margin-bottom: 10px;
-        }
-
-        .admin-profile h3 {
-            font-size: 18px;
-            margin-bottom: 5px;
-            color: white;
-        }
-
-        .admin-profile p {
-            font-size: 12px;
-            line-height: 1.5;
-            color: #aab4c3;
-        }
-
-        .admin-profile .admin-role {
-            display: inline-block;
-            margin-top: 8px;
-            padding: 5px 10px;
-            border-radius: 20px;
-            background: rgba(244, 180, 0, 0.15);
             color: #f4b400;
-            font-size: 11px;
-        }
-        /* ================= EDIT PROFILE BUTTON ================= */
 
-        .edit-profile-btn {
+        }
+
+        .topbar {
+            min-height: 75px;
             width: 100%;
-            padding: 10px 12px;
-            margin-bottom: 20px;
-            border: none;
-            border-radius: 10px;
-            background: #f4b400;
-            color: #111827;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .edit-profile-btn:hover {
-            transform: translateY(-2px);
-            opacity: 0.9;
-        }
-
-        /* ================= PROFILE MODAL ================= */
-
-        .profile-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.75);
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            padding: 20px;
-        }
-
-
-        .profile-modal-box {
-            width: 100%;
-            max-width: 450px;
-            background: #ffffff;
-            border-radius: 18px;
-            padding: 25px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-
-
-        .profile-modal-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
+            gap: 12px;
+            padding: 10px 25px;
+            background: rgba(7, 11, 18, 0.95);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
         }
 
-
-        .profile-modal-header h2 {
-            margin: 0;
-            color: #111827;
-            font-size: 22px;
-        }
-
-
-        .close-profile-modal {
-            border: none;
-            background: transparent;
-            font-size: 20px;
-            cursor: pointer;
-            color: #555;
-        }
-
-
-        .profile-form {
+        .brand {
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
         }
 
-
-        .profile-form label {
-            margin-bottom: 7px;
-            margin-top: 12px;
-            color: #333;
-            font-size: 14px;
-            font-weight: 600;
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #f4b400;
         }
 
+        .brand-name {
+            font-size: 20px;
+            font-weight: bold;
+        }
 
-        .profile-form input,
-        .profile-form textarea {
-            width: 100%;
-            padding: 11px 12px;
-            border: 1px solid #d1d5db;
+        .brand-name span {
+            color: #f4b400;
+        }
+
+        .admin-notification-wrapper {
+            position: relative !important;
+            top: auto !important;
+            right: auto !important;
+            left: auto !important;
+            bottom: auto !important;
+            margin-left: auto;
+            flex-shrink: 0;
+        }
+
+        .logout-btn {
+            border: none;
+            background: #d64545;
+            color: white;
+            padding: 10px 18px;
             border-radius: 10px;
-            font-size: 14px;
-            outline: none;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .logout-btn:hover {
+            background: #b83232;
+        }
+
+        .logout-btn:hover {
+
+            background: #b83232;
+
+        }
+
+
+
+        
+        /* =========================
+           MAIN LAYOUT
+        ========================= */
+
+        
+        .layout {
+
+            display: grid;
+
+            grid-template-columns: 250px minmax(0, 1fr);
+
+            grid-template-rows: auto 1fr;
+
+            align-items: start;
+
+            min-height: calc(100vh - 75px);
+
+            width: 100%;
+
+            max-width: 100%;
+
             box-sizing: border-box;
+
+            gap: 20px;
+
         }
 
-
-        .profile-form input:focus,
-        .profile-form textarea:focus {
-            border-color: #f4b400;
-        }
+    
 
 
-        .profile-form textarea {
-            resize: vertical;
-        }
+        /* =========================
+           SIDEBAR
+        ========================= */
 
+                .sidebar {
 
-        .save-profile-btn {
-            margin-top: 22px;
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
-            background: #f4b400;
-            color: #111827;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-        }
+            grid-column: 1;
 
+            grid-row: 1 / span 2;
 
-        .save-profile-btn:hover {
-            opacity: 0.9;
-        }
+            width: 250px;
 
-        .side-link {
-            width: 100%;
+            min-height: 100%;
 
-            border: none;
+            flex-shrink: 0;
 
-            background: transparent;
+            background:
+                rgba(
+                    9,
+                    14,
+                    23,
+                    0.98
+                );
 
-            color: #cbd5e1;
-
-            padding: 13px 15px;
-
-            margin-bottom: 7px;
-
-            border-radius: 10px;
-
-            text-align: left;
-
-            cursor: pointer;
-
-            font-size: 15px;
-
-            transition: 0.3s;
-        }
-
-
-        .side-link:hover,
-        .side-link.active {
-            background: #f4b400;
-
-            color: #111;
-        }
-
-
-        .quote {
-            margin-top: 80px;
+            border-right: 1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
 
             padding: 20px 15px;
 
+            box-sizing: border-box;
+
+        }
+
+        .admin-profile {
+
+            text-align: center;
+
+            padding: 20px 12px;
+
+            margin-bottom: 20px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.05
+                );
+
+            border-radius: 15px;
+
+            border: 1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
+        }
+
+        .admin-profile img {
+
+            width: 85px;
+
+            height: 85px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            border: 3px solid #f4b400;
+
+            margin-bottom: 10px;
+
+        }
+
+        .admin-profile h3 {
+
+            font-size: 18px;
+
+            margin-bottom: 5px;
+
+        }
+
+        .admin-profile p {
+
+            font-size: 12px;
+
+            line-height: 1.5;
+
             color: #aab4c3;
+
+        }
+
+        .admin-role {
+
+            display: inline-block;
+
+            margin-top: 8px;
+
+            padding: 5px 10px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(
+                    244,
+                    180,
+                    0,
+                    0.15
+                );
+
+            color: #f4b400;
+
+            font-size: 11px;
+
+        }
+
+        .side-menu {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+
+        }
+
+        .side-link {
+
+            width: 100%;
+
+            border: none;
+
+            background: transparent;
+
+            color: #c9d1dc;
+
+            text-align: left;
+
+            padding: 13px 15px;
+
+            border-radius: 10px;
 
             font-size: 14px;
 
-            line-height: 1.7;
+            transition:
+                background 0.2s ease,
+                color 0.2s ease;
 
-            font-style: italic;
         }
 
+        .side-link:hover {
 
-        .quote strong {
+            background:
+                rgba(
+                    244,
+                    180,
+                    0,
+                    0.10
+                );
+
+            color: white;
+
+        }
+
+        .side-link.active {
+
+            background:
+                rgba(
+                    244,
+                    180,
+                    0,
+                    0.18
+                );
+
             color: #f4b400;
+
+            font-weight: bold;
+
+        }
+
+        /* =========================
+           MAIN CONTENT
+        ========================= */
+
+        main {
+
+            flex: 1;
+
+            min-width: 0;
+
+            padding: 30px;
+
+            overflow-y: auto;
+
+        }
+
+        /* =========================
+           ADMIN SECTIONS
+        ========================= */
+
+        .admin-section {
+
+            display: none;
+
+        }
+
+        .admin-section.active {
 
             display: block;
 
-            margin-top: 10px;
         }
 
+        /* =========================
+           DASHBOARD HERO
+        ========================= */
 
-        /* ================= MAIN ================= */
-
-        main {
-            flex: 1;
-
-            padding: 35px;
-
-            overflow: hidden;
-        }
-
-
-        /* ================= HERO ================= */
 
         .welcome {
+
+            grid-column: 2;
+
+            grid-row: 1;
+
             min-height: 330px;
+
+            width: 100%;
+
+            max-width: 100%;
+
+            box-sizing: border-box;
 
             border-radius: 22px;
 
@@ -451,13 +585,39 @@
 
             overflow: hidden;
 
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
             background:
                 linear-gradient(
                     90deg,
-                    rgba(9, 14, 23, 0.99) 0%,
-                    rgba(9, 14, 23, 0.94) 38%,
-                    rgba(9, 14, 23, 0.35) 72%,
-                    rgba(9, 14, 23, 0.15) 100%
+                    rgba(
+                        9,
+                        14,
+                        23,
+                        0.99
+                    ) 0%,
+                    rgba(
+                        9,
+                        14,
+                        23,
+                        0.94
+                    ) 38%,
+                    rgba(
+                        9,
+                        14,
+                        23,
+                        0.35
+                    ) 72%,
+                    rgba(
+                        9,
+                        14,
+                        23,
+                        0.15
+                    ) 100%
                 ),
                 radial-gradient(
                     circle at 80% 50%,
@@ -465,1577 +625,805 @@
                     #171c26 60%
                 );
 
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
 
             box-shadow:
-                0 15px 40px rgba(0, 0, 0, 0.25);
-        }
+                0 15px 40px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.25
+                );
 
+        }
 
         .welcome-text {
-            position: relative;
 
-            z-index: 20;
+            max-width: 600px;
 
-            max-width: 480px;
-
-            padding-top: 20px;
         }
-
 
         .welcome-text small {
-            color: #a9c4df;
-
-            font-size: 17px;
-        }
-
-
-        .welcome-text h1 {
-            font-size: 58px;
 
             color: #f4b400;
 
-            margin: 5px 0 10px;
+            font-size: 14px;
 
-            font-family: Georgia, serif;
-
-            font-style: italic;
         }
 
+        .welcome-text h1 {
 
-        .creative-line {
-            width: 80px;
+            font-size: 38px;
 
-            height: 4px;
+            margin: 10px 0;
 
-            background: #f4b400;
-
-            margin: 15px 0;
-
-            border-radius: 10px;
         }
-
 
         .welcome-text p {
-            color: #d7dee8;
+
+            color: #c2cad5;
 
             line-height: 1.7;
 
-            font-size: 16px;
+            font-size: 15px;
 
-            margin-bottom: 5px;
+        }
+
+        
+
+.welcome-art {
+    position: relative;
+    width: 520px;
+    max-width: 52%;
+    height: 300px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+}
+
+.artist-studio {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.22));
+}
+
+@media (max-width: 900px) {
+    .welcome-art {
+        width: 360px;
+        max-width: 48%;
+        height: 260px;
+    }
+}
+
+@media (max-width: 700px) {
+    .welcome-art {
+        width: 100%;
+        max-width: 100%;
+        height: 260px;
+        margin: 8px auto 0;
+    }
+}
+
+
+.rabbit-scene {
+    position: relative;
+    width: 250px;
+    height: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rabbit-canvas {
+    position: absolute;
+    top: 12px;
+    right: 8px;
+    width: 95px;
+    height: 120px;
+    border: 7px solid #bd8750;
+    border-radius: 5px;
+    background: #fff5d9;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+    transform: rotate(5deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    animation: canvasPaint 3s ease-in-out infinite;
+}
+
+.rabbit {
+    position: absolute;
+    bottom: 22px;
+    left: 25px;
+    width: 125px;
+    height: 125px;
+    animation: rabbitPaint 2s ease-in-out infinite;
+}
+
+.rabbit-body {
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    width: 100px;
+    height: 85px;
+    border-radius: 50% 50% 40% 40%;
+    background: #fffaf0;
+    box-shadow: inset -9px -7px 0 #dedbd4;
+}
+
+.rabbit-ear {
+    position: absolute;
+    top: -22px;
+    width: 28px;
+    height: 75px;
+    border-radius: 50%;
+    background: #fffaf0;
+    border: 2px solid #e2d9cb;
+}
+
+.rabbit-ear.one {
+    left: 28px;
+    transform: rotate(-15deg);
+}
+
+.rabbit-ear.two {
+    left: 60px;
+    top: -30px;
+    transform: rotate(15deg);
+}
+
+.rabbit-head {
+    position: absolute;
+    top: 18px;
+    left: 20px;
+    width: 83px;
+    height: 76px;
+    border-radius: 50%;
+    background: #fffaf0;
+    box-shadow: inset -5px -4px 0 #dedbd4;
+}
+
+.rabbit-eye {
+    position: absolute;
+    top: 30px;
+    right: 16px;
+    width: 9px;
+    height: 12px;
+    border-radius: 50%;
+    background: #222;
+}
+
+.rabbit-nose {
+    position: absolute;
+    top: 43px;
+    right: 8px;
+    width: 10px;
+    height: 8px;
+    border-radius: 50%;
+    background: #f28aa0;
+}
+
+.rabbit-arm {
+    position: absolute;
+    top: 67px;
+    right: -5px;
+    width: 58px;
+    height: 16px;
+    border-radius: 15px;
+    background: #fffaf0;
+    transform: rotate(-28deg);
+    transform-origin: left center;
+    animation: brushMove 1s ease-in-out infinite alternate;
+}
+
+.rabbit-brush {
+    position: absolute;
+    top: 47px;
+    right: -48px;
+    width: 65px;
+    height: 5px;
+    border-radius: 4px;
+    background: #d69b55;
+    transform: rotate(-35deg);
+    transform-origin: left center;
+    animation: brushMove 1s ease-in-out infinite alternate;
+}
+
+.rabbit-brush::before {
+    content: "";
+    position: absolute;
+    left: -8px;
+    top: -2px;
+    width: 13px;
+    height: 9px;
+    border-radius: 50% 0 50% 50%;
+    background: #ff4d8d;
+}
+
+.rabbit-palette {
+    position: absolute;
+    bottom: 12px;
+    right: 0;
+    width: 67px;
+    height: 45px;
+    border-radius: 50%;
+    background: #e9c28e;
+    border: 3px solid #b98750;
+    transform: rotate(-15deg);
+    font-size: 12px;
+    text-align: center;
+    line-height: 36px;
+    z-index: 2;
+}
+
+@keyframes rabbitPaint {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+@keyframes brushMove {
+    from {
+        transform: rotate(-35deg);
+    }
+    to {
+        transform: rotate(-20deg);
+    }
+}
+
+@keyframes canvasPaint {
+    0%, 100% {
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 8px 24px rgba(244, 180, 0, 0.25);
+    }
+}
+
+@media (max-width: 900px) {
+    .welcome-art {
+        transform: scale(0.8);
+        transform-origin: center right;
+        margin-left: -25px;
+    }
+}
+
+        @media (
+            max-width: 700px
+        ) {
+
+            .topbar {
+                padding: 0 15px;
+            }
+
+            .brand-name {
+                font-size: 16px;
+            }
+
+            .layout {
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                width: 100%;
+                max-width: 100%;
+                gap: 12px;
+                overflow-x: clip;
+            }
+
+            .sidebar {
+                order: 1;
+                width: 100%;
+                min-width: 0;
+                min-height: auto;
+                padding: 12px;
+                border-right: none;
+                border-bottom: 1px solid
+                    rgba(255, 255, 255, 0.08);
+                box-sizing: border-box;
+            }
+
+            .admin-profile {
+                display: none;
+            }
+
+            .side-menu {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 8px;
+            }
+
+            .side-link {
+                min-width: 0;
+                padding: 12px 8px;
+                font-size: 13px;
+                overflow-wrap: anywhere;
+            }
+
+            .welcome {
+                order: 2;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+                max-width: 100%;
+                min-width: 0;
+                min-height: 0;
+                padding: 24px 18px;
+                margin: 0;
+                box-sizing: border-box;
+                grid-column: auto;
+                grid-row: auto;
+            }
+
+            .welcome-text {
+                width: 100%;
+                max-width: 100%;
+                overflow-wrap: anywhere;
+            }
+
+            .welcome-text h1 {
+                font-size: 28px;
+                overflow-wrap: anywhere;
+            }
+
+            .welcome-text p {
+                overflow-wrap: anywhere;
+            }
+
+            .welcome-art {
+                display: none;
+            }
+
+            main {
+                order: 3;
+                width: 100%;
+                max-width: 100%;
+                min-width: 0;
+                padding: 16px;
+                box-sizing: border-box;
+                overflow-x: clip;
+            }
+
+            .stats-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
         }
 
 
-        /* ==================================================
-           ART STUDIO
-        ================================================== */
+        /* =========================
+           STATS
+        ========================= */
 
-        .cat-scene {
-            position: absolute;
+        .stats-grid {
 
-            right: 15px;
-
-            bottom: 0;
-
-            width: 58%;
-
-            height: 100%;
-
-            z-index: 5;
-        }
-
-
-        /* ================= WALL ART ================= */
-
-        .wall-frame {
-            position: absolute;
-
-            right: 355px;
-
-            top: 35px;
-
-            width: 90px;
-
-            height: 80px;
-
-            background: #c18b52;
-
-            padding: 7px;
-
-            transform: rotate(-4deg);
-
-            box-shadow:
-                0 8px 20px rgba(0, 0, 0, 0.4);
-        }
-
-
-        .wall-picture {
-            width: 100%;
-
-            height: 100%;
-
-            background:
-                radial-gradient(
-                    circle at 50% 35%,
-                    #f4b400 0 12%,
-                    transparent 13%
-                ),
-                linear-gradient(
-                    145deg,
-                    #335c67,
-                    #9c4f4f,
-                    #243b55
-                );
-        }
-
-
-        /* ================= TABLE ================= */
-
-        .art-table {
-            position: absolute;
-
-            right: 345px;
-
-            bottom: 28px;
-
-            width: 170px;
-
-            height: 18px;
-
-            background: #70452a;
-
-            border-radius: 8px;
-
-            box-shadow:
-                0 8px 15px rgba(0, 0, 0, 0.4);
-        }
-
-
-        .art-table::before {
-            content: "";
-
-            position: absolute;
-
-            left: 15px;
-
-            top: 15px;
-
-            width: 12px;
-
-            height: 80px;
-
-            background: #54321f;
-
-            transform: rotate(4deg);
-        }
-
-
-        .art-table::after {
-            content: "";
-
-            position: absolute;
-
-            right: 15px;
-
-            top: 15px;
-
-            width: 12px;
-
-            height: 80px;
-
-            background: #54321f;
-
-            transform: rotate(-4deg);
-        }
-
-
-        /* ================= PAINT JARS ================= */
-
-        .paint-jars {
-            position: absolute;
-
-            right: 385px;
-
-            bottom: 48px;
-
-            display: flex;
-
-            gap: 7px;
-
-            z-index: 4;
-        }
-
-
-        .paint-jar {
-            width: 18px;
-
-            height: 25px;
-
-            border-radius: 4px 4px 7px 7px;
-
-            border-top: 5px solid #333;
-        }
-
-
-        .jar-red {
-            background: #ff4d6d;
-        }
-
-
-        .jar-yellow {
-            background: #ffd166;
-        }
-
-
-        .jar-blue {
-            background: #38bdf8;
-        }
-
-
-        .jar-purple {
-            background: #a78bfa;
-        }
-
-
-        /* ================= EASEL ================= */
-
-        .easel {
-            position: absolute;
-
-            right: 30px;
-
-            bottom: 25px;
-
-            width: 205px;
-
-            height: 255px;
-
-            z-index: 3;
-        }
-
-
-        .canvas-frame {
-            position: absolute;
-
-            left: 0;
-
-            top: 0;
-
-            width: 180px;
-
-            height: 205px;
-
-            background: #9b6336;
-
-            padding: 8px;
-
-            box-shadow:
-                0 12px 30px rgba(0, 0, 0, 0.5);
-        }
-
-
-        .painting {
-            width: 100%;
-
-            height: 100%;
-
-            position: relative;
-
-            overflow: hidden;
-
-            background:
-                linear-gradient(
-                    160deg,
-                    #4f8eb8 0%,
-                    #8fd3e8 38%,
-                    #f6b45b 39%,
-                    #e98554 60%,
-                    #345b65 61%,
-                    #173a4d 100%
-                );
-        }
-
-
-        .sun {
-            position: absolute;
-
-            width: 38px;
-
-            height: 38px;
-
-            border-radius: 50%;
-
-            background: #ffd45a;
-
-            right: 25px;
-
-            top: 25px;
-
-            box-shadow:
-                0 0 25px #ffd45a;
-        }
-
-
-        .mountain-one {
-            position: absolute;
-
-            left: -10px;
-
-            bottom: 55px;
-
-            width: 130px;
-
-            height: 95px;
-
-            background: #51457a;
-
-            clip-path: polygon(
-                0 100%,
-                48% 0,
-                100% 100%
-            );
-        }
-
-
-        .mountain-two {
-            position: absolute;
-
-            right: -20px;
-
-            bottom: 50px;
-
-            width: 150px;
-
-            height: 105px;
-
-            background: #6b456f;
-
-            clip-path: polygon(
-                0 100%,
-                50% 0,
-                100% 100%
-            );
-        }
-
-
-        .lake {
-            position: absolute;
-
-            left: 20px;
-
-            bottom: 20px;
-
-            width: 140px;
-
-            height: 45px;
-
-            background:
-                linear-gradient(
-                    180deg,
-                    #4aa4b8,
-                    #246276
-                );
-
-            border-radius: 50%;
-        }
-
-
-        .easel-leg-one {
-            position: absolute;
-
-            left: 45px;
-
-            top: 195px;
-
-            width: 9px;
-
-            height: 60px;
-
-            background: #70452a;
-
-            transform: rotate(7deg);
-        }
-
-
-        .easel-leg-two {
-            position: absolute;
-
-            right: 40px;
-
-            top: 195px;
-
-            width: 9px;
-
-            height: 60px;
-
-            background: #70452a;
-
-            transform: rotate(-7deg);
-        }
-
-
-        /* ==================================================
-           COLORFUL CAT - BACK VIEW
-        ================================================== */
-
-        .cat {
-            position: absolute;
-
-            right: 205px;
-
-            bottom: 18px;
-
-            width: 185px;
-
-            height: 250px;
-
-            z-index: 12;
-        }
-
-
-        /* ================= CAT BODY ================= */
-
-        .cat-body {
-            position: absolute;
-
-            width: 115px;
-
-            height: 155px;
-
-            left: 35px;
-
-            bottom: 0;
-
-            background:
-                radial-gradient(
-                    circle at 20% 25%,
-                    #ff5d8f 0 10%,
-                    transparent 11%
-                ),
-                radial-gradient(
-                    circle at 75% 20%,
-                    #ffd166 0 11%,
-                    transparent 12%
-                ),
-                radial-gradient(
-                    circle at 40% 55%,
-                    #38bdf8 0 13%,
-                    transparent 14%
-                ),
-                radial-gradient(
-                    circle at 78% 70%,
-                    #a78bfa 0 12%,
-                    transparent 13%
-                ),
-                radial-gradient(
-                    circle at 25% 82%,
-                    #22c55e 0 10%,
-                    transparent 11%
-                ),
-                linear-gradient(
-                    135deg,
-                    #fff3d6,
-                    #ff9fba 30%,
-                    #7dd3fc 60%,
-                    #c4b5fd
-                );
-
-            border-radius:
-                55%
-                55%
-                38%
-                38%;
-
-            box-shadow:
-                0 12px 30px rgba(0, 0, 0, 0.5);
-        }
-
-
-        /* ================= CAT BACK COLOR SPLASH ================= */
-
-        .cat-back-mark {
-            position: absolute;
-
-            width: 65px;
-
-            height: 105px;
-
-            left: 25px;
-
-            top: 35px;
-
-            background:
-                radial-gradient(
-                    circle at 50% 10%,
-                    #ff4d6d 0 16%,
-                    transparent 17%
-                ),
-                radial-gradient(
-                    circle at 15% 45%,
-                    #ffd166 0 17%,
-                    transparent 18%
-                ),
-                radial-gradient(
-                    circle at 80% 50%,
-                    #38bdf8 0 18%,
-                    transparent 19%
-                ),
-                radial-gradient(
-                    circle at 45% 75%,
-                    #a855f7 0 18%,
-                    transparent 19%
-                );
-
-            border-radius: 50%;
-
-            opacity: 0.95;
-        }
-
-
-        /* ================= CAT APRON ================= */
-
-        .cat-body::after {
-            content: "";
-
-            position: absolute;
-
-            width: 72px;
-
-            height: 98px;
-
-            left: 22px;
-
-            top: 53px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #6366f1,
-                    #ec4899,
-                    #f59e0b
-                );
-
-            clip-path:
-                polygon(
-                    20% 0,
-                    80% 0,
-                    100% 100%,
-                    0 100%
-                );
-
-            border-radius: 10px;
-
-            opacity: 0.9;
-        }
-
-
-        /* ================= CAT HEAD ================= */
-
-        .cat-head {
-            position: absolute;
-
-            width: 108px;
-
-            height: 100px;
-
-            left: 38px;
-
-            top: 0;
-
-            background:
-                radial-gradient(
-                    circle at 28% 30%,
-                    #ff4d6d 0 8%,
-                    transparent 9%
-                ),
-                radial-gradient(
-                    circle at 72% 28%,
-                    #ffd166 0 9%,
-                    transparent 10%
-                ),
-                radial-gradient(
-                    circle at 45% 68%,
-                    #22c55e 0 11%,
-                    transparent 12%
-                ),
-                radial-gradient(
-                    circle at 72% 68%,
-                    #38bdf8 0 10%,
-                    transparent 11%
-                ),
-                linear-gradient(
-                    135deg,
-                    #fff1d0,
-                    #ff9fba,
-                    #8bd3ff,
-                    #c4b5fd
-                );
-
-            border-radius: 50%;
-
-            box-shadow:
-                0 8px 22px rgba(0, 0, 0, 0.4);
-
-            z-index: 5;
-        }
-
-
-        /* ================= CAT HEAD STRIPES ================= */
-
-        .cat-head::after {
-            content: "";
-
-            position: absolute;
-
-            width: 45px;
-
-            height: 65px;
-
-            left: 32px;
-
-            top: 20px;
-
-            background:
-                repeating-linear-gradient(
-                    90deg,
-                    transparent 0 7px,
-                    rgba(90, 60, 120, 0.35) 8px 13px
-                );
-
-            border-radius: 50%;
-        }
-
-
-        /* ================= LEFT EAR ================= */
-
-        .ear-left {
-            position: absolute;
-
-            width: 45px;
-
-            height: 65px;
-
-            left: 34px;
-
-            top: -34px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #ff5d8f,
-                    #ffd166
-                );
-
-            clip-path:
-                polygon(
-                    50% 0,
-                    100% 100%,
-                    0 100%
-                );
-
-            transform: rotate(-18deg);
-
-            z-index: 2;
-        }
-
-
-        /* ================= RIGHT EAR ================= */
-
-        .ear-right {
-            position: absolute;
-
-            width: 45px;
-
-            height: 65px;
-
-            right: 25px;
-
-            top: -34px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #38bdf8,
-                    #a78bfa
-                );
-
-            clip-path:
-                polygon(
-                    50% 0,
-                    100% 100%,
-                    0 100%
-                );
-
-            transform: rotate(18deg);
-
-            z-index: 2;
-        }
-
-
-        /* ================= CAT TAIL ================= */
-
-        .tail {
-            position: absolute;
-
-            width: 100px;
-
-            height: 75px;
-
-            right: -45px;
-
-            bottom: 24px;
-
-            border:
-                18px solid #ff7b9c;
-
-            border-left: 0;
-
-            border-bottom: 0;
-
-            border-radius:
-                0
-                75px
-                0
-                0;
-
-            transform: rotate(-20deg);
-
-            z-index: 2;
-
-            box-shadow:
-                inset 0 9px 0 #ffd166;
-        }
-
-
-        /* ================= CAT PAINTING ARM ================= */
-
-        .cat-arm {
-            position: absolute;
-
-            width: 70px;
-
-            height: 27px;
-
-            right: 70px;
-
-            bottom: 105px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #ff9fba,
-                    #7dd3fc,
-                    #c4b5fd
-                );
-
-            border-radius: 30px;
-
-            transform:
-                rotate(-28deg);
-
-            z-index: 18;
-
-            box-shadow:
-                0 5px 10px rgba(0, 0, 0, 0.3);
-        }
-
-
-        /* ================= PAINT BRUSH ================= */
-
-        .brush {
-            position: absolute;
-
-            width: 125px;
-
-            height: 8px;
-
-            right: 55px;
-
-            bottom: 155px;
-
-            background: #d59b62;
-
-            transform: rotate(-22deg);
-
-            z-index: 25;
-
-            border-radius: 10px;
-
-            box-shadow:
-                0 3px 5px rgba(0, 0, 0, 0.4);
-        }
-
-
-        /* ================= BRUSH TIP ================= */
-
-        .brush-tip {
-            position: absolute;
-
-            right: -15px;
-
-            top: -7px;
-
-            width: 27px;
-
-            height: 23px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #ff4d6d,
-                    #7c3aed,
-                    #22c55e
-                );
-
-            border-radius:
-                50%
-                50%
-                70%
-                30%;
-
-            transform: rotate(-15deg);
-        }
-
-
-        /* ================= PAINT SPLASHES ================= */
-
-        .paint-splash-one {
-            position: absolute;
-
-            right: 245px;
-
-            bottom: 145px;
-
-            width: 12px;
-
-            height: 12px;
-
-            border-radius: 50%;
-
-            background: #ff4d6d;
-
-            box-shadow:
-                25px -15px 0 #ffd166,
-                45px 5px 0 #38bdf8,
-                15px 25px 0 #a78bfa;
-
-            z-index: 30;
-        }
-
-
-        /* ================= STATS ================= */
-
-        .stats {
             display: grid;
 
             grid-template-columns:
-                repeat(4, minmax(0, 1fr));
-
-            gap: 18px;
-
-            margin-top: 25px;
-        }
-
-
-        .stat-card {
-            padding: 22px;
-
-            background:
-                rgba(18, 28, 42, 0.92);
-
-            border:
-                1px solid rgba(255, 255, 255, 0.08);
-
-            border-radius: 15px;
-
-            transition: 0.3s;
-        }
-
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-
-            border-color: #f4b400;
-        }
-
-
-        .stat-icon {
-            font-size: 25px;
-
-            margin-bottom: 12px;
-        }
-
-
-        .stat-card p {
-            color: #9ca9bb;
-
-            font-size: 13px;
-        }
-
-
-        .stat-card h3 {
-            font-size: 28px;
-
-            margin-top: 5px;
-
-            color: #f4b400;
-        }
-
-
-        /* ================= LOWER AREA ================= */
-
-        .lower {
-            display: grid;
-
-            grid-template-columns: 1fr 1fr;
+                repeat(
+                    3,
+                    1fr
+                );
 
             gap: 20px;
 
             margin-top: 25px;
+
         }
 
+        .stat-card {
 
-        .panel {
-            background:
-                rgba(18, 28, 42, 0.92);
-
-            border:
-                1px solid rgba(255, 255, 255, 0.08);
+            padding: 25px;
 
             border-radius: 18px;
 
-            padding: 25px;
+            background: #111927;
+
+            border: 1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
         }
 
+        .stat-card h3 {
 
-        .panel h2 {
-            margin-bottom: 20px;
+            font-size: 14px;
 
-            font-size: 21px;
+            color: #aab4c3;
+
+            margin-bottom: 10px;
+
         }
 
+        .stat-card strong {
 
-        /* ================= ACTIONS ================= */
+            font-size: 32px;
 
-        .actions {
-            display: grid;
+            color: #f4b400;
 
-            grid-template-columns: 1fr 1fr;
-
-            gap: 12px;
         }
 
+        /* =========================
+           COMMON SECTION
+        ========================= */
 
-        .action {
-            padding: 18px;
+        .section-header {
 
-            border: none;
+            margin-bottom: 25px;
 
-            border-radius: 12px;
-
-            background: #202d40;
-
-            color: white;
-
-            text-align: left;
-
-            cursor: pointer;
-
-            transition: 0.3s;
         }
 
+        .section-header h2 {
 
-        .action:hover {
-            background: #f4b400;
-
-            color: #111;
-
-            transform: translateY(-3px);
-        }
-
-
-        .action-icon {
-            font-size: 24px;
+            font-size: 28px;
 
             margin-bottom: 8px;
+
         }
 
+        .section-header p {
 
-        .action strong {
+            color: #aab4c3;
+
+        }
+
+        /* =========================
+           COMMON CARD
+        ========================= */
+
+        .panel {
+
+            background: #111927;
+
+            border-radius: 18px;
+
+            border: 1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
+            padding: 25px;
+
+        }
+
+        .form-group {
+
+            margin-bottom: 18px;
+
+        }
+
+        .form-group label {
+
             display: block;
 
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+
+            font-size: 14px;
+
+            color: #c9d1dc;
+
         }
 
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
 
-        .action small {
-            color: #9ba7b7;
-        }
+            width: 100%;
 
+            padding: 12px 14px;
 
-        .action:hover small {
-            color: #333;
-        }
-
-
-        /* ================= RECENT ================= */
-
-        .recent-item {
-            display: flex;
-
-            align-items: center;
-
-            gap: 15px;
-
-            padding: 12px 0;
-
-            border-bottom:
-                1px solid
-                rgba(255, 255, 255, 0.07);
-        }
-
-
-        .recent-icon {
-            width: 45px;
-
-            height: 45px;
+            border: 1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.12
+                );
 
             border-radius: 10px;
 
+            background: #0b111c;
+
+            color: white;
+
+            outline: none;
+
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+
+            border-color: #f4b400;
+
+        }
+
+        .primary-btn {
+
+            border: none;
+
             background: #f4b400;
 
             color: #111;
 
-            display: flex;
+            padding: 12px 20px;
 
-            align-items: center;
+            border-radius: 10px;
 
-            justify-content: center;
+            font-weight: bold;
 
-            font-size: 20px;
         }
 
+        .primary-btn:hover {
 
-        .recent-item strong {
+            background: #ffc928;
+
+        }
+
+        /* =========================
+           GALLERY
+        ========================= */
+
+        .gallery-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fill,
+                    minmax(
+                        220px,
+                        1fr
+                    )
+                );
+
+            gap: 20px;
+
+        }
+
+        .gallery-card {
+
+            background: #111927;
+
+            border-radius: 16px;
+
+            overflow: hidden;
+
+            border: 1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.08
+                );
+
+        }
+
+        .gallery-card img {
+
+            width: 100%;
+
+            height: 220px;
+
+            object-fit: cover;
+
             display: block;
+
         }
 
+        .gallery-card-content {
 
-        .recent-item small {
-            color: #8895a7;
+            padding: 15px;
+
         }
 
+        .gallery-card-content h3 {
 
-        /* ================= FOOTER ================= */
+            margin-bottom: 7px;
 
-        footer {
-            text-align: center;
+        }
 
-            color: #687587;
+        .gallery-card-content p {
+
+            color: #f4b400;
 
             font-size: 13px;
 
-            padding: 30px 0 10px;
         }
 
+        /* =========================
+           PROFILE
+        ========================= */
 
-        footer span {
-            color: #f4b400;
+        .profile-photo-preview {
+
+            width: 100px;
+
+            height: 100px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            border: 3px solid #f4b400;
+
+            margin-bottom: 15px;
+
         }
 
+        /* =========================
+           SECURITY
+        ========================= */
 
-        /* ================= TABLET ================= */
+        .security-warning {
 
-        @media (max-width: 1100px) {
+            padding: 15px;
+
+            margin-bottom: 20px;
+
+            border-radius: 12px;
+
+            background:
+                rgba(
+                    244,
+                    180,
+                    0,
+                    0.10
+                );
+
+            border: 1px solid
+                rgba(
+                    244,
+                    180,
+                    0,
+                    0.25
+                );
+
+            color: #e6d18b;
+
+            line-height: 1.6;
+
+            font-size: 14px;
+
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (
+            max-width: 900px
+        ) {
 
             .sidebar {
-                width: 200px;
+
+                width: 210px;
+
             }
 
+            .stats-grid {
 
-            .cat-scene {
-                width: 60%;
+                grid-template-columns:
+                    1fr;
 
-                opacity: 0.9;
             }
 
+            .welcome {
 
-            .cat {
-                right: 170px;
+                min-height: 300px;
+
             }
 
+            .welcome-art {
 
-            .easel {
-                right: 10px;
-            }
+                font-size: 80px;
 
-
-            .wall-frame {
-                right: 300px;
-            }
-
-
-            .art-table {
-                right: 290px;
-            }
-
-
-            .paint-jars {
-                right: 325px;
             }
 
         }
 
+        @media (
+            max-width: 700px
+        ) {
 
-        /* ================= MOBILE ================= */
+            .topbar {
 
-        @media (max-width: 800px) {
-
-            header {
                 padding: 0 15px;
+
             }
 
+            .brand-name {
 
-            .logo h2 {
-                font-size: 17px;
+                font-size: 16px;
+
             }
-
-
-            .admin-area {
-                gap: 8px;
-            }
-
-
-            .admin-avatar {
-                width: 34px;
-
-                height: 34px;
-            }
-
 
             .layout {
-                display: block;
-            }
 
+                flex-direction: column;
+
+            }
 
             .sidebar {
+
                 width: 100%;
 
-                display: flex;
+                border-right: none;
 
-                overflow-x: auto;
+                border-bottom: 1px solid
+                    rgba(
+                        255,
+                        255,
+                        255,
+                        0.08
+                    );
 
-                padding: 10px;
             }
 
+            .admin-profile {
 
-            .side-title,
-            .quote {
                 display: none;
+
             }
 
+            .side-menu {
 
-            .side-link {
-                min-width: 130px;
+                display: grid;
 
-                margin: 0 4px;
+                grid-template-columns:
+                    repeat(
+                        2,
+                        1fr
+                    );
 
-                white-space: nowrap;
             }
-
 
             main {
-                padding: 18px;
+
+                padding: 20px;
+
             }
 
-
             .welcome {
-                min-height: 420px;
 
                 padding: 25px;
+
             }
-
-
-            .welcome-text {
-                max-width: 100%;
-            }
-
 
             .welcome-text h1 {
-                font-size: 43px;
+
+                font-size: 28px;
+
             }
 
+            .welcome-art {
 
-            .cat-scene {
-                width: 100%;
-
-                right: -90px;
-
-                opacity: 0.7;
-            }
-
-
-            .cat {
-                right: 135px;
-            }
-
-
-            .easel {
-                right: 0;
-            }
-
-
-            .stats {
-                grid-template-columns:
-                    repeat(2, 1fr);
-            }
-
-
-            .lower {
-                grid-template-columns: 1fr;
-            }
-
-        }
-
-
-        /* ================= SMALL MOBILE ================= */
-
-        @media (max-width: 500px) {
-
-            .logo-icon {
-                width: 38px;
-
-                height: 38px;
-
-                font-size: 20px;
-            }
-
-
-            .logo h2 {
-                font-size: 15px;
-            }
-
-
-            .admin-area span {
                 display: none;
-            }
 
-
-            .logout-btn {
-                padding: 8px 12px;
-
-                font-size: 12px;
-            }
-
-
-            .welcome {
-                min-height: 390px;
-            }
-
-
-            .welcome-text h1 {
-                font-size: 37px;
-            }
-
-
-            .welcome-text p {
-                font-size: 14px;
-            }
-
-
-            .cat-scene {
-                right: -150px;
-
-                opacity: 0.6;
-            }
-
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-
-            .actions {
-                grid-template-columns: 1fr;
             }
 
         }
-        .artwork-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.75);
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
-
-.artwork-modal-box {
-    width: 90%;
-    max-width: 500px;
-    background: #ffffff;
-    border-radius: 18px;
-    padding: 25px;
-}
-
-.artwork-modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.artwork-modal-header h2 {
-    margin: 0;
-}
-
-.artwork-modal-header button {
-    border: none;
-    background: transparent;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.artwork-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.artwork-form input,
-.artwork-form select {
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-}
-
-#saveArtworkBtn {
-    margin-top: 10px;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    background: #f4b400;
-    color: #111;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-/* ================= GALLERY ================= */
-
-.gallery-section {
-    padding: 25px;
-}
-
-.section-header {
-    margin-bottom: 25px;
-}
-
-.section-header h2 {
-    font-size: 28px;
-    margin-bottom: 8px;
-}
-
-.section-header p {
-    color: #aab4c3;
-}
-
-/* ================= CONTACT US ================= */
-
-.contact-section {
-    width: 100%;
-    text-align: center;
-    margin-top: 40px;
-    margin-bottom: 30px;
-}
-
-.contact-section h2 {
-    text-align: center;
-    font-size: 28px;
-    margin: 0;
-}
-
-.developed-by {
-    color: #a855f7;
-}
-
-.footer-brand {
-    color: #38bdf8;
-}
-
-.keep-creating {
-    color: #ec4899;
-}
-
-.developer-link {
-    color: #22c55e;
-    text-decoration: none;
-}
-
-.developer-link:hover {
-    color: #16a34a;
-}
-
-.contact-links {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    margin-top: 25px;
-    flex-wrap: wrap;
-}
-
-.contact-links a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 11px 18px;
-
-    border-radius: 10px;
-
-    background: #111927;
-    color: white;
-
-    text-decoration: none;
-
-    font-size: 14px;
-    font-weight: 600;
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
-    transition:
-        transform 0.2s ease,
-        background 0.3s ease,
-        box-shadow 0.3s ease;
-}
-
-
-
-.contact-links a:hover {
-    background: #f4b400;
-    color: #111827;
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 6px 15px rgba(244, 180, 0, 0.25);
-}
-
-.gallery-grid {
-    display: grid;
-    grid-template-columns:
-        repeat(auto-fill, minmax(220px, 1fr));
-
-    gap: 20px;
-}
-
-.gallery-card {
-    background: #111927;
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.25);
-}
-
-.gallery-card img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    display: block;
-}
-
-.gallery-card-content {
-    padding: 15px;
-}
-
-.gallery-card-content h3 {
-    color: white;
-    margin-bottom: 7px;
-}
-
-.gallery-card-content p {
-    color: #f4b400;
-    font-size: 13px;
-}
-
-/* ================= DELETE ARTWORK BUTTON ================= */
-
-.delete-artwork-btn {
-    width: 100%;
-    margin-top: 15px;
-    padding: 11px 14px;
-
-    border: none;
-    border-radius: 10px;
-
-    background: #dc2626;
-    color: white;
-
-    font-size: 14px;
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition:
-        background 0.3s ease,
-        transform 0.2s ease,
-        box-shadow 0.3s ease;
-}
-
-.delete-artwork-btn:hover {
-    background: #b91c1c;
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 6px 15px rgba(220, 38, 38, 0.3);
-}
-
-.delete-artwork-btn:active {
-    transform: translateY(0);
-}
-
-/* ================= EDIT ARTWORK BUTTON ================= */
-
-.edit-artwork-btn {
-    width: 100%;
-    margin-top: 10px;
-    padding: 11px 14px;
-
-    border: none;
-    border-radius: 10px;
-
-    background: #f4b400;
-    color: #111827;
-
-    font-size: 14px;
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition:
-        background 0.3s ease,
-        transform 0.2s ease,
-        box-shadow 0.3s ease;
-}
-
-.edit-artwork-btn:hover {
-    background: #d99f00;
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 6px 15px rgba(244, 180, 0, 0.3);
-}
-
-.edit-artwork-btn:active {
-    transform: translateY(0);
-}
 
     </style>
 
@@ -2045,978 +1433,1390 @@
 <body>
 
 
-    <!-- ================= HEADER ================= -->
+    <!-- =========================
+         LOADING SCREEN
+    ========================= -->
 
-    <header>
+    <div id="loadingScreen">
 
+        <div class="loading-box">
 
-        <div class="logo">
-
-            <div class="logo-icon">
-                🎨
-            </div>
+            <img
+                src="images/shailesh.jpg"
+                alt="Shailesh"
+                class="loading-logo">
 
             <h2>
-                artwith<span>shailesh</span>
+                artwithshailesh
             </h2>
 
-        </div>
-
-
-        <div class="admin-area">
-
-            <div class="admin-avatar">
-                A
-            </div>
-
-            <span>
-                Admin
-            </span>
-
-            <button
-                class="logout-btn"
-                id="logoutBtn">
-
-                Logout
-
-            </button>
+            <p>
+                Admin panel load ho raha hai...
+            </p>
 
         </div>
 
-
-    </header>
-
+    </div>
 
 
-    <!-- ================= MAIN LAYOUT ================= -->
+    <!-- =========================
+         ADMIN APP
+    ========================= -->
 
-    <div class="layout">
+    <div id="adminApp">
 
 
-        <!-- ================= SIDEBAR ================= -->
+        <!-- =========================
+             TOP BAR
+        ========================= -->
 
-        <aside class="sidebar">
+        <header class="topbar">
 
-            <!-- ================= ADMIN PROFILE ================= -->
-
-            <div class="admin-profile">
+            <div class="brand">
 
                 <img
                     src="images/shailesh.jpg"
-                    alt="Shailesh">
+                    alt="Shailesh"
+                    class="brand-logo">
 
-                <h3>
-                    Shailesh
-                </h3>
+                <div class="brand-name">
 
-                <p>
-                    Wall Painting • Sketch • Flower Design
-                </p>
+                    artwith<span>shailesh</span>
 
-                <span class="admin-role">
-                    Administrator
-                </span>
+                </div>
 
             </div>
+
 
             <button
                 type="button"
-                class="edit-profile-btn"
-                id="editProfileBtn">
+                class="logout-btn"
+                id="logoutBtn">
 
-                ✏️ Edit Profile
+                🚪 Logout
 
             </button>
+            <div class="admin-notification-wrapper">
 
-            <div>
+                <button
+                    type="button"
+                    id="adminNotificationBtn"
+                    class="admin-notification-btn"
+                    aria-label="Notifications"
+                    aria-expanded="false">
 
-                <div class="side-title">
-                    Menu
+                    🔔
+
+                    <span
+                        id="adminNotificationCount"
+                        class="admin-notification-count"
+                        style="display: none;">
+                        0
+                    </span>
+
+                </button>
+
+                <div
+                    id="adminNotificationPanel"
+                    class="admin-notification-panel"
+                    style="display: none;">
+
+                    <h3>Notifications</h3>
+
+                    <div id="adminNotificationList">
+                        No notifications yet..
+                    </div>
+
                 </div>
 
-
-                <button
-                    type="button"
-                    class="side-link active"
-                    id="dashboardBtn">
-                    🏠 Dashboard
-
-                </button>
-
-
-                <button
-                    class="side-link"
-                   id="addArtworkBtn">
-
-                    ➕ Add Artwork
-
-                </button>
-
-
-                <button
-                    type="button"
-                    class="side-link"
-                    id="manageGalleryBtn">
-
-                    🖼️ Manage Gallery
-
-                </button>
-
-
-                <button class="side-link">
-                    📷 Photos
-                </button>
-
-
-                <button class="side-link">
-                    🎬 Videos
-                </button>
-
-
-                <button class="side-link">
-                    ⚙️ Settings
-                </button>
-
             </div>
 
-
-            <div class="quote">
-
-                "Art brings colors
-                to life."
-
-                <strong>
-                    — artwithshailesh
-                </strong>
-
-            </div>
+        </header>
 
 
-        </aside>
+        <!-- =========================
+             MAIN LAYOUT
+        ========================= -->
 
-        <!-- ================= EDIT PROFILE MODAL ================= -->
+        <div class="layout">
 
-        <div
-            class="profile-modal"
-            id="profileModal">
+            
+            <!-- =========================
+                 SIDEBAR
+            ========================= -->
 
-            <div class="profile-modal-box">
+            <aside class="sidebar">
 
-                <div class="profile-modal-header">
 
-                    <h2>
-                        ✏️ Edit Profile
-                    </h2>
 
-                    <button
-                        type="button"
-                        class="close-profile-modal"
-                        id="closeProfileModal">
+                <div class="admin-profile">
 
-                        ✖
+                    <img
+                        src="images/shailesh.jpg"
+                        alt="Shailesh"
+                        id="adminProfilePhoto">
 
-                    </button>
+                    <h3 id="adminProfileName">
+                        Shailesh
+                    </h3>
+
+                    <p id="adminProfileBio">
+                        Wall Painting • Sketch • Flower Design
+                    </p>
+
+                    <span class="admin-role">
+                        Administrator
+                    </span>
 
                 </div>
 
 
-                <div class="profile-form">
 
-                    <label for="profileName">
-                        Name
-                    </label>
-
-                    <input
-                        type="text"
-                        id="profileName"
-                        placeholder="Enter name"
-                        value="Shailesh">
-
-
-                    <label for="profileBio">
-                        Bio
-                    </label>
-
-                    <textarea
-                        id="profileBio"
-                        rows="4"
-                        placeholder="Enter bio">Wall Painting • Sketch • Flower Design</textarea>
-
-
-                    <label for="profilePhoto">
-                        Profile Photo
-                    </label>
-
-                    <input
-                        type="file"
-                        id="profilePhoto"
-                        accept="image/*">
+                <nav class="side-menu">
 
 
                     <button
                         type="button"
-                        class="save-profile-btn"
-                        id="saveProfileBtn">
+                        class="side-link active"
+                        id="dashboardBtn">
 
-                        💾 Save Profile
+                        🏠 Dashboard
 
                     </button>
 
-                </div>
 
-            </div>
+                    <button
+                        type="button"
+                        class="side-link"
+                        id="addArtworkBtn">
 
-        </div>
+                        ➕ Add Artwork
 
-
-
-        <!-- ================= CONTENT ================= -->
-        <!-- ================= ADD ARTWORK MODAL ================= -->
-
-<div
-    class="artwork-modal"
-    id="artworkModal">
-
-    <div class="artwork-modal-box">
-
-        <div class="artwork-modal-header">
-
-            <h2>
-                🎨 Add Artwork
-            </h2>
-
-            <button
-                type="button"
-                id="closeArtworkModal">
-
-                ✖
-
-            </button>
-
-        </div>
-
-        <div class="artwork-form">
-
-            <label for="artworkTitle">
-                Artwork Title
-            </label>
-
-            <input
-                type="text"
-                id="artworkTitle"
-                placeholder="Enter artwork title">
-
-            <label for="artworkCategory">
-                Category
-            </label>
-
-            <select id="artworkCategory">
-
-                <option value="wall">
-                    Wall Painting
-                </option>
-
-                <option value="sketch">
-                    Sketch
-                </option>
-
-                <option value="flower">
-                    Flower Design
-                </option>
-
-            </select>
-
-            <label for="artworkPhoto">
-                Artwork Photo
-            </label>
-
-            <input
-                type="file"
-                id="artworkPhoto"
-                accept="image/*">
-
-            <button
-                type="button"
-                id="saveArtworkBtn">
-
-                💾 Upload Artwork
-
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-<main>
-
-<section
-    class="gallery-section"
-    id="gallerySection"
-    style="display: none;">
-
-    <div class="section-header">
-
-        <h2>
-            🖼️ Manage Gallery
-        </h2>
-
-        <p>
-            Uploaded artworks manage karein
-        </p>
-
-    </div>
-
-    <div
-        class="gallery-grid"
-        id="galleryGrid">
-
-        <!-- Artworks yahan show honge -->
-
-    </div>
-
-</section>
+                    </button>
 
 
-            <!-- ================= HERO ================= -->
+                    <button
+                        type="button"
+                        class="side-link"
+                        id="manageGalleryBtn">
+
+                        🖼️ Manage Gallery
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="side-link"
+                        id="photosBtn">
+
+                        📷 Photos
+
+                    </button>
+
+
+
+                    <button
+                        type="button"
+                        class="side-link"
+                        id="settingsBtn">
+
+                        ⚙️ Settings
+
+                    </button>
+
+
+                </nav>
+
+
+            </aside>
+
+            
+            <!-- =========================
+                 MAIN CONTENT
+            ========================= -->
+
+            <main>
+
+
+                <!-- =========================
+                     DASHBOARD
+                ========================= -->
+
+                <section
+                    class="admin-section active"
+                    id="dashboardSection">
+
+                <!-- WELCOME SECTION -->
 
             <section class="welcome">
 
-
                 <div class="welcome-text">
 
-                    <small>
-                        Welcome back,
-                    </small>
+                    <small>Welcome back, Admin</small>
 
-
-                    <h1>
-                        Admin
-                    </h1>
-
-
-                    <div class="creative-line"></div>
-
+                    <h1>artwithshailesh</h1>
 
                     <p>
-                        Create • Upload • Inspire
+                        Manage your artworks, photos and
+                        videos here
                     </p>
-
-
-                    <p>
-                        Every artwork tells a story...
-                        and you are the storyteller.
-                    </p>
-
-                </div>
-
-
-
-                <!-- ================= ART STUDIO ================= -->
-
-                <div class="cat-scene">
-
-
-                    <!-- WALL FRAME -->
-
-                    <div class="wall-frame">
-
-                        <div class="wall-picture"></div>
-
-                    </div>
-
-
-
-                    <!-- TABLE -->
-
-                    <div class="art-table"></div>
-
-
-
-                    <!-- PAINT JARS -->
-
-                    <div class="paint-jars">
-
-                        <div class="paint-jar jar-red"></div>
-
-                        <div class="paint-jar jar-yellow"></div>
-
-                        <div class="paint-jar jar-blue"></div>
-
-                        <div class="paint-jar jar-purple"></div>
-
-                    </div>
-
-
-
-                    <!-- EASEL -->
-
-                    <div class="easel">
-
-
-                        <div class="canvas-frame">
-
-                            <div class="painting">
-
-                                <div class="sun"></div>
-
-                                <div class="mountain-one"></div>
-
-                                <div class="mountain-two"></div>
-
-                                <div class="lake"></div>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="easel-leg-one"></div>
-
-                        <div class="easel-leg-two"></div>
-
-
-                    </div>
-
-
-
-                    <!-- COLORFUL CAT -->
-
-                    <div class="cat">
-
-
-                        <div class="ear-left"></div>
-
-                        <div class="ear-right"></div>
-
-
-                        <div class="cat-head"></div>
-
-
-                        <div class="cat-body">
-
-                            <div class="cat-back-mark"></div>
-
-                        </div>
-
-
-                        <div class="tail"></div>
-
-
-                        <div class="cat-arm"></div>
-
-
-                    </div>
-
-
-
-                    <!-- PAINT BRUSH -->
-
-                    <div class="brush">
-
-                        <div class="brush-tip"></div>
-
-                    </div>
-
-
-
-                    <!-- PAINT SPLASH -->
-
-                    <div class="paint-splash-one"></div>
-
-
-                </div>
-
-
-            </section>
-
-
-
-            <!-- ================= STATS ================= -->
-
-            <section class="stats">
-
-
-                <div class="stat-card">
-
-                    <div class="stat-icon">
-                        🎨
-                    </div>
-
-                    <p>
-                        Total Artworks
-                    </p>
-
-                    <h3 id="totalArtworks">
-                        0
-                    </h3>
-
-                </div>
-
-
-                <div class="stat-card">
-
-                    <div class="stat-icon">
-                        📷
-                    </div>
-
-                    <p>
-                        Total Photos
-                    </p>
-
-                    <h3 id="totalPhotos">
-                        0
-                    </h3>
-
-                </div>
-
-
-                <div class="stat-card">
-
-                    <div class="stat-icon">
-                        🎬
-                    </div>
-
-                    <p>
-                        Total Videos
-                    </p>
-
-                    <h3 id="totalVideos">
-                        0
-                    </h3>
-
-                </div>
-
-
-                <div class="stat-card">
-
-                    <div class="stat-icon">
-                        🔐
-                    </div>
-
-                    <p>
-                        Admin Access
-                    </p>
-
-                    <h3>
-                        Active
-                    </h3>
-
-                </div>
-
-
-            </section>
-
-        
-
-            <!-- ================= LOWER CONTENT ================= -->
-
-            <section class="lower">
-
-
-                <!-- QUICK ACTIONS -->
-
-                <div class="panel">
-
-                    <h2>
-                        ⚡ Quick Actions
-                    </h2>
-
-
-                    <div class="actions">
-
-
-                        <button class="action">
-
-                            id="quickAddArtworkBtn">
-
-                            <div class="action-icon">
-                                🎨
-                            </div>
-
-                            <strong>
-                                Add Artwork
-                            </strong>
-
-                            <small>
-                                Upload new painting
-                            </small>
-
-                        </button>
-
-
-                        <button class="action">
-
-                            <div class="action-icon">
-                                📷
-                            </div>
-
-                            <strong>
-                                Add Photo
-                            </strong>
-
-                            <small>
-                                Add gallery photo
-                            </small>
-
-                        </button>
-
-
-                        <button class="action">
-
-                            <div class="action-icon">
-                                🎬
-                            </div>
-
-                            <strong>
-                                Add Video
-                            </strong>
-
-                            <small>
-                                Upload artwork video
-                            </small>
-
-                        </button>
-
-
-                        <button class="action">
-
-                            <div class="action-icon">
-                                🖼️
-                            </div>
-
-                            <strong>
-                                Manage Gallery
-                            </strong>
-
-                            <small>
-                                Edit gallery
-                            </small>
-
-                        </button>
-
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- RECENT ARTWORK -->
-
-                <div class="panel">
-
-                    <h2>
-                        🎨 Recent Artwork
-                    </h2>
-
-
-                    <div class="recent-item">
-
-                        <div class="recent-icon">
-                            🖌️
-                        </div>
-
-                        <div>
-
-                            <strong>
-                                Wall Painting
-                            </strong>
-
-                            <small>
-                                Ready for your next artwork
-                            </small>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="recent-item">
-
-                        <div class="recent-icon">
-                            ✏️
-                        </div>
-
-                        <div>
-
-                            <strong>
-                                Sketch
-                            </strong>
-
-                            <small>
-                                Add your latest sketch
-                            </small>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="recent-item">
-
-                        <div class="recent-icon">
-                            🌸
-                        </div>
-
-                        <div>
-
-                            <strong>
-                                Flower Design
-                            </strong>
-
-                            <small>
-                                Add a beautiful flower design
-                            </small>
-
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-
-            </section>
-
-            
-
-
-            <!-- ================= CONTACT US ================= -->
-
-            <section class="contact-section">
-
-                <h2>
-                    CONTACT US
-                </h2>
-
-                <div class="contact-links">
-
-                    <a
-                        href="https://www.youtube.com/@artwithshailesh"
-                        target="_blank">
-
-                        ▶️ YouTube
-
-                    </a>
-
-                    <a
-                        href="https://wa.me/919984809023"
-                        target="_blank">
-
-                        💬 WhatsApp
-
-                    </a>
-
-                    <a
-                        href="tel:+919984809023">
-
-                        📞 Call
-
-                    </a>
-
-                    <a
-                        href="https://www.instagram.com/divine_art_by_shailesh"
-                        target="_blank">
-
-                        📸 Instagram
-
-                    </a>
-
-                    <a
-                        href="#"
-                        target="_blank">
-
-                        💼 LinkedIn
-
-                    </a>
 
                 </div>
 
             </section>
 
+                <!-- Notification Bell -->
+                      
 
-            
+                <div class="welcome-art">
+                    <svg class="artist-studio"
+                         viewBox="0 0 520 330"
+                         xmlns="http://www.w3.org/2000/svg"
+                         role="img"
+                         aria-label="Rabbit painting flowers">
 
-            <!-- ================= FOOTER ================= -->
+                        <defs>
+                            <linearGradient id="rabbitFur"
+                                            x1="0" y1="0"
+                                            x2="1" y2="1">
+                                <stop offset="0%"
+                                      stop-color="#ffffff" />
+                                <stop offset="100%"
+                                      stop-color="#dedfe5" />
+                            </linearGradient>
 
-            <footer>
+                            <linearGradient id="blueApron"
+                                            x1="0" y1="0"
+                                            x2="1" y2="1">
+                                <stop offset="0%"
+                                      stop-color="#49b9db" />
+                                <stop offset="100%"
+                                      stop-color="#17628e" />
+                            </linearGradient>
+                        </defs>
 
-                <span class="footer-brand">
-                    © 2026 artwithshailesh
-                </span>
+                        <!-- Studio background -->
+                        <rect x="0" y="0"
+                              width="520" height="330"
+                              rx="18" fill="#1b3036" />
 
-                &nbsp; • &nbsp;
+                        <circle cx="430" cy="45" r="75"
+                                fill="#f5bd58" opacity=".12" />
+
+                        <!-- Window -->
+                        <rect x="390" y="12"
+                              width="108" height="112"
+                              rx="5" fill="#e9b975" />
+
+                        <rect x="398" y="20"
+                              width="92" height="96"
+                              fill="#b8dce1" />
+
+                        <path d="M444 20 V116 M398 68 H490"
+                              stroke="#fff0c9"
+                              stroke-width="5" />
+
+                        <circle cx="468" cy="37" r="12"
+                                fill="#ffe8a1" />
+
+                        <path d="M400 104 Q425 62 443 99 T489 85 V116 H400Z"
+                              fill="#6caa85" />
+
+                        <!-- Easel legs -->
+                        <path d="M286 80 L245 308
+                                 M354 80 L393 308"
+                              stroke="#b9804a"
+                              stroke-width="10"
+                              stroke-linecap="round" />
+
+                        <path d="M319 80 L319 308"
+                              stroke="#d9a166"
+                              stroke-width="7" />
+
+                        <path d="M275 192 H365"
+                              stroke="#9b6339"
+                              stroke-width="9" />
+
+                        <!-- Canvas -->
+                        <rect x="258" y="35"
+                              width="125" height="155"
+                              rx="4" fill="#d6a064"
+                              transform="rotate(4 320 110)" />
+
+                        <rect x="267" y="44"
+                              width="107" height="137"
+                              fill="#fff4dc"
+                              transform="rotate(4 320 110)" />
+
+                        <!-- Flower painting -->
+                        <path d="M320 165 Q321 135 332 111"
+                              stroke="#4b965b"
+                              stroke-width="5"
+                              fill="none" />
+
+                        <ellipse cx="310" cy="146"
+                                 rx="14" ry="7"
+                                 fill="#67b86c"
+                                 transform="rotate(30 310 146)" />
+
+                        <ellipse cx="337" cy="133"
+                                 rx="14" ry="7"
+                                 fill="#3d9962"
+                                 transform="rotate(-35 337 133)" />
+
+                        <g fill="#ffbe3d">
+                            <ellipse cx="329" cy="91"
+                                     rx="9" ry="17" />
+                            <ellipse cx="329" cy="91"
+                                     rx="9" ry="17"
+                                     transform="rotate(45 329 108)" />
+                            <ellipse cx="329" cy="91"
+                                     rx="9" ry="17"
+                                     transform="rotate(90 329 108)" />
+                            <ellipse cx="329" cy="91"
+                                     rx="9" ry="17"
+                                     transform="rotate(135 329 108)" />
+                        </g>
+
+                        <circle cx="329" cy="108" r="10"
+                                fill="#81513c" />
+
+                        <!-- Rabbit ears -->
+                        <path d="M157 139
+                                 C126 108 130 44 151 33
+                                 C173 31 180 94 179 132Z"
+                              fill="url(#rabbitFur)"
+                              stroke="#e7e3e1"
+                              stroke-width="2" />
+
+                        <path d="M145 105
+                                 C139 76 142 49 151 46
+                                 C162 57 166 90 165 112Z"
+                              fill="#f3a3b4" />
+
+                        <path d="M184 132
+                                 C177 91 191 34 212 37
+                                 C230 49 211 111 200 141Z"
+                              fill="url(#rabbitFur)"
+                              stroke="#e7e3e1"
+                              stroke-width="2" />
+
+                        <path d="M194 108
+                                 C195 77 204 55 211 52
+                                 C215 72 205 96 201 117Z"
+                              fill="#f3a3b4" />
+
+                        <!-- Rabbit body -->
+                        <ellipse cx="183" cy="230"
+                                 rx="65" ry="72"
+                                 fill="url(#rabbitFur)" />
+
+                        <ellipse cx="138" cy="265"
+                                 rx="27" ry="20"
+                                 fill="#fffaf3" />
+
+                        <ellipse cx="221" cy="267"
+                                 rx="26" ry="20"
+                                 fill="#f7f4f0" />
+
+                        <!-- Rabbit head -->
+                        <ellipse cx="184" cy="159"
+                                 rx="57" ry="53"
+                                 fill="url(#rabbitFur)" />
+
+                        <ellipse cx="209" cy="175"
+                                 rx="25" ry="20"
+                                 fill="#fffaf3" />
+
+                        <ellipse cx="220" cy="168"
+                                 rx="6" ry="5"
+                                 fill="#f18da7" />
+
+                        <ellipse cx="203" cy="148"
+                                 rx="6" ry="9"
+                                 fill="#24232c" />
+
+                        <circle cx="205" cy="145" r="2.5"
+                                fill="#ffffff" />
+
+                        <circle cx="165" cy="180" r="10"
+                                fill="#f8a8b6" opacity=".35" />
+
+                        <!-- Blue artist apron -->
+                        <path d="M145 213
+                                 Q182 193 218 215
+                                 L237 275
+                                 Q186 299 132 274Z"
+                              fill="url(#blueApron)"
+                              stroke="#8ad8ec"
+                              stroke-width="2" />
+
+                        <path d="M151 215 L154 202
+                                 Q181 188 207 205 L215 218"
+                              stroke="#66cce7"
+                              stroke-width="7"
+                              fill="none"
+                              stroke-linecap="round" />
+
+                        <!-- Painting arm -->
+                        <path d="M202 219
+                                 Q226 198 249 170"
+                              stroke="#fffaf3"
+                              stroke-width="22"
+                              fill="none"
+                              stroke-linecap="round" />
+
+                        <!-- Paintbrush -->
+                        <path d="M246 172 L282 136"
+                              stroke="#d59b57"
+                              stroke-width="5"
+                              stroke-linecap="round" />
+
+                        <path d="M279 139 L288 128 L285 143Z"
+                              fill="#ec6194" />
+
+                        <!-- Palette -->
+                        <g transform="rotate(-12 119 257)">
+                            <ellipse cx="113" cy="255"
+                                     rx="38" ry="25"
+                                     fill="#e9bf8c"
+                                     stroke="#bd8858"
+                                     stroke-width="3" />
+
+                            <circle cx="93" cy="246" r="7"
+                                    fill="#f34c72" />
+
+                            <circle cx="110" cy="239" r="7"
+                                    fill="#367ee8" />
+
+                            <circle cx="132" cy="242" r="7"
+                                    fill="#ffce42" />
+
+                            <circle cx="95" cy="262" r="7"
+                                    fill="#48c9b0" />
+
+                            <circle cx="115" cy="270" r="7"
+                                    fill="#a86be7" />
+                        </g>
+
+                        <!-- Studio table -->
+                        <path d="M0 295 Q145 281 280 296
+                                 T520 289 V330 H0Z"
+                              fill="#80593e" />
+
+                        <!-- Paint jars -->
+                        <rect x="25" y="262"
+                              width="20" height="32"
+                              rx="4" fill="#f1c64d" />
+
+                        <rect x="28" y="255"
+                              width="14" height="9"
+                              rx="2" fill="#d7dce3" />
+
+                        <rect x="53" y="267"
+                              width="21" height="27"
+                              rx="4" fill="#2bb5c4" />
+
+                        <rect x="56" y="260"
+                              width="15" height="8"
+                              rx="2" fill="#d7dce3" />
+
+                        <rect x="82" y="270"
+                              width="20" height="24"
+                              rx="4" fill="#e75c88" />
+
+                        <rect x="85" y="263"
+                              width="14" height="8"
+                              rx="2" fill="#d7dce3" />
+
+                        <!-- Sparkles -->
+                        <g fill="#ffd36b">
+                            <path d="M246 48 L250 59 L261 63
+                                     L250 67 L246 78 L242 67
+                                     L231 63 L242 59Z" />
+
+                            <circle cx="235" cy="103" r="3" />
+                            <circle cx="374" cy="222" r="3" />
+                        </g>
+                    </svg>
+                </div>
+
+
+
+                    
+
+
+                    <div class="stats-grid">
+
+
+                        <div class="stat-card">
+
+                            <h3>
+                                Total Artworks
+                            </h3>
+
+                            <strong
+                                id="totalArtworks">
+
+                                0
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="stat-card">
+
+                            <h3>
+                                Total Photos
+                            </h3>
+
+                            <strong
+                                id="totalPhotos">
+
+                                0
+
+                            </strong>
+
+                        </div>
+
+
+                        <div class="stat-card admin-access-card">
+
+                            <div class="admin-access-icon">
+                                🔐
+                            </div>
+
+                            <h3>Admin Access</h3>
+
+                            <p class="admin-active-status">
+                                <span class="active-dot"></span>
+                                Active
+                            </p>
+
+                        </div>
+                        
+
+
+                    </div>
+
+
+                </section>
+
+
+                <!-- =========================
+                     ADD ARTWORK
+                ========================= -->
+
+                <section
+                    class="admin-section"
+                    id="addArtworkSection">
+
+
+                    <div class="section-header">
+
+                        <h2>
+                            🎨 Add Artwork
+                        </h2>
+
+                        <p>
+                            Naya artwork website par add karein.
+                        </p>
+
+                    </div>
+
+
+                    <div class="panel">
+
+
+                        <div class="form-group">
+
+                            <label for="artworkTitle">
+                                Artwork Title
+                            </label>
+
+                            <input
+                                type="text"
+                                id="artworkTitle"
+                                placeholder="Enter artwork title">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="artworkCategory">
+                                Category
+                            </label>
+
+                            <select
+                                id="artworkCategory">
+
+                                <option value="wall">
+                                    Wall Painting
+                                </option>
+
+                                <option value="sketch">
+                                    Sketch
+                                </option>
+
+                                <option value="flower">
+                                    Flower Design
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="artworkPhoto">
+                                Artwork Photo
+                            </label>
+
+                            <input
+                                type="file"
+                                id="artworkPhoto"
+                                accept="image/*">
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="primary-btn"
+                            id="saveArtworkBtn">
+
+                            💾 Upload Artwork
+
+                        </button>
+
+
+                    </div>
+
+
+                </section>
+
+
+                <!-- =========================
+                     MANAGE COMMENTS
+                ========================= -->
+
+                <section
+                    class="admin-section"
+                    id="manageCommentsSection">
+
+                    <div class="section-header">
+
+                        <h2>
+                            💬 Manage Comments
+                        </h2>
+
+                        <p>
+                            Website par aaye comments dekhein aur manage karein.
+                        </p>
+
+                    </div>
+
+                    <div class="panel">
+
+                        <div
+                            id="adminCommentsMessage"
+                            role="status">
+                            Comments load karne ke liye section kholein.
+                        </div>
+
+                        <div
+                            id="adminCommentsList">
+                        </div>
+
+                    </div>
+
+                </section>
 
                 
 
-                <span class="developed-by">
-                    Developed by
-                </span>
+                <!-- =========================
+                     MANAGE GALLERY
+                ========================= -->
 
-                <span>
-                    Dharmendra Verma
-                </span>
-
-                &nbsp; • &nbsp;
-
-                <span class="keep-creating">
-                    Keep Creating... ❤️
-                </span>
-
-                <br>
-
-                <a
-                    href="https://www.linkedin.com/in/dharmendraverma25"
-                    target="_blank"
-                    class="developer-link">
-
-                    💼 LinkedIn
-
-                </a>
-
-            </footer>
+                <section
+                    class="admin-section"
+                    id="gallerySection">
 
 
-        </main>
+                    <div class="section-header">
+
+                        <h2>
+                            🖼️ Manage Gallery
+                        </h2>
+
+                        <p>
+                            Uploaded artworks manage karein.
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="gallery-grid"
+                        id="galleryGrid">
+
+                    </div>
+
+
+                </section>
+
+
+                <!-- =========================
+                     PHOTOS
+                ========================= -->
+
+                <section
+                    class="admin-section"
+                    id="photosSection">
+
+
+                    <div class="section-header">
+
+                        <h2>
+                            📷 Manage Photos
+                        </h2>
+
+                        <p>
+                            Website ki photos upload aur manage karein.
+                        </p>
+
+                    </div>
+
+
+                    <div class="panel">
+
+
+                        <div class="form-group">
+
+                            <label for="photoTitle">
+                                Photo Title
+                            </label>
+
+                            <input
+                                type="text"
+                                id="photoTitle"
+                                placeholder="Enter photo title">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="photoFile">
+                                Select Photo
+                            </label>
+
+                            <input
+                                type="file"
+                                id="photoFile"
+                                accept="image/*">
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="primary-btn"
+                            id="uploadPhotoBtn">
+
+                            📤 Upload Photo
+
+                        </button>
+
+
+                    </div>
+
+
+                </section>
+
+
+                <!-- =========================
+                     VIDEOS
+                ========================= -->
+
+                <section
+                    class="admin-section"
+                    id="videosSection">
+
+
+                    <div class="section-header">
+
+                        <h2>
+                            🎬 Manage Videos
+                        </h2>
+
+                        <p>
+                            Website ke videos manage karein.
+                        </p>
+
+                    </div>
+
+
+                    <div class="panel">
+
+
+                        <div class="form-group">
+
+                            <label for="videoTitle">
+                                Video Title
+                            </label>
+
+                            <input
+                                type="text"
+                                id="videoTitle"
+                                placeholder="Enter video title">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="videoFile">
+                                Select Video
+                            </label>
+
+                            <input
+                                type="file"
+                                id="videoFile"
+                                accept="video/*">
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="primary-btn"
+                            id="uploadVideoBtn">
+
+                            📤 Upload Video
+
+                        </button>
+
+
+                    </div>
+
+
+                    <div
+                        class="gallery-grid"
+                        id="videosGrid">
+
+                    </div>
+
+
+                </section>
+
+
+                <!-- =========================
+                     SETTINGS
+                ========================= -->
+
+                <section
+                    class="admin-section"
+                    id="settingsSection">
+
+
+                    <div class="section-header">
+
+                        <h2>
+                            ⚙️ Settings
+                        </h2>
+
+                        <p>
+                            Admin profile, social links aur security manage karein.
+                        </p>
+
+                    </div>
+
+
+                    <!-- PROFILE SETTINGS -->
+
+                    <div class="panel">
+
+                        <h3>
+                            👤 Profile Settings
+                        </h3>
+
+                        <br>
+
+
+                        <img
+                            src="images/shailesh.jpg"
+                            alt="Profile"
+                            class="profile-photo-preview"
+                            id="profilePreview">
+
+
+                        <div class="form-group">
+
+                            <label for="profileName">
+                                Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="profileName"
+                                value="Shailesh">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="profileBio">
+                                Bio
+                            </label>
+
+                            <textarea
+                                id="profileBio"
+                                rows="4">Wall Painting • Sketch • Flower Design</textarea>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="profilePhoto">
+                                Profile Photo
+                            </label>
+
+                            <input
+                                type="file"
+                                id="profilePhoto"
+                                accept="image/*">
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="primary-btn"
+                            id="saveProfileBtn">
+
+                            💾 Save Profile
+
+                        </button>
+
+
+                    </div>
+
+
+                    <br>
+
+
+                    <!-- BACKGROUND PHOTO SETTINGS -->
+
+                    <div class="panel">
+
+                        <h3>
+                            Background Photo Settings
+                        </h3>
+
+                        <br>
+
+                        <div class="form-group">
+
+                            <label for="backgroundPhoto">
+                                Choose New Photo
+                            </label>
+
+                            <input
+                                type="file"
+                                id="backgroundPhoto"
+                                accept="image/*">
+
+                        </div>
+
+                        <button
+                            type="button"
+                            class="primary-btn"
+                            id="saveBackgroundBtn">
+
+                            Save Background Photo
+
+                        </button>
+
+                    </div>
+
+
+                    <br>
+
+
+                    <!-- SOCIAL SETTINGS -->
+
+                    <div class="panel">
+
+                        <h3>
+                            🔗 Social Settings
+                        </h3>
+
+                        <br>
+
+
+                        <div class="form-group">
+
+                            <label for="mobileNumber">
+                                Mobile / WhatsApp Number
+                            </label>
+
+                            <input
+                                type="text"
+                                id="mobileNumber"
+                                value="+919984809023">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="instagramLink">
+                                Instagram
+                            </label>
+
+                            <input
+                                type="url"
+                                id="instagramLink"
+                                value="https://www.instagram.com/divine_art_by_shailesh">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="youtubeLink">
+                                YouTube
+                            </label>
+
+                            <input
+                                type="url"
+                                id="youtubeLink"
+                                value="https://www.youtube.com/@artwithshailesh">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="shaileshLinkedin">
+                                Shailesh LinkedIn
+                            </label>
+
+                            <input
+                                type="url"
+                                id="shaileshLinkedin"
+                                placeholder="LinkedIn URL later add karein">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="developerLinkedin">
+                                Dharmendra Verma LinkedIn
+                            </label>
+
+                            <input
+                                type="url"
+                                id="developerLinkedin"
+                                value="https://www.linkedin.com/in/dharmendraverma25"
+                                readonly>
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="primary-btn"
+                            id="saveSocialBtn">
+
+                            💾 Save Social Settings
+
+                        </button>
+
+
+                    </div>
+
+
+                    <br>
+
+
+                    <!-- SECURITY SETTINGS -->
+
+                    <div class="panel">
+
+                        <h3>
+                            🔒 Security Settings
+                        </h3>
+
+                        <br>
+
+                        <div class="form-group">
+
+                            <label for="currentAdminEmail">
+                                Current Admin Email
+                            </label>
+
+                            <input
+                                type="email"
+                                id="currentAdminEmail"
+                                placeholder="Current admin email"
+                                readonly>
+
+                        </div>
+
+
+                                                <div class="form-group">
+
+                            <label for="newAdminEmail">
+                                New Admin Email
+                            </label>
+
+                            <input
+                                type="email"
+                                id="newAdminEmail"
+                                placeholder="Enter new admin email">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="emailChangePassword">
+                                Current Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="emailChangePassword"
+                                placeholder="Enter current password">
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="primary-btn"
+                            id="changeAdminEmailBtn">
+
+                            ✉️ Change Admin Email
+
+                        </button>
+
+
+                        <br>
+                        <br>
+
+
+                        <div class="security-warning">
+
+                            ⚠️ Security settings sirf
+                            authenticated administrator ke liye hain.
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="currentPassword">
+                                Current Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="currentPassword"
+                                placeholder="Enter current password">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="newPassword">
+                                New Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="newPassword"
+                                placeholder="Enter new password">
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="confirmPassword">
+                                Confirm New Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                placeholder="Confirm new password">
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="primary-btn"
+                            id="changePasswordBtn">
+
+                            🔐 Change Password
+
+                        </button>
+
+
+                    </div>
+
+
+                </section>
+
+
+            </main>
+
+
+        </div>
 
 
     </div>
 
 
-
-    <!-- ================= FIREBASE ================= -->
+    <!-- =========================
+         FIREBASE + ADMIN SCRIPT
+    ========================= -->
 
     <script type="module">
 
         import {
-            auth,
-            db
-        } from "./firebase.js?v=2";
+            auth
+        } from "./firebase.js";
+
+
         import {
+            onAuthStateChanged,
+            signOut,
+            updatePassword,
+            verifyBeforeUpdateEmail,
+            EmailAuthProvider,
+            reauthenticateWithCredential
+        } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+
+        const loadingScreen =
+            document.getElementById(
+                "loadingScreen"
+            );
+
+
+        const adminApp =
+            document.getElementById(
+                "adminApp"
+            );
+
+
+        const logoutBtn =
+            document.getElementById(
+                "logoutBtn"
+            );
+
+        /* =========================
+           FIRESTORE IMPORTS
+        ========================= */
+
+        const {
+            db
+        } = await import("./firebase.js");
+
+        /* =========================
+           SUPABASE CONNECTION
+        ========================= */
+
+        const {
             createClient
-        } from "https://esm.sh/@supabase/supabase-js@2";
+        } = await import(
+            "https://esm.sh/@supabase/supabase-js@2"
+        );
+
 
         const SUPABASE_URL =
             "https://egjllkvnvezvnnkscxbm.supabase.co";
 
-        
+
         const SUPABASE_PUBLISHABLE_KEY =
             "sb_publishable_2s_-otBOO6EzWJvMneNhPQ_QaEuAD-H";
+
 
         const supabase =
             createClient(
                 SUPABASE_URL,
                 SUPABASE_PUBLISHABLE_KEY
             );
-        import {
-            onAuthStateChanged,
-            signOut
-        } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
-        import {
-            doc,
-            setDoc,
-            getDoc,
-            collection,
+
+        const {
             addDoc,
+            collection,
             getDocs,
-            updateDoc,
-            deleteDoc
-        } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+            deleteDoc,
+            doc,
+            onSnapshot
+        } = await import(
+            "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js"
+        );
 
-onAuthStateChanged(
-    auth,
-    async function(user) {
+        /* =========================
+           AUTH CHECK
+        ========================= */
 
-        if (!user) {
-            window.location.href =
-                "login.html";
-            return;
-        }
+        onAuthStateChanged(
+            auth,
+            function(user) {
 
-        try {
-            const profileDoc =
-                await getDoc(
-                    doc(
-                        db,
-                        "settings",
-                        "adminProfile"
-                    )
-                );
+                if (user) {
 
-            if (profileDoc.exists()) {
+                    loadingScreen.style.display = "none";
+                    adminApp.style.display = "block";
 
-                const profile =
-                    profileDoc.data();
+                    const currentAdminEmailField =
+                        document.getElementById("currentAdminEmail");
 
-                const adminName =
-                    document.querySelector(
-                        ".admin-profile h3"
-                    );
+                    if (currentAdminEmailField) {
+                        currentAdminEmailField.value =
+                            user.email || "";
+                    }
 
-                const adminBio =
-                    document.querySelector(
-                        ".admin-profile p"
-                    );
+                    loadDashboardCounts();
+                    loadGallery();
 
-                const adminPhoto =
-                    document.querySelector(
-                        ".admin-profile img"
-                    );
+                }
+                else {
 
-                if (
-                    adminName &&
-                    profile.name
-                ) {
-                    adminName.innerText =
-                        profile.name;
+                    window.location.href =
+                        "login.html";
+
                 }
 
-                if (
-                    adminBio &&
-                    profile.bio
-                ) {
-                    adminBio.innerText =
-                        profile.bio;
-                }
-
-                if (
-                    adminPhoto &&
-                    profile.photoUrl
-                ) {
-                    adminPhoto.src =
-                        profile.photoUrl;
-                }
             }
-            document.querySelector(".admin-profile").style.visibility = "visible";
-            const artworkSnapshot =
-                await getDocs(
-                    collection(db, "artworks")
-                );
-
-            document.getElementById("totalArtworks").innerText =
-                artworkSnapshot.size;
-            document.getElementById("totalPhotos").innerText =
-                artworkSnapshot.size;
-        }
-        
-        catch (error) {
-
-            console.error(
-                "Profile load error:",
-                error
-            );
-        }
-    }
-);
+        );
 
 
-        document
-            .getElementById("logoutBtn")
-            .addEventListener(
-                "click",
-                async function() {
+        /* =========================
+           LOGOUT
+        ========================= */
+
+        logoutBtn.addEventListener(
+            "click",
+            async function() {
+
+                try {
 
                     await signOut(auth);
 
@@ -3024,623 +2824,15 @@ onAuthStateChanged(
                         "login.html";
 
                 }
-            );
-        // ================= PROFILE MODAL =================
-
-        const editProfileBtn =
-            document.getElementById("editProfileBtn");
-
-        const profileModal =
-            document.getElementById("profileModal");
-
-        const closeProfileModal =
-            document.getElementById("closeProfileModal");
-
-
-        editProfileBtn.addEventListener(
-            "click",
-            function() {
-
-                profileModal.style.display = "flex";
-
-            }
-        );
-
-
-        closeProfileModal.addEventListener(
-            "click",
-            function() {
-
-                profileModal.style.display = "none";
-
-            }
-        );
-
-
-        profileModal.addEventListener(
-            "click",
-            function(event) {
-
-                if (event.target === profileModal) {
-
-                    profileModal.style.display = "none";
-
-                }
-
-            }
-        );
-
-// ================= SAVE PROFILE =================
-const saveProfileBtn =
-    document.getElementById("saveProfileBtn");
-
-saveProfileBtn.addEventListener(
-    "click",
-    async function() {
-
-        const name =
-            document
-                .getElementById("profileName")
-                .value
-                .trim();
-
-        const bio =
-            document
-                .getElementById("profileBio")
-                .value
-                .trim();
-
-        const photoInput =
-            document.getElementById("profilePhoto");
-
-        if (name === "" || bio === "") {
-            alert("Please enter name and bio.");
-            return;
-        }
-
-        try {
-
-            let photoUrl = "";
-
-            /*
-             * ================= PHOTO UPLOAD =================
-             */
-
-            if (
-                photoInput.files &&
-                photoInput.files.length > 0
-            ) {
-
-                const file =
-                    photoInput.files[0];
-
-                const fileName =
-                    "profile_" +
-                    Date.now() +
-                    "_" +
-                    file.name;
-
-                const uploadResult =
-                    await supabase
-                        .storage
-                        .from("profile-photos")
-                        .upload(
-                            fileName,
-                            file
-                        );
-
-                if (uploadResult.error) {
-                    throw uploadResult.error;
-                }
-
-                const publicUrlResult =
-                    supabase
-                        .storage
-                        .from("profile-photos")
-                        .getPublicUrl(fileName);
-
-                photoUrl =
-                    publicUrlResult.data.publicUrl;
-            }
-
-            /*
-             * ================= FIRESTORE SAVE =================
-             */
-
-            const profileData = {
-                name: name,
-                bio: bio
-            };
-
-            if (photoUrl !== "") {
-                profileData.photoUrl =
-                    photoUrl;
-            }
-
-            await setDoc(
-                doc(
-                    db,
-                    "settings",
-                    "adminProfile"
-                ),
-                profileData,
-                {
-                    merge: true
-                }
-            );
-
-            /*
-             * ================= UPDATE SCREEN =================
-             */
-
-            document
-                .querySelector(".admin-profile h3")
-                .innerText = name;
-
-            document
-                .querySelector(".admin-profile p")
-                .innerText = bio;
-
-            if (photoUrl !== "") {
-
-                document
-                    .querySelector(".admin-profile img")
-                    .src = photoUrl;
-            }
-
-            document
-                .getElementById("profileModal")
-                .style.display = "none";
-
-            photoInput.value = "";
-
-            alert(
-                "Profile saved successfully!"
-            );
-
-        }
-        catch (error) {
-
-            console.error(
-                "Profile save error:",
-                error
-            );
-
-            alert(
-                "Profile save nahi hua. Console check karein."
-            );
-        }
-    }
-);
-
-    // ================= ADD ARTWORK MODAL =================
-
-    const artworkModal =
-        document.getElementById("artworkModal");
-
-    const addArtworkBtn =
-        document.getElementById("addArtworkBtn");
-
-    const quickAddArtworkBtn =
-        document.getElementById("quickAddArtworkBtn");
-
-    const closeArtworkModal =
-        document.getElementById("closeArtworkModal");
-
-    addArtworkBtn.addEventListener(
-        "click",
-        function() {
-            artworkModal.style.display = "flex";
-        }
-    );
-
-    if (quickAddArtworkBtn) {
-
-        quickAddArtworkBtn.addEventListener(
-            "click",
-            function() {
-                artworkModal.style.display = "flex";
-            }
-        );
-
-    }
-
-    closeArtworkModal.addEventListener(
-        "click",
-        function() {
-            artworkModal.style.display = "none";
-        }
-    );
-
-    artworkModal.addEventListener(
-        "click",
-        function(event) {
-            if (event.target === artworkModal) {
-                artworkModal.style.display = "none";
-            }
-        }
-    );
-
-    // ================= SAVE ARTWORK =================
-
-const saveArtworkBtn =
-    document.getElementById("saveArtworkBtn");
-
-saveArtworkBtn.addEventListener(
-    "click",
-    async function() {
-
-        const title =
-            document
-                .getElementById("artworkTitle")
-                .value
-                .trim();
-
-        const category =
-            document
-                .getElementById("artworkCategory")
-                .value;
-
-        const photoInput =
-            document
-                .getElementById("artworkPhoto");
-
-        if (
-            title === "" ||
-            !photoInput.files ||
-            photoInput.files.length === 0
-        ) {
-
-            alert(
-                "Please enter title and select a photo."
-            );
-
-            return;
-        }
-
-        try {
-
-            const file =
-                photoInput.files[0];
-
-            const fileName =
-                "artwork_" +
-                Date.now() +
-                "_" +
-                file.name;
-
-            const uploadResult =
-                await supabase
-                    .storage
-                    .from("profile-photos")
-                    .upload(
-                        fileName,
-                        file
-                    );
-
-            if (uploadResult.error) {
-
-                throw uploadResult.error;
-
-            }
-
-            const publicUrlResult =
-                supabase
-                    .storage
-                    .from("profile-photos")
-                    .getPublicUrl(
-                        fileName
-                    );
-
-            const photoUrl =
-                publicUrlResult
-                    .data
-                    .publicUrl;
-
-            console.log(
-                "Artwork uploaded:",
-                photoUrl
-            );
-
-            await addDoc(
-                collection(db, "artworks"),
-                {
-                    title: title,
-                    category: category,
-                    photoUrl: photoUrl,
-                    createdAt: new Date().toISOString()
-                }
-            );
-
-            alert(
-                "Artwork upload aur save ho gaya!"
-            );
-
-            // Update dashboard counters immediately
-
-            const artworkSnapshot =
-                await getDocs(
-                    collection(db, "artworks")
-                );
-
-            document.getElementById("totalArtworks").innerText =
-                artworkSnapshot.size;
-
-            document.getElementById("totalPhotos").innerText =
-                artworkSnapshot.size;
-
-            // Refresh gallery immediately
-
-            if (typeof loadGallery === "function") {
-
-                await loadGallery();
-
-            }
-
-
-
-        }
-        catch (error) {
-
-            console.error(
-                "Artwork upload error:",
-                error
-            );
-
-            alert(
-                "Artwork upload nahi hua. Console check karein."
-            );
-
-        }
-
-    }
-);
-
-// ================= LOAD GALLERY =================
-
-const galleryGrid =
-    document.getElementById("galleryGrid");
-
-async function loadGallery() {
-
-    if (!galleryGrid) {
-        return;
-    }
-
-    galleryGrid.innerHTML = "";
-
-    try {
-
-        const artworkSnapshot =
-            await getDocs(
-                collection(db, "artworks")
-            );
-
-        if (artworkSnapshot.empty) {
-
-            galleryGrid.innerHTML =
-                "<p>No artwork uploaded yet.</p>";
-
-            return;
-        }
-
-        artworkSnapshot.forEach(
-            function(docSnapshot) {
-
-                const artwork =
-                    docSnapshot.data();
-
-                const card =
-                    document.createElement("div");
-
-                card.className =
-                    "gallery-card";
-                const deleteButton =
-                    document.createElement("button");
-
-                deleteButton.type =
-                    "button";
-
-                deleteButton.className =
-                    "delete-artwork-btn";
-
-                deleteButton.innerText =
-                    "🗑️ Delete Artwork";
-
-                card.innerHTML = `
-                    <img
-                        src="${artwork.photoUrl}"
-                        alt="${artwork.title}">
-
-                    <div class="gallery-card-content">
-
-                        <h3>
-                            ${artwork.title}
-                        </h3>
-
-                        <p>
-                            ${artwork.category}
-                        </p>
-
-                    </div>
-                `;
-
-                // ================= EDIT ARTWORK BUTTON =================
-
-                const editButton =
-                    document.createElement("button");
-
-                editButton.type =
-                    "button";
-
-                editButton.className =
-                    "edit-artwork-btn";
-
-                editButton.innerText =
-                    "✏️ Edit Artwork";
-
-                card
-                    .querySelector(".gallery-card-content")
-                    .appendChild(editButton);
-
-                editButton.addEventListener(
-                    "click",
-                    async function() {
-
-                        const newTitle =
-                            prompt(
-                                "Artwork ka naya title:",
-                                artwork.title
-                            );
-
-                        if (newTitle === null) {
-
-                            return;
-
-                        }
-
-                        const trimmedTitle =
-                            newTitle.trim();
-
-                        if (trimmedTitle === "") {
-
-                            alert(
-                                "Title empty nahi ho sakta."
-                            );
-
-                            return;
-
-                        }
-
-                        const newCategory =
-                            prompt(
-                                "Category likhein: wall / sketch / flower",
-                                artwork.category
-                            );
-
-                        if (newCategory === null) {
-
-                            return;
-
-                        }
-
-                        const trimmedCategory =
-                            newCategory.trim().toLowerCase();
-
-                        if (
-                            trimmedCategory !== "wall" &&
-                            trimmedCategory !== "sketch" &&
-                            trimmedCategory !== "flower"
-                        ) {
-
-                            alert(
-                                "Category sirf wall, sketch ya flower honi chahiye."
-                            );
-
-                            return;
-
-                        }
-
-                        try {
-
-                            await updateDoc(
-                                doc(
-                                    db,
-                                    "artworks",
-                                    docSnapshot.id
-                                ),
-                                {
-                                    title: trimmedTitle,
-                                    category: trimmedCategory
-                                }
-                            );
-
-                            alert(
-                                "Artwork successfully update ho gaya!"
-                            );
-
-                            await loadGallery();
-
-                        }
-                        catch (error) {
-
-                            console.error(
-                                "Update artwork error:",
-                                error
-                            );
-
-                            alert(
-                                "Artwork update nahi hua."
-                            );
-
-                        }
-
-                    }
-                );
-
-                card
-                    .querySelector(".gallery-card-content")
-                    .appendChild(deleteButton);
-
-        deleteButton.addEventListener(
-            "click",
-            async function() {
-
-                const confirmDelete =
-                    confirm(
-                        "Kya aap ye artwork delete karna chahte hain?"
-                    );
-
-                if (!confirmDelete) {
-
-                    return;
-
-                }
-
-                try {
-
-                    await deleteDoc(
-                        doc(
-                            db,
-                            "artworks",
-                            docSnapshot.id
-                        )
-                    );
-
-                    alert(
-                        "Artwork successfully delete ho gaya!"
-                    );
-
-                    const artworkSnapshot =
-                        await getDocs(
-                            collection(
-                                db,
-                                "artworks"
-                            )
-                        );
-
-                    document.getElementById(
-                        "totalArtworks"
-                    ).innerText =
-                        artworkSnapshot.size;
-
-                    document.getElementById(
-                        "totalPhotos"
-                    ).innerText =
-                        artworkSnapshot.size;
-
-                    await loadGallery();
-
-                }
                 catch (error) {
 
                     console.error(
-                        "Delete artwork error:",
+                        "Logout error:",
                         error
                     );
 
                     alert(
-                        "Artwork delete nahi hua."
+                        "Logout nahi hua."
                     );
 
                 }
@@ -3648,59 +2840,1042 @@ async function loadGallery() {
             }
         );
 
-                galleryGrid.appendChild(card);
+        
+
+        
+
+        /* =========================
+           DASHBOARD COUNTS - REAL TIME
+        ========================= */
+
+        let artworksCountUnsubscribe = null;
+        let photosCountUnsubscribe = null;
+        let videosCountUnsubscribe = null;
+
+        function loadDashboardCounts() {
+
+            const totalArtworks =
+                document.getElementById("totalArtworks");
+
+            const totalPhotos =
+                document.getElementById("totalPhotos");
+
+            const totalVideos =
+                document.getElementById("totalVideos");
+
+            if (
+                typeof db === "undefined" ||
+                typeof onSnapshot === "undefined" ||
+                typeof collection === "undefined"
+            ) {
+                console.warn(
+                    "Dashboard counts: Firebase abhi ready nahi hai."
+                );
+                return;
+            }
+
+            try {
+
+                if (!artworksCountUnsubscribe) {
+
+                    artworksCountUnsubscribe = onSnapshot(
+                        collection(db, "artworks"),
+                        function(snapshot) {
+                            if (totalArtworks) {
+                                totalArtworks.innerText =
+                                    snapshot.size;
+                            }
+                        },
+                        function(error) {
+                            console.error(
+                                "Artworks count error:",
+                                error
+                            );
+                        }
+                    );
+
+                }
+
+                if (!photosCountUnsubscribe) {
+
+                    photosCountUnsubscribe = onSnapshot(
+                        collection(db, "photos"),
+                        function(snapshot) {
+                            if (totalPhotos) {
+                                totalPhotos.innerText =
+                                    snapshot.size;
+                            }
+                        },
+                        function(error) {
+                            console.error(
+                                "Photos count error:",
+                                error
+                            );
+                        }
+                    );
+
+                }
+
+                if (!videosCountUnsubscribe) {
+
+                    videosCountUnsubscribe = onSnapshot(
+                        collection(db, "videos"),
+                        function(snapshot) {
+                            if (totalVideos) {
+                                totalVideos.innerText =
+                                    snapshot.size;
+                            }
+                        },
+                        function(error) {
+                            console.error(
+                                "Videos count error:",
+                                error
+                            );
+                        }
+                    );
+
+                }
+
+            } catch (error) {
+
+                console.error(
+                    "Dashboard counts setup error:",
+                    error
+                );
 
             }
-        );
 
-    }
-    catch (error) {
-
-        console.error(
-            "Gallery load error:",
-            error
-        );
-
-        galleryGrid.innerHTML =
-            "<p>Gallery load nahi hui.</p>";
-
-    }
-}
-
-// ================= DASHBOARD / GALLERY =================
-
-const manageGalleryBtn =
-    document.getElementById("manageGalleryBtn");
-
-const dashboardBtn =
-    document.getElementById("dashboardBtn");
-
-const gallerySection =
-    document.getElementById("gallerySection");
-
-const mainSections =
-    document.querySelectorAll("main > section");
+        }
 
 
-if (manageGalleryBtn) {
 
-    manageGalleryBtn.addEventListener(
-        "click",
-        async function() {
+        /* =========================
+           LOAD PHOTOS - REAL TIME
+        ========================= */
 
-            mainSections.forEach(
+        let photosUnsubscribe = null;
+
+        function loadPhotos() {
+
+            const photosGrid =
+                document.getElementById("photosGrid");
+
+            if (!photosGrid) {
+                return;
+            }
+
+            if (photosUnsubscribe) {
+                return;
+            }
+
+            photosGrid.innerHTML =
+                "<p>Photos loading...</p>";
+
+            photosUnsubscribe = onSnapshot(
+                collection(db, "photos"),
+
+                function(photosSnapshot) {
+
+                    photosGrid.innerHTML = "";
+
+                    if (photosSnapshot.empty) {
+
+                        photosGrid.innerHTML =
+                            "<p>Abhi koi photo upload nahi hui.</p>";
+
+                        return;
+                    }
+
+                    photosSnapshot.forEach(function(docSnapshot) {
+
+                        const photo = docSnapshot.data();
+
+                        const card =
+                            document.createElement("div");
+
+                        card.className = "gallery-card";
+
+                        const image =
+                            document.createElement("img");
+
+                        image.src = photo.photoUrl || "";
+                        image.alt =
+                            photo.title || "Website photo";
+
+                        image.style.width = "100%";
+                        image.style.borderRadius = "10px";
+
+                        const heading =
+                            document.createElement("h3");
+
+                        heading.textContent =
+                            photo.title || "Untitled photo";
+
+                        card.appendChild(image);
+                        card.appendChild(heading);
+
+                        photosGrid.appendChild(card);
+
+                    });
+
+                },
+
+                function(error) {
+
+                    console.error(
+                        "Load photos error:",
+                        error
+                    );
+
+                    photosGrid.innerHTML =
+                        "<p>Photos load nahi hui. Console error check karein.</p>";
+
+                }
+            );
+        }
+
+
+
+        /* =========================
+           UPLOAD PHOTO
+        ========================= */
+
+        document
+            .getElementById("uploadPhotoBtn")
+            .addEventListener("click", async function() {
+
+                const uploadButton = this;
+
+                const title =
+                    document
+                        .getElementById("photoTitle")
+                        .value
+                        .trim();
+
+                const photoInput =
+                    document.getElementById("photoFile");
+
+                const photo =
+                    photoInput.files[0];
+
+                if (!title) {
+
+                    alert("Photo title likhiye.");
+
+                    return;
+                }
+
+                if (!photo) {
+
+                    alert("Pehle photo select kijiye.");
+
+                    return;
+                }
+
+                if (!photo.type.startsWith("image/")) {
+
+                    alert("Kripya image file select kijiye.");
+
+                    return;
+                }
+
+                uploadButton.disabled = true;
+                uploadButton.textContent = "Uploading...";
+
+                try {
+
+                    const fileName =
+                        Date.now() + "_" +
+                        photo.name.replace(
+                            /[^a-zA-Z0-9._-]/g,
+                            "_"
+                        );
+
+                    const filePath =
+                        "photos/" + fileName;
+
+                    const {
+                        error: uploadError
+                    } = await supabase
+                        .storage
+                        .from("artworks")
+                        .upload(
+                            filePath,
+                            photo,
+                            {
+                                cacheControl: "3600",
+                                upsert: false
+                            }
+                        );
+
+                    if (uploadError) {
+                        throw uploadError;
+                    }
+
+                    const {
+                        data: publicUrlData
+                    } = supabase
+                        .storage
+                        .from("artworks")
+                        .getPublicUrl(filePath);
+
+                    const photoUrl =
+                        publicUrlData.publicUrl;
+
+                    await addDoc(
+                        collection(db, "photos"),
+                        {
+                            title: title,
+                            photoUrl: photoUrl,
+                            filePath: filePath,
+                            createdAt: new Date().toISOString()
+                        }
+                    );
+
+                    await loadPhotos();
+                    loadDashboardCounts();
+
+                    document.getElementById("photoTitle").value = "";
+                    photoInput.value = "";
+
+                    alert("Photo successfully upload ho gayi!");
+
+                } catch (error) {
+
+                    console.error("Photo upload error:", error);
+
+                    alert(
+                        "Photo upload nahi hui. Browser Console mein error dekhein."
+                    );
+
+                } finally {
+
+                    uploadButton.disabled = false;
+                    uploadButton.textContent = "📤 Upload Photo";
+
+                }
+
+            });
+
+        
+        
+        /* =========================
+           LOAD GALLERY - REAL TIME
+        ========================= */
+
+        let galleryUnsubscribe = null;
+        let photosGalleryUnsubscribe = null;
+
+        function loadGallery() {
+
+            const galleryGrid =
+                document.getElementById("galleryGrid");
+
+            if (!galleryGrid) {
+                return;
+            }
+
+            if (
+                galleryUnsubscribe ||
+                photosGalleryUnsubscribe
+            ) {
+                return;
+            }
+
+            const artworkItems = new Map();
+            const photoItems = new Map();
+
+            function renderGallery() {
+
+                galleryGrid.innerHTML = "";
+
+                const allItems = [
+                    ...Array.from(artworkItems.values()),
+                    ...Array.from(photoItems.values())
+                ];
+
+                if (allItems.length === 0) {
+                    galleryGrid.innerHTML =
+                        "<p>Abhi koi image upload nahi hui.</p>";
+                    return;
+                }
+
+                allItems.forEach(function(item) {
+
+                    const card =
+                        document.createElement("div");
+
+                    card.className = "gallery-card";
+
+                    const image =
+                        document.createElement("img");
+
+                    image.src = item.imageUrl || "";
+                    image.alt = item.title || "Artwork";
+                    image.style.width = "100%";
+                    image.style.borderRadius = "10px";
+
+                    const content =
+                        document.createElement("div");
+
+                    content.className =
+                        "gallery-card-content";
+
+                    const heading =
+                        document.createElement("h3");
+
+                    heading.textContent =
+                        item.title || "Untitled";
+
+                    const category =
+                        document.createElement("p");
+
+                    category.textContent =
+                        item.category ||
+                        (item.type === "photo" ? "Photo" : "Artwork");
+
+                    const typeLabel =
+                        document.createElement("p");
+
+                    typeLabel.textContent =
+                        item.type === "photo"
+                            ? "Photos Section"
+                            : "Add Artwork Section";
+
+                    const deleteButton =
+                        document.createElement("button");
+
+                    deleteButton.type = "button";
+                    deleteButton.textContent = "🗑️ Delete";
+                    deleteButton.style.width = "100%";
+                    deleteButton.style.marginTop = "12px";
+                    deleteButton.style.padding = "11px 16px";
+                    deleteButton.style.background =
+                        "linear-gradient(135deg, #ff4d6d, #e63956)";
+                    deleteButton.style.color = "white";
+                    deleteButton.style.border = "none";
+                    deleteButton.style.borderRadius = "10px";
+                    deleteButton.style.cursor = "pointer";
+
+                    deleteButton.addEventListener(
+                        "click",
+                        async function() {
+
+                            const confirmed = confirm(
+                                "Do you want to delete it ?"
+                            );
+
+                            if (!confirmed) {
+                                return;
+                            }
+
+                            deleteButton.disabled = true;
+
+                            try {
+
+                                if (
+                                    item.imageUrl &&
+                                    item.imageUrl.includes(
+                                        "/storage/v1/object/public/artworks/"
+                                    )
+                                ) {
+
+                                    const imagePath =
+                                        decodeURIComponent(
+                                            item.imageUrl.split(
+                                                "/storage/v1/object/public/artworks/"
+                                            )[1]
+                                        );
+
+                                    const {
+                                        error: storageError
+                                    } = await supabase
+                                        .storage
+                                        .from("artworks")
+                                        .remove([imagePath]);
+
+                                    if (storageError) {
+                                        throw storageError;
+                                    }
+                                }
+
+                                await deleteDoc(
+                                    doc(
+                                        db,
+                                        item.collectionName,
+                                        item.id
+                                    )
+                                );
+
+                                loadDashboardCounts();
+
+                                alert("Image delete ho gayi.");
+
+                            } catch (error) {
+
+                                console.error(
+                                    "Gallery delete error:",
+                                    error
+                                );
+
+                                alert(
+                                    "Image delete nahi hui. Console error check karein."
+                                );
+
+                                deleteButton.disabled = false;
+                            }
+                        }
+                    );
+
+                    content.appendChild(heading);
+                    content.appendChild(category);
+                    content.appendChild(typeLabel);
+                    content.appendChild(deleteButton);
+
+                    card.appendChild(image);
+                    card.appendChild(content);
+
+                    galleryGrid.appendChild(card);
+                });
+            }
+
+            galleryGrid.innerHTML =
+                "<p>Gallery loading...</p>";
+
+            galleryUnsubscribe = onSnapshot(
+                collection(db, "artworks"),
+
+                function(snapshot) {
+
+                    artworkItems.clear();
+
+                    snapshot.forEach(function(documentSnapshot) {
+
+                        const artwork = documentSnapshot.data();
+
+                        artworkItems.set(documentSnapshot.id, {
+                            id: documentSnapshot.id,
+                            collectionName: "artworks",
+                            type: "artwork",
+                            title: artwork.title,
+                            category: artwork.category,
+                            imageUrl: artwork.image
+                        });
+                    });
+
+                    renderGallery();
+                },
+
+                function(error) {
+
+                    console.error(
+                        "Artworks listener error:",
+                        error
+                    );
+                }
+            );
+
+            photosGalleryUnsubscribe = onSnapshot(
+                collection(db, "photos"),
+
+                function(snapshot) {
+
+                    photoItems.clear();
+
+                    snapshot.forEach(function(documentSnapshot) {
+
+                        const photo = documentSnapshot.data();
+
+                        photoItems.set(documentSnapshot.id, {
+                            id: documentSnapshot.id,
+                            collectionName: "photos",
+                            type: "photo",
+                            title: photo.title,
+                            imageUrl: photo.photoUrl
+                        });
+                    });
+
+                    renderGallery();
+                },
+
+                function(error) {
+
+                    console.error(
+                        "Photos listener error:",
+                        error
+                    );
+                }
+            );
+        }
+
+
+        /* =========================
+           ADD ARTWORK
+        ========================= */
+
+        document
+            .getElementById("saveArtworkBtn")
+            .addEventListener(
+                "click",
+                async function() {
+
+                    const title =
+                        document
+                            .getElementById(
+                                "artworkTitle"
+                            )
+                            .value
+                            .trim();
+
+
+                    const category =
+                        document
+                            .getElementById(
+                                "artworkCategory"
+                            )
+                            .value;
+
+
+                    const photo =
+                        document
+                            .getElementById(
+                                "artworkPhoto"
+                            )
+                            .files[0];
+
+
+                    if (title === "") {
+
+                        alert(
+                            "Artwork title likhiye."
+                        );
+
+                        return;
+                    }
+
+
+                    if (!photo) {
+
+                        alert(
+                            "Artwork photo select kijiye."
+                        );
+
+                        return;
+                    }
+
+
+                    try {
+
+                        /* =========================
+                           UPLOAD PHOTO TO SUPABASE
+                        ========================= */
+
+                        const fileExtension =
+                            photo.name
+                                .split(".")
+                                .pop();
+
+
+                        const fileName =
+                            Date.now() +
+                            "_" +
+                            Math.random()
+                                .toString(36)
+                                .substring(2) +
+                            "." +
+                            fileExtension;
+
+
+                        const filePath =
+                            "artworks/" +
+                            fileName;
+
+
+                        const {
+                            error:
+                                uploadError
+                        } =
+                            await supabase
+                                .storage
+                                .from(
+                                    "artworks"
+                                )
+                                .upload(
+                                    filePath,
+                                    photo,
+                                    {
+                                        cacheControl:
+                                            "3600",
+                                        upsert:
+                                            false
+                                    }
+                                );
+
+
+                        if (uploadError) {
+
+                            console.error(
+                                "Supabase upload error:",
+                                uploadError
+                            );
+
+                            alert(
+                                "Photo upload nahi hui."
+                            );
+
+                            return;
+                        }
+
+
+                        /* =========================
+                           GET PUBLIC PHOTO URL
+                        ========================= */
+
+                        const {
+                            data:
+                                publicUrlData
+                        } =
+                            supabase
+                                .storage
+                                .from(
+                                    "artworks"
+                                )
+                                .getPublicUrl(
+                                    filePath
+                                );
+
+
+                        const imageUrl =
+                            publicUrlData
+                                .publicUrl;
+
+
+                        /* =========================
+                           SAVE ARTWORK IN FIRESTORE
+                        ========================= */
+
+                        await addDoc(
+                            collection(
+                                db,
+                                "artworks"
+                            ),
+                            {
+                                title:
+                                    title,
+
+                                category:
+                                    category,
+
+                                image:
+                                    imageUrl,
+
+                                createdAt:
+                                    new Date()
+                            }
+                        );
+
+
+                        alert(
+                            "Artwork successfully upload ho gaya!"
+                        );
+
+
+                        document
+                            .getElementById(
+                                "artworkTitle"
+                            )
+                            .value = "";
+
+
+                        document
+                            .getElementById(
+                                "artworkPhoto"
+                            )
+                            .value = "";
+
+
+                        loadDashboardCounts();
+
+                    }
+                    catch (error) {
+
+                        console.error(
+                            "Artwork upload error:",
+                            error
+                        );
+
+                        alert(
+                            "Artwork upload nahi hua."
+                        );
+
+                    }
+
+                }
+            );
+        /* =========================
+           LOAD VIDEOS
+        ========================= */
+
+        async function loadVideos() {
+
+            const videosGrid =
+                document.getElementById("videosGrid");
+
+            if (!videosGrid) {
+                return;
+            }
+
+            videosGrid.innerHTML = "<p>Videos loading...</p>";
+
+            try {
+
+                const videoSnapshot =
+                    await getDocs(
+                        collection(db, "videos")
+                    );
+
+                videosGrid.innerHTML = "";
+
+                if (videoSnapshot.empty) {
+
+                    videosGrid.innerHTML =
+                        "<p>Abhi koi video upload nahi hua.</p>";
+
+                    return;
+                }
+
+                videoSnapshot.forEach(function(docSnapshot) {
+
+                    const video = docSnapshot.data();
+
+                    const videoUrl =
+                        video.videoUrl || video.url || "";
+
+                    const card =
+                        document.createElement("div");
+
+                    card.className = "gallery-card";
+
+                    if (!videoUrl) {
+
+                        card.innerHTML = `
+                            <div class="gallery-card-content">
+                                <h3>${video.title || "Untitled video"}</h3>
+                                <p>Video URL nahi mila.</p>
+                            </div>
+                        `;
+
+                    } else {
+
+                        card.innerHTML = `
+                            <video
+                                controls
+                                preload="metadata"
+                                style="width:100%; display:block; max-height:320px; background:#000;">
+                                <source src="${videoUrl}">
+                                Your browser does not support video playback.
+                            </video>
+
+                            <div class="gallery-card-content">
+                                <h3>${video.title || "Untitled video"}</h3>
+                            </div>
+                        `;
+
+                    }
+
+                    videosGrid.appendChild(card);
+
+                });
+
+            }
+            catch (error) {
+
+                console.error("Load videos error:", error);
+
+                videosGrid.innerHTML =
+                    "<p>Videos load nahi ho paaye. Console check karein.</p>";
+
+            }
+
+        }
+
+
+        /* =========================
+           UPLOAD VIDEO
+        ========================= */
+
+        document
+            .getElementById("uploadVideoBtn")
+            .addEventListener("click", async function() {
+
+                const title =
+                    document.getElementById("videoTitle").value.trim();
+
+                const fileInput =
+                    document.getElementById("videoFile");
+
+                const file =
+                    fileInput.files[0];
+
+                if (!title) {
+                    alert("Video title likhiye.");
+                    return;
+                }
+
+                if (!file) {
+                    alert("Video select kijiye.");
+                    return;
+                }
+
+                if (!file.type.startsWith("video/")) {
+                    alert("Kripya video file select kijiye.");
+                    return;
+                }
+
+                const uploadButton = this;
+
+                uploadButton.disabled = true;
+                uploadButton.textContent = "Uploading...";
+
+                try {
+
+                    const fileName =
+                        Date.now() + "_" +
+                        file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+
+                    const filePath =
+                        "videos/" + fileName;
+
+                    /*
+                       NOTE:
+                       Yeh existing "artworks" Supabase bucket
+                       mein videos/ folder ke andar upload karega.
+                    */
+
+                    const { error: uploadError } =
+                        await supabase
+                            .storage
+                            .from("artworks")
+                            .upload(filePath, file, {
+                                cacheControl: "3600",
+                                upsert: false
+                            });
+
+                    if (uploadError) {
+                        throw uploadError;
+                    }
+
+                    const { data: publicUrlData } =
+                        supabase
+                            .storage
+                            .from("artworks")
+                            .getPublicUrl(filePath);
+
+                    const videoUrl =
+                        publicUrlData.publicUrl;
+
+                    await addDoc(
+                        collection(db, "videos"),
+                        {
+                            title: title,
+                            videoUrl: videoUrl,
+                            fileName: filePath,
+                            createdAt: new Date().toISOString()
+                        }
+                    );
+
+                    await loadVideos();
+                    await loadDashboardCounts();
+
+                    document.getElementById("videoTitle").value = "";
+                    fileInput.value = "";
+
+                    alert("Video successfully upload ho gaya!");
+
+                }
+                catch (error) {
+
+                    console.error("Video upload error:", error);
+
+                    alert(
+                        "Video upload nahi hua. Console mein error dekhein."
+                    );
+
+                }
+                finally {
+
+                    uploadButton.disabled = false;
+                    uploadButton.textContent = "📤 Upload Video";
+
+                }
+
+            });
+        /* =========================
+           SECTION SWITCHING
+        ========================= */
+
+        const sections =
+            document.querySelectorAll(
+                ".admin-section"
+            );
+
+
+        const sideLinks =
+            document.querySelectorAll(
+                ".side-link"
+            );
+
+
+        function showSection(
+            sectionId,
+            clickedButton
+        ) {
+
+            sections.forEach(
                 function(section) {
 
-                    section.style.display =
-                        "none";
+                    section.classList.remove(
+                        "active"
+                    );
 
                 }
             );
 
-            gallerySection.style.display =
-                "block";
 
-            await loadGallery();
+            sideLinks.forEach(
+                function(button) {
+
+                    button.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
+
+
+            const section =
+                document.getElementById(
+                    sectionId
+                );
+
+
+            if (section) {
+
+                section.classList.add(
+                    "active"
+                );
+
+            }
+
+
+            if (clickedButton) {
+
+                clickedButton.classList.add(
+                    "active"
+                );
+
+            }
+
 
             window.scrollTo({
                 top: 0,
@@ -3708,41 +3883,930 @@ if (manageGalleryBtn) {
             });
 
         }
-    );
-
-}
 
 
-if (dashboardBtn) {
+        document
+            .getElementById(
+                "dashboardBtn"
+            )
+            .addEventListener(
+                "click",
+                function() {
 
-    dashboardBtn.addEventListener(
-        "click",
-        function() {
-
-            mainSections.forEach(
-                function(section) {
-
-                    section.style.display =
-                        "";
+                    showSection(
+                        "dashboardSection",
+                        this
+                    );
 
                 }
             );
 
-            gallerySection.style.display =
-                "none";
 
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
+        document
+            .getElementById(
+                "addArtworkBtn"
+            )
+            .addEventListener(
+                "click",
+                function() {
+
+                    showSection(
+                        "addArtworkSection",
+                        this
+                    );
+
+                }
+            );
+
+
+        document
+            .getElementById(
+                "manageGalleryBtn"
+            )
+            .addEventListener(
+                "click",
+                function() {
+
+                    showSection(
+                        "gallerySection",
+                        this
+                    );
+
+                }
+            );
+
+
+        document
+            .getElementById(
+                "photosBtn"
+            )
+            .addEventListener(
+                "click",
+                function() {
+
+                    showSection(
+                        "photosSection",
+                        this
+                    );
+                    loadPhotos();
+                }
+            );
+
+
+        
+
+
+        document
+            .getElementById(
+                "settingsBtn"
+            )
+            .addEventListener(
+                "click",
+                function() {
+
+                    showSection(
+                        "settingsSection",
+                        this
+                    );
+
+                }
+            );
+
+
+
+        /* =========================
+           COMMENT NOTIFICATIONS
+        ========================= */
+
+        const notificationList =
+            document.getElementById("adminNotificationList");
+
+        const notificationCount =
+            document.getElementById("adminNotificationCount");
+
+        const commentNotificationItems = new Map();
+        const commentNotificationUnsubscribers = [];
+
+        function renderCommentNotifications() {
+            if (!notificationList || !notificationCount) {
+                return;
+            }
+
+            const items = Array.from(
+                commentNotificationItems.values()
+            ).sort(function(a, b) {
+                return b.createdAt - a.createdAt;
             });
 
-        }
-    );
+            notificationList.innerHTML = "";
 
-}
+            if (items.length === 0) {
+                notificationList.textContent =
+                    "No comments yet.";
+                notificationCount.style.display = "none";
+                return;
+            }
+
+            items.forEach(function(item) {
+                const card = document.createElement("button");
+                card.type = "button";
+                card.style.display = "block";
+                card.style.width = "100%";
+                card.style.textAlign = "left";
+                card.style.padding = "12px";
+                card.style.marginTop = "8px";
+                card.style.border = "0";
+                card.style.borderRadius = "10px";
+                card.style.cursor = "pointer";
+                card.style.background = item.read
+                    ? "rgba(255,255,255,0.04)"
+                    : "rgba(100,160,255,0.16)";
+                card.style.color = "inherit";
+
+                const heading = document.createElement("strong");
+                heading.textContent = "New comment on your photo";
+
+                const commentText = document.createElement("p");
+                commentText.textContent = item.comment;
+                commentText.style.margin = "6px 0";
+
+                const status = document.createElement("small");
+                status.textContent = item.read ? "Read" : "Unread";
+
+                card.appendChild(heading);
+                card.appendChild(commentText);
+                card.appendChild(status);
+
+                card.addEventListener("click", async function() {
+                    try {
+                        const { updateDoc, doc } = await import(
+                            "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js"
+                        );
+
+                        await updateDoc(
+                            doc(db, "adminNotifications", item.id),
+                            { read: true }
+                        );
+
+                        const publicGalleryUrl =
+                            new URL("index.html", window.location.href);
+
+                        publicGalleryUrl.searchParams.set(
+                            "artworkId",
+                            item.artworkId
+                        );
+
+                        window.open(
+                            publicGalleryUrl.href,
+                            "_blank"
+                        );
+                    } catch (error) {
+                        console.error(
+                            "Notification update error:",
+                            error
+                        );
+                        alert(
+                            "Read status save nahi hua. Firebase rules check karein."
+                        );
+                    }
+                });
+
+                notificationList.appendChild(card);
+            });
+
+            const unreadCount = items.filter(function(item) {
+                return !item.read;
+            }).length;
+
+            notificationCount.textContent =
+                unreadCount > 99 ? "99+" : String(unreadCount);
+
+            notificationCount.style.display =
+                unreadCount ? "inline-block" : "none";
+        }
+
+        function startCommentNotifications() {
+            const { collection, onSnapshot } = {
+                collection: window.firestoreCollection,
+                onSnapshot: window.firestoreOnSnapshot
+            };
+
+            // Firebase modules are loaded below.
+            import(
+                "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js"
+            ).then(function(firestore) {
+                const listenToNotifications = firestore.onSnapshot;
+                const makeCollection = firestore.collection;
+
+                listenToNotifications(
+                    makeCollection(db, "adminNotifications"),
+                    function(snapshot) {
+                        commentNotificationItems.clear();
+
+                        snapshot.forEach(function(documentSnapshot) {
+                            const data = documentSnapshot.data();
+
+                            commentNotificationItems.set(
+                                documentSnapshot.id,
+                                {
+                                    id: documentSnapshot.id,
+                                    artworkId: data.artworkId || "",
+                                    comment: data.comment || "New comment",
+                                    createdAt: data.createdAt &&
+                                        typeof data.createdAt.toMillis === "function"
+                                            ? data.createdAt.toMillis()
+                                            : Date.now(),
+                                    read: data.read === true
+                                }
+                            );
+                        });
+
+                        renderCommentNotifications();
+                    },
+                    function(error) {
+                        console.error(
+                            "Comment notifications error:",
+                            error
+                        );
+                        notificationList.textContent =
+                            "Notifications load nahi hui. Console check karein.";
+                    }
+                );
+            });
+        }
+
+        startCommentNotifications();
+
+
+        /* =========================
+           NOTIFICATION PANEL
+        ========================= */
+
+        const notificationButton =
+            document.getElementById(
+                "adminNotificationBtn"
+            );
+
+        const notificationPanel =
+            document.getElementById(
+                "adminNotificationPanel"
+            );
+
+        if (
+            notificationButton &&
+            notificationPanel
+        ) {
+
+            notificationButton.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+            notificationButton.addEventListener(
+                "click",
+                function(event) {
+
+                    event.preventDefault();
+
+                    const isOpen =
+                        notificationPanel.classList.contains(
+                            "notification-open"
+                        );
+
+                    if (isOpen) {
+
+                        notificationPanel.classList.remove(
+                            "notification-open"
+                        );
+
+                        notificationPanel.style.display =
+                            "none";
+
+                        notificationButton.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+                    } else {
+
+                        notificationPanel.classList.add(
+                            "notification-open"
+                        );
+
+                        notificationPanel.style.display =
+                            "block";
+
+                        notificationButton.setAttribute(
+                            "aria-expanded",
+                            "true"
+                        );
+
+                    }
+
+                }
+            );
+
+        } else {
+
+            console.error(
+                "Notification button or panel HTML ID not found."
+            );
+
+        }
+
+        /* =========================
+           CHANGE ADMIN EMAIL
+        ========================= */
+
+        const changeAdminEmailButton =
+            document.getElementById(
+                "changeAdminEmailBtn"
+            );
+
+        if (changeAdminEmailButton) {
+
+            changeAdminEmailButton.addEventListener(
+                "click",
+                async function() {
+
+                    const user = auth.currentUser;
+
+                    const newEmail =
+                        document.getElementById(
+                            "newAdminEmail"
+                        ).value.trim();
+
+                    const currentPassword =
+                        document.getElementById(
+                            "emailChangePassword"
+                        ).value;
+
+                    if (!user) {
+                        alert("Please log in first.");
+                        return;
+                    }
+
+                    if (!newEmail || !currentPassword) {
+                        alert(
+                            "Enter your new email and current password."
+                        );
+                        return;
+                    }
+
+                    try {
+
+                        const credential =
+                            EmailAuthProvider.credential(
+                                user.email,
+                                currentPassword
+                            );
+
+                        await reauthenticateWithCredential(
+                            user,
+                            credential
+                        );
+
+                        await verifyBeforeUpdateEmail(
+                            user,
+                            newEmail
+                        );
+
+                        alert(
+                            "Verification email sent. Open it and click the verification link."
+                        );
+
+                        document.getElementById(
+                            "currentPassword"
+                        ).value = "";
+
+                        document.getElementById(
+                            "newAdminEmail"
+                        ).value = "";
+
+                    } catch (error) {
+
+                        alert(
+                            "Email change failed: " +
+                            error.message
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /* =========================
+           CHANGE ADMIN PASSWORD
+        ========================= */
+
+        const changePasswordButton =
+            document.getElementById(
+                "changePasswordBtn"
+            );
+
+        if (changePasswordButton) {
+
+            changePasswordButton.addEventListener(
+                "click",
+                async function() {
+
+                    const user = auth.currentUser;
+
+                    const currentPassword =
+                        document.getElementById(
+                            "currentPassword"
+                        ).value;
+
+                    const newPassword =
+                        document.getElementById(
+                            "newPassword"
+                        ).value;
+
+                    const confirmPassword =
+                        document.getElementById(
+                            "confirmPassword"
+                        ).value;
+
+                    if (!user) {
+                        alert("Please log in first.");
+                        return;
+                    }
+
+                    if (
+                        !currentPassword ||
+                        !newPassword ||
+                        !confirmPassword
+                    ) {
+                        alert(
+                            "Please fill in all password fields."
+                        );
+                        return;
+                    }
+
+                    if (newPassword.length < 6) {
+                        alert(
+                            "Password must contain at least 6 characters."
+                        );
+                        return;
+                    }
+
+                    if (newPassword !== confirmPassword) {
+                        alert(
+                            "New passwords do not match."
+                        );
+                        return;
+                    }
+
+                    try {
+
+                        const credential =
+                            EmailAuthProvider.credential(
+                                user.email,
+                                currentPassword
+                            );
+
+                        await reauthenticateWithCredential(
+                            user,
+                            credential
+                        );
+
+                        await updatePassword(
+                            user,
+                            newPassword
+                        );
+
+                        alert(
+                            "Password changed successfully!"
+                        );
+
+                        document.getElementById(
+                            "currentPassword"
+                        ).value = "";
+
+                        document.getElementById(
+                            "newPassword"
+                        ).value = "";
+
+                        document.getElementById(
+                            "confirmPassword"
+                        ).value = "";
+
+                    } catch (error) {
+
+                        alert(
+                            "Password change failed: " +
+                            error.message
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /* =========================
+           SAVE SOCIAL SETTINGS
+        ========================= */
+
+        const saveSocialBtn =
+            document.getElementById("saveSocialBtn");
+
+        if (saveSocialBtn) {
+            saveSocialBtn.addEventListener(
+                "click",
+                async function() {
+                    const mobileNumber =
+                        document.getElementById("mobileNumber").value.trim();
+
+                    const instagramLink =
+                        document.getElementById("instagramLink").value.trim();
+
+                    const youtubeLink =
+                        document.getElementById("youtubeLink").value.trim();
+
+                    const shaileshLinkedin =
+                        document.getElementById("shaileshLinkedin").value.trim();
+
+                    if (!mobileNumber || !instagramLink || !youtubeLink) {
+                        alert("Please fill in WhatsApp, Instagram and YouTube.");
+                        return;
+                    }
+
+                    try {
+                        const { db } =
+                            await import("./firebase.js");
+
+                        const { doc, setDoc } =
+                            await import(
+                                "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js"
+                            );
+
+                        await setDoc(
+                            doc(db, "settings", "social"),
+                            {
+                                whatsapp: mobileNumber,
+                                instagram: instagramLink,
+                                youtube: youtubeLink,
+                                linkedin: shaileshLinkedin
+                            },
+                            { merge: true }
+                        );
+
+                        alert("Social Settings saved successfully!");
+
+                    } catch (error) {
+                        console.error(
+                            "Social settings save error:",
+                            error
+                        );
+
+                        alert(
+                            "Social Settings save failed: " +
+                            error.message
+                        );
+                    }
+                }
+            );
+        }
+
+
+        /* =========================
+           LOAD SAVED PROFILE
+        ========================= */
+
+        async function loadSavedProfile() {
+
+            try {
+
+                const { db } =
+                    await import("./firebase.js");
+
+                const { doc, getDoc } =
+                    await import(
+                        "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js"
+                    );
+
+                const profileRef =
+                    doc(db, "settings", "profile");
+
+                const profileSnapshot =
+                    await getDoc(profileRef);
+
+                if (!profileSnapshot.exists()) {
+                    return;
+                }
+
+                const profileData =
+                    profileSnapshot.data();
+
+                const profileNameInput =
+                    document.getElementById("profileName");
+
+                const profileBioInput =
+                    document.getElementById("profileBio");
+
+                const profilePreview =
+                    document.getElementById("profilePreview");
+
+                const adminProfilePhoto =
+                    document.getElementById("adminProfilePhoto");
+
+                const adminProfileName =
+                    document.getElementById("adminProfileName");
+
+                const adminProfileBio =
+                    document.getElementById("adminProfileBio");
+
+                if (profileNameInput && profileData.name) {
+                    profileNameInput.value =
+                        profileData.name;
+                }
+
+                if (profileBioInput && profileData.bio) {
+                    profileBioInput.value =
+                        profileData.bio;
+                }
+
+                if (profileData.photoUrl) {
+
+                    if (profilePreview) {
+                        profilePreview.src =
+                            profileData.photoUrl;
+                    }
+
+                    if (adminProfilePhoto) {
+                        adminProfilePhoto.src =
+                            profileData.photoUrl;
+                    }
+                }
+
+                if (adminProfileName && profileData.name) {
+                    adminProfileName.textContent =
+                        profileData.name;
+                }
+
+                if (adminProfileBio && profileData.bio) {
+                    adminProfileBio.textContent =
+                        profileData.bio;
+                }
+
+            } catch (error) {
+
+                console.error(
+                    "Load saved profile error:",
+                    error
+                );
+
+            }
+        }
+
+        loadSavedProfile();
+
+        /* =========================
+           SAVE PROFILE SETTINGS
+        ========================= */
+
+        const saveProfileBtn =
+            document.getElementById("saveProfileBtn");
+
+        if (saveProfileBtn) {
+            saveProfileBtn.addEventListener(
+                "click",
+                async function() {
+
+                    const profileName =
+                        document.getElementById("profileName").value.trim();
+
+                    const profileBio =
+                        document.getElementById("profileBio").value.trim();
+
+                    const profilePhotoInput =
+                        document.getElementById("profilePhoto");
+
+                    const profilePreview =
+                        document.getElementById("profilePreview");
+
+                    if (!profileName || !profileBio) {
+                        alert("Please enter Name and Bio.");
+                        return;
+                    }
+
+                    saveProfileBtn.disabled = true;
+                    saveProfileBtn.textContent = "Saving...";
+
+                    try {
+                        const { db } =
+                            await import("./firebase.js");
+
+                        const { doc, setDoc, getDoc } =
+                            await import(
+                                "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js"
+                            );
+
+                        const profileRef =
+                            doc(db, "settings", "profile");
+
+                        const existingProfile =
+                            await getDoc(profileRef);
+
+                        let photoUrl =
+                            existingProfile.exists()
+                                ? existingProfile.data().photoUrl || ""
+                                : "";
+
+                        const selectedFile =
+                            profilePhotoInput.files[0];
+
+                        if (selectedFile) {
+
+                            if (!selectedFile.type.startsWith("image/")) {
+                                throw new Error("Please select an image file.");
+                            }
+
+                            const filePath =
+                                "profile-" + Date.now() + "-" +
+                                selectedFile.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+
+                            const { error: uploadError } =
+                                await supabase.storage
+                                    .from("profile-photos")
+                                    .upload(filePath, selectedFile, {
+                                        upsert: true
+                                    });
+
+                            if (uploadError) {
+                                throw uploadError;
+                            }
+
+                            const { data: publicData } =
+                                supabase.storage
+                                    .from("profile-photos")
+                                    .getPublicUrl(filePath);
+
+                            photoUrl = publicData.publicUrl;
+                        }
+
+                        await setDoc(
+                            profileRef,
+                            {
+                                name: profileName,
+                                bio: profileBio,
+                                photoUrl: photoUrl,
+                                updatedAt: new Date().toISOString()
+                            },
+                            { merge: true }
+                        );
+
+
+                        if (photoUrl) {
+
+                            if (profilePreview) {
+                                profilePreview.src = photoUrl;
+                            }
+
+                            const adminProfilePhoto =
+                                document.getElementById(
+                                    "adminProfilePhoto"
+                                );
+
+                            if (adminProfilePhoto) {
+                                adminProfilePhoto.src = photoUrl;
+                            }
+                        }
+
+                        const adminProfileName =
+                            document.getElementById(
+                                "adminProfileName"
+                            );
+
+                        const adminProfileBio =
+                            document.getElementById(
+                                "adminProfileBio"
+                            );
+
+                        if (adminProfileName) {
+                            adminProfileName.textContent =
+                                profileName;
+                        }
+
+                        if (adminProfileBio) {
+                            adminProfileBio.textContent =
+                                profileBio;
+                        }
+
+
+                        alert("Profile saved successfully!");
+
+                    } catch (error) {
+                        console.error("Save profile error:", error);
+
+                        alert(
+                            "Profile save failed: " + error.message
+                        );
+
+                    } finally {
+                        saveProfileBtn.disabled = false;
+                        saveProfileBtn.textContent = "💾 Save Profile";
+                    }
+                }
+            );
+        }
+
+        /* =========================
+           SAVE BACKGROUND PHOTO
+        ========================= */
+
+        document
+            .getElementById("saveBackgroundBtn")
+            .addEventListener("click", async function () {
+
+                const fileInput =
+                    document.getElementById("backgroundPhoto");
+
+                const file = fileInput.files[0];
+
+                if (!file) {
+                    alert("Please choose a background photo first.");
+                    return;
+                }
+
+                try {
+
+                    const filePath =
+                        "background-" +
+                        Date.now() +
+                        "-" +
+                        file.name.replace(
+                            /[^a-zA-Z0-9._-]/g,
+                            "_"
+                        );
+
+                    const {
+                        data: uploadData,
+                        error: uploadError
+                    } = await supabase.storage
+                        .from("profile-photos")
+                        .upload(filePath, file);
+
+                    if (uploadError) {
+                        throw uploadError;
+                    }
+
+                    const {
+                        data: urlData
+                    } = supabase.storage
+                        .from("profile-photos")
+                        .getPublicUrl(uploadData.path);
+
+                    const backgroundImageUrl =
+                        urlData.publicUrl;
+
+                    const {
+                        doc,
+                        setDoc,
+                        serverTimestamp
+
+                    } = await import(
+                        "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js"
+                    );
+
+
+                    await setDoc(
+                        doc(db, "settings", "background"),
+                        {
+                            imageUrl: backgroundImageUrl,
+                            updatedAt: serverTimestamp()
+                        },
+                        { merge: true }
+                    );
+
+                    alert(
+                        "Background photo saved successfully!"
+                    );
+
+                } catch (error) {
+
+                    console.error(
+                        "Background photo error:",
+                        error
+                    );
+
+                    alert(
+                        "Photo save nahi hui. Error check karein."
+                    );
+
+                }
+
+            });
+
 
     </script>
-    
+
 
 </body>
 
