@@ -679,9 +679,7 @@ async function loadPublicGallery() {
 async function likePost(button) {
     const card = button.closest(".gallery-card");
 
-    if (!card) {
-        return;
-    }
+    if (!card) return;
 
     const storedId = card.dataset.artworkId;
 
@@ -690,14 +688,6 @@ async function likePost(button) {
         return;
     }
 
-    const isPhoto = storedId.startsWith("photo_");
-
-    const collectionName = isPhoto ? "photos" : "artworks";
-
-    const documentId = isPhoto
-        ? storedId.substring(6)
-        : storedId;
-
     const likeKey = "liked_artwork_" + storedId;
 
     if (localStorage.getItem(likeKey) === "true") {
@@ -705,46 +695,57 @@ async function likePost(button) {
         return;
     }
 
-    try {
-        const firestoreModule = await import(
-            "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js"
-        );
+    let visitorId = localStorage.getItem("artwithshailesh_visitor_id");
 
-        await firestoreModule.updateDoc(
-            firestoreModule.doc(
-                firebaseDB,
-                collectionName,
-                documentId
-            ),
+    if (!visitorId) {
+        visitorId = crypto.randomUUID();
+        localStorage.setItem("artwithshailesh_visitor_id", visitorId);
+    }
+
+    const buttonText = button.innerHTML;
+    button.disabled = true;
+
+    try {
+        const response = await fetch(
+            "https://egjllkvnvezvnnkscxbm.supabase.co/functions/v1/public-likes",
             {
-                likes: firestoreModule.increment(1)
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer sb_publishable_2s_-otBOO6EzWJvMneNhPQ_QaEuAD-H",
+                    "apikey": "sb_publishable_2s_-otBOO6EzWJvMneNhPQ_QaEuAD-H",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    artworkId: storedId,
+                    visitorId: visitorId
+                })
             }
         );
 
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+            throw new Error(result.error || "Like save failed");
+        }
+
         const countSpan = button.querySelector("span");
 
-        let count = parseInt(
-            countSpan ? countSpan.innerText : "0",
-            10
-        ) || 0;
-
-        count++;
+        if (countSpan) {
+            countSpan.textContent = result.likeCount;
+        }
 
         button.innerHTML =
-            "❤️ Liked <span>" + count + "</span>";
-
-        button.disabled = true;
+            "❤️ Liked <span>" + result.likeCount + "</span>";
 
         localStorage.setItem(likeKey, "true");
-
         console.log("Like saved successfully.");
 
     } catch (error) {
         console.error("Like save error:", error);
-
-        alert(
-            "Like save nahi ho paya. Console mein error dekhein."
-        );
+        button.innerHTML = buttonText;
+        alert("Like save nahi ho paya. Dobara try karein.");
+    } finally {
+        button.disabled = false;
     }
 }
 
