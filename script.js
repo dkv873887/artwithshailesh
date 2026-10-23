@@ -515,6 +515,7 @@ async function loadPublicGallery() {
 
                 const likeButton = document.createElement("button");
                 likeButton.disabled = alreadyLiked;
+                likeButton.title = "Artwork ID: " + artworkId;
                 likeButton.innerHTML =
                     (alreadyLiked ? "❤️ Liked" : "❤️ Like") +
                     " <span>" + (Number(artwork.likes) || 0) +
