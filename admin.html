@@ -2503,18 +2503,20 @@
                         </div>
 
 
+
                         <div class="form-group">
 
-                            <label for="shaileshLinkedin">
-                                Shailesh LinkedIn
+                            <label for="shaileshFacebook">
+                                Shailesh Facebook
                             </label>
 
                             <input
                                 type="url"
-                                id="shaileshLinkedin"
-                                placeholder="LinkedIn URL later add karein">
+                                id="shaileshFacebook"
+                                placeholder="Facebook profile URL yahan paste karein">
 
                         </div>
+
 
 
                         <div class="form-group">
@@ -3094,33 +3096,39 @@
                     const filePath =
                         "photos/" + fileName;
 
-                    const {
-                        error: uploadError
-                    } = await supabase
-                        .storage
-                        .from("artworks")
-                        .upload(
-                            filePath,
-                            photo,
-                            {
-                                cacheControl: "3600",
-                                upsert: false
-                            }
-                        );
+                    const currentUser = auth.currentUser;
 
-                    if (uploadError) {
-                        throw uploadError;
+                    if (!currentUser) {
+                        throw new Error("Please login as admin first.");
                     }
 
-                    const {
-                        data: publicUrlData
-                    } = supabase
-                        .storage
-                        .from("artworks")
-                        .getPublicUrl(filePath);
+                    const idToken = await currentUser.getIdToken();
 
-                    const photoUrl =
-                        publicUrlData.publicUrl;
+                    const formData = new FormData();
+                    formData.append("file", photo);
+                    formData.append("path", filePath);
+
+                    const response = await fetch(
+                        "https://egjllkvnvezvnnkscxbm.supabase.co/functions/v1/admin-storage",
+                        {
+                            method: "POST",
+                            headers: {
+                                "Authorization": "Bearer " + idToken,
+                                "apikey": "sb_publishable_2s_-otBOO6EzWJvMneNhPQ_QaEuAD-H"
+                            },
+                            body: formData
+                        }
+                    );
+
+                    const result = await response.json();
+
+                    if (!response.ok || !result.success) {
+                        throw new Error(
+                            result.error || "Photo upload failed."
+                        );
+                    }
+
+                    const photoUrl = result.publicUrl;
 
                     await addDoc(
                         collection(db, "photos"),
@@ -3287,15 +3295,34 @@
                                             )[1]
                                         );
 
-                                    const {
-                                        error: storageError
-                                    } = await supabase
-                                        .storage
-                                        .from("artworks")
-                                        .remove([imagePath]);
+                                    const currentUser = auth.currentUser;
 
-                                    if (storageError) {
-                                        throw storageError;
+                                    if (!currentUser) {
+                                        throw new Error("Please login as admin first.");
+                                    }
+
+                                    const idToken = await currentUser.getIdToken();
+
+                                    const response = await fetch(
+                                        "https://egjllkvnvezvnnkscxbm.supabase.co/functions/v1/admin-storage",
+                                        {
+                                            method: "POST",
+                                            headers: {
+                                                "Authorization": "Bearer " + idToken,
+                                                "apikey": "sb_publishable_2s_-otBOO6EzWJvMneNhPQ_QaEuAD-H",
+                                                "Content-Type": "application/json"
+                                            },
+                                            body: JSON.stringify({
+                                                action: "delete",
+                                                path: imagePath
+                                            })
+                                        }
+                                    );
+
+                                    const result = await response.json();
+
+                                    if (!response.ok || !result.success) {
+                                        throw new Error(result.error || "Image delete failed.");
                                     }
                                 }
 
@@ -3470,84 +3497,52 @@
                            UPLOAD PHOTO TO SUPABASE
                         ========================= */
 
-                        const fileExtension =
-                            photo.name
-                                .split(".")
-                                .pop();
 
+                        const fileExtension =
+                        photo.name.split(".").pop();
 
                         const fileName =
-                            Date.now() +
-                            "_" +
-                            Math.random()
-                                .toString(36)
-                                .substring(2) +
-                            "." +
-                            fileExtension;
-
+                        Date.now() + "_" +
+                        Math.random().toString(36).substring(2) +
+                        "." + fileExtension;
 
                         const filePath =
-                            "artworks/" +
-                            fileName;
+                        "artworks/" + fileName;
 
+                        const currentUser = auth.currentUser;
 
-                        const {
-                            error:
-                                uploadError
-                        } =
-                            await supabase
-                                .storage
-                                .from(
-                                    "artworks"
-                                )
-                                .upload(
-                                    filePath,
-                                    photo,
-                                    {
-                                        cacheControl:
-                                            "3600",
-                                        upsert:
-                                            false
-                                    }
-                                );
-
-
-                        if (uploadError) {
-
-                            console.error(
-                                "Supabase upload error:",
-                                uploadError
-                            );
-
-                            alert(
-                                "Photo upload nahi hui."
-                            );
-
-                            return;
+                        if (!currentUser) {
+                            throw new Error("Please login as admin first.");
                         }
 
+                        const idToken = await currentUser.getIdToken();
 
-                        /* =========================
-                           GET PUBLIC PHOTO URL
-                        ========================= */
+                        const formData = new FormData();
+                        formData.append("file", photo);
+                        formData.append("path", filePath);
 
-                        const {
-                            data:
-                                publicUrlData
-                        } =
-                            supabase
-                                .storage
-                                .from(
-                                    "artworks"
-                                )
-                                .getPublicUrl(
-                                    filePath
-                                );
+                        const response = await fetch(
+                            "https://egjllkvnvezvnnkscxbm.supabase.co/functions/v1/admin-storage",
+                            {
+                                method: "POST",
+                                headers: {
+                                    "Authorization": "Bearer " + idToken,
+                                    "apikey": "sb_publishable_2s_-otBOO6EzWJvMneNhPQ_QaEuAD-H"
+                                },
+                                body: formData
+                            }
+                        );
 
+                        const result = await response.json();
 
-                        const imageUrl =
-                            publicUrlData
-                                .publicUrl;
+                        if (!response.ok || !result.success) {
+                            throw new Error(
+                                result.error || "Photo upload failed."
+                            );
+                        }
+
+                        const imageUrl = result.publicUrl;
+
 
 
                         /* =========================
@@ -3752,27 +3747,40 @@
                        mein videos/ folder ke andar upload karega.
                     */
 
-                    const { error: uploadError } =
-                        await supabase
-                            .storage
-                            .from("artworks")
-                            .upload(filePath, file, {
-                                cacheControl: "3600",
-                                upsert: false
-                            });
+                    const currentUser = auth.currentUser;
 
-                    if (uploadError) {
-                        throw uploadError;
+                    if (!currentUser) {
+                        throw new Error("Please login as admin first.");
                     }
 
-                    const { data: publicUrlData } =
-                        supabase
-                            .storage
-                            .from("artworks")
-                            .getPublicUrl(filePath);
+                    const idToken = await currentUser.getIdToken();
 
-                    const videoUrl =
-                        publicUrlData.publicUrl;
+                    const formData = new FormData();
+                    formData.append("file", file);
+                    formData.append("path", filePath);
+
+                    const response = await fetch(
+                        "https://egjllkvnvezvnnkscxbm.supabase.co/functions/v1/admin-storage",
+                        {
+                            method: "POST",
+                            headers: {
+                                "Authorization": "Bearer " + idToken,
+                                "apikey": "sb_publishable_2s_-otBOO6EzWJvMneNhPQ_QaEuAD-H"
+                            },
+                            body: formData
+                        }
+                    );
+
+                    const result = await response.json();
+
+                    if (!response.ok || !result.success) {
+                        throw new Error(
+                            result.error || "Video upload failed."
+                        );
+                    }
+
+                    const videoUrl = result.publicUrl;
+
 
                     await addDoc(
                         collection(db, "videos"),
@@ -4429,9 +4437,8 @@
                     const youtubeLink =
                         document.getElementById("youtubeLink").value.trim();
 
-                    const shaileshLinkedin =
-                        document.getElementById("shaileshLinkedin").value.trim();
-
+                    const shaileshFacebook =
+                        document.getElementById("shaileshFacebook").value.trim();
                     if (!mobileNumber || !instagramLink || !youtubeLink) {
                         alert("Please fill in WhatsApp, Instagram and YouTube.");
                         return;
@@ -4452,7 +4459,7 @@
                                 whatsapp: mobileNumber,
                                 instagram: instagramLink,
                                 youtube: youtubeLink,
-                                linkedin: shaileshLinkedin
+                                facebook: shaileshFacebook
                             },
                             { merge: true }
                         );
@@ -4706,10 +4713,11 @@
                         console.error("Save profile error:", error);
 
                         alert(
-                            "Profile save failed: " + error.message
+                            "Error Code: " + (error.code || "unknown") +
+                            "\nError Message: " + error.message
                         );
-
-                    } finally {
+                    }
+                    finally {
                         saveProfileBtn.disabled = false;
                         saveProfileBtn.textContent = "💾 Save Profile";
                     }
