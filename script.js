@@ -749,6 +749,24 @@ async function likePost(button) {
     }
 }
 
+/* =========================
+   TOGGLE COMMENT BOX
+========================= */
+
+function toggleCommentBox(button) {
+    const card = button.closest(".gallery-card");
+
+    if (!card) return;
+
+    const commentBox = card.querySelector(
+        ".comment-box, .comments-container"
+    );
+
+    if (!commentBox) return;
+
+    commentBox.classList.toggle("comments-open");
+}
+
 
 /* =========================
    COMMENT BUTTON
