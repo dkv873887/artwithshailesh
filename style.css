@@ -2845,4 +2845,18 @@ body.light-theme .section-header p {
     }
 }
 
+/* =========================
+   HIDE COMMENTS BY DEFAULT
+========================= */
+
+.gallery-card .comment-box,
+.gallery-card .comments-container {
+    display: none;
+}
+
+.gallery-card .comment-box.comments-open,
+.gallery-card .comments-container.comments-open {
+    display: block;
+}
+
 
