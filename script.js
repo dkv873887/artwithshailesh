@@ -1636,3 +1636,77 @@ async function loadPublicBackgroundPhoto() {
 }
 
 
+/* =========================
+   FULL PHOTO VIEW
+========================= */
+
+(function () {
+    function setupPhotoLightbox() {
+        let lightbox = document.querySelector(".photo-lightbox");
+
+        if (!lightbox) {
+            lightbox = document.createElement("div");
+            lightbox.className = "photo-lightbox";
+            lightbox.setAttribute("role", "dialog");
+            lightbox.setAttribute("aria-label", "Full size photo");
+
+            const closeButton = document.createElement("button");
+            closeButton.className = "photo-lightbox-close";
+            closeButton.type = "button";
+            closeButton.textContent = "×";
+            closeButton.setAttribute("aria-label", "Close photo");
+
+            const fullImage = document.createElement("img");
+            fullImage.alt = "Full size artwork";
+
+            lightbox.appendChild(closeButton);
+            lightbox.appendChild(fullImage);
+            document.body.appendChild(lightbox);
+
+            closeButton.addEventListener("click", function () {
+                lightbox.classList.remove("show");
+                fullImage.removeAttribute("src");
+            });
+
+            lightbox.addEventListener("click", function (event) {
+                if (event.target === lightbox) {
+                    lightbox.classList.remove("show");
+                    fullImage.removeAttribute("src");
+                }
+            });
+
+            document.addEventListener("keydown", function (event) {
+                if (event.key === "Escape") {
+                    lightbox.classList.remove("show");
+                    fullImage.removeAttribute("src");
+                }
+            });
+        }
+
+        document.addEventListener("click", function (event) {
+            const image = event.target.closest(".gallery-card img");
+
+            if (!image || !image.src) {
+                return;
+            }
+
+            event.preventDefault();
+
+            const fullImage = lightbox.querySelector("img");
+            fullImage.src = image.src;
+            fullImage.alt = image.alt || "Full size artwork";
+
+            lightbox.classList.add("show");
+        });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener(
+            "DOMContentLoaded",
+            setupPhotoLightbox
+        );
+    } else {
+        setupPhotoLightbox();
+    }
+})();
+
