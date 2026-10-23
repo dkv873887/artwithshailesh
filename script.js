@@ -339,15 +339,16 @@ async function loadWebsiteSettings() {
                             socialData.youtube || "#";
                     }
 
-                    const publicLinkedinBtn =
+                    const publicFacebookBtn =
                         document.getElementById(
-                            "publicLinkedinBtn"
+                            "publicFacebookBtn"
                         );
 
-                    if (publicLinkedinBtn) {
-                        publicLinkedinBtn.href =
-                            socialData.linkedin || "#";
+                    if (publicFacebookBtn) {
+                        publicFacebookBtn.href =
+                            socialData.facebook || "#";
                     }
+
 
                 },
                 function(error) {
@@ -673,16 +674,15 @@ async function loadPublicGallery() {
 
 
 
+
 /* =========================
    LIKE BUTTON
 ========================= */
 async function likePost(button) {
     const card = button.closest(".gallery-card");
-
     if (!card) return;
 
     const storedId = card.dataset.artworkId;
-
     if (!storedId) {
         alert("Artwork ID nahi mila.");
         return;
@@ -695,6 +695,7 @@ async function likePost(button) {
         return;
     }
 
+    // Ek browser ke liye permanent random visitor ID
     let visitorId = localStorage.getItem("artwithshailesh_visitor_id");
 
     if (!visitorId) {
@@ -729,7 +730,6 @@ async function likePost(button) {
         }
 
         const countSpan = button.querySelector("span");
-
         if (countSpan) {
             countSpan.textContent = result.likeCount;
         }
@@ -1636,6 +1636,7 @@ async function loadPublicBackgroundPhoto() {
 }
 
 
+
 /* =========================
    FULL PHOTO VIEW
 ========================= */
@@ -1709,4 +1710,3 @@ async function loadPublicBackgroundPhoto() {
         setupPhotoLightbox();
     }
 })();
-
