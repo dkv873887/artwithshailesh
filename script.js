@@ -537,9 +537,10 @@ async function loadPublicGallery() {
 
                 commentButton.addEventListener("click", function() {
                     const isOpen =
-                        commentBox.style.display === "block";
+                        commentBox.classList.contains("comments-open");
 
                     if (isOpen) {
+                        commentBox.classList.remove("comments-open");
                         commentBox.style.display = "none";
 
                         commentButton.setAttribute(
@@ -547,14 +548,13 @@ async function loadPublicGallery() {
                             "false"
                         );
                     } else {
+                        commentBox.classList.add("comments-open");
                         commentBox.style.display = "block";
 
                         commentButton.setAttribute(
                             "aria-expanded",
                             "true"
                         );
-
-                        commentPost(commentButton);
                     }
                 });
 
@@ -1308,8 +1308,12 @@ async function loadCommentsForArtwork(
                         commentBox.appendChild(toggleButton);
                     }
 
+                    
                     commentBox.style.display =
-                        comments.length > 0 ? "block" : "none";
+                        commentBox.classList.contains("comments-open")
+                            ? "block"
+                            : "none";
+
                     commentBox._renderComments = renderComments;                       
                 }
 
