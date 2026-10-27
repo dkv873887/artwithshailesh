@@ -586,6 +586,7 @@ async function loadPublicGallery() {
                             "aria-expanded",
                             "true"
                         );
+                        commentPost(commentButton);
                     }
                 });
 
