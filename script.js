@@ -515,7 +515,6 @@ async function loadPublicGallery() {
 
                 const likeButton = document.createElement("button");
                 likeButton.disabled = alreadyLiked;
-                likeButton.title = "Artwork ID: " + artworkId;
                 likeButton.innerHTML =
                     (alreadyLiked ? "❤️ Liked" : "❤️ Like") +
                     " <span>" + (Number(artwork.likes) || 0) +
@@ -524,7 +523,38 @@ async function loadPublicGallery() {
                 likeButton.addEventListener("click", function() {
                     likePost(likeButton);
                 });
+                // Load the saved Like count from Supabase
+                fetch(
+                    "https://egjllkvnvezvnnkscxbm.supabase.co/functions/v1/public-likes",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Authorization": "Bearer sb_publishable_2s_-otBOO6EzWJvMneNhPQ_QaEuAD-H",
+                            "apikey": "sb_publishable_2s_-otBOO6EzWJvMneNhPQ_QaEuAD-H",
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            action: "count",
+                            artworkId: artworkId
+                        })
+                    }
+                )
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(result) {
+                    if (result.success) {
+                        const countSpan =
+                            likeButton.querySelector("span");
 
+                        if (countSpan) {
+                            countSpan.textContent = result.likeCount;
+                        }
+                    }
+                })
+                .catch(function(error) {
+                    console.error("Like count load error:", error);
+                });
                 actions.appendChild(likeButton);
 
                 
