@@ -1424,7 +1424,104 @@
             }
 
         }
+        /* ===== MOBILE ADMIN PANEL IMPROVEMENTS ===== */
+        @media (max-width: 600px) {
 
+                /* Top Navigation */
+                #adminApp .topbar {
+                        min-height: 65px;
+                        padding: 8px 12px;
+                        gap: 8px;
+                }
+
+                #adminApp .brand {
+                        gap: 8px;
+                        min-width: 0;
+                }
+
+                #adminApp .brand-logo {
+                        width: 36px;
+                        height: 36px;
+                }
+
+                #adminApp .brand-name {
+                        font-size: 15px;
+                        letter-spacing: normal;
+                }
+
+                #adminApp .logout-btn {
+                        padding: 9px 11px;
+                        font-size: 13px;
+                        white-space: nowrap;
+                }
+
+                #adminApp .admin-notification-wrapper {
+                        margin-left: auto;
+                }
+
+                /* Sidebar Navigation */
+                #adminApp .sidebar {
+                        padding: 12px;
+                }
+
+                #adminApp .side-menu {
+                        grid-template-columns: repeat(2, minmax(0, 1fr));
+                        gap: 10px;
+                }
+
+                #adminApp .side-link {
+                        min-height: 46px;
+                        padding: 11px 8px;
+                        font-size: 14px;
+                        line-height: 1.35;
+                        text-align: center;
+                        overflow-wrap: break-word;
+                }
+
+                /* Welcome Card */
+                #adminApp .welcome {
+                        min-height: auto;
+                        padding: 21px 16px;
+                        border-radius: 18px;
+                        width: 100%;
+                }
+
+                #adminApp .welcome-text {
+                        width: 100%;
+                        max-width: 100%;
+                }
+
+                #adminApp .welcome-text small {
+                        font-size: 13px;
+                }
+
+                #adminApp .welcome-text h1 {
+                        font-size: 26px;
+                        line-height: 1.25;
+                        margin: 9px 0;
+                        overflow-wrap: anywhere;
+                }
+
+                #adminApp .welcome-text p {
+                        font-size: 14px;
+                        line-height: 1.6;
+                }
+
+                /* Main Content */
+                #adminApp main {
+                        padding: 14px;
+                }
+
+                #adminApp .section-header h2 {
+                        font-size: 23px;
+                        line-height: 1.35;
+                }
+
+                #adminApp .section-header p {
+                        font-size: 14px;
+                        line-height: 1.5;
+                }
+        }
     </style>
     <link rel="icon" type="image/png" href="admin-icon.png">
     <link rel="manifest" href="manifest.json">
