@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dkv873887.github.io/artwithshailesh/sitemap.xml
